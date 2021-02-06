@@ -9,6 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MoodTrack">
+        <activity android:name=".About" android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".Settings" android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".Statistics"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".DayQuestions"
+            android:parentActivityName=".DayMood" />
+        <activity
+            android:name=".DayMood"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
