@@ -3,6 +3,7 @@ package com.rever.moodtrack
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.question_item.view.*
 
@@ -26,13 +27,38 @@ class QuestionAdapter (
         notifyItemInserted(questions.size -1)
     }
 
+    //Returns a comma seperated string with
+    fun getItemCount2(i: Int): String {
+        return questions[i].title + ',' + questions[i].rate
+    }
+
+    fun getSize(): Int {
+        return questions.size
+    }
+
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
         val curQuestion = questions[position]
         holder.itemView.apply {
             tvHeader.text = curQuestion.title
             sbRankBar.progress = curQuestion.rate
-            //sbRankBar
         }
+        holder.itemView.sbRankBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+                //DEBUG:                println("YOLO + " +p1)
+                curQuestion.rate = p1
+            }
+
+            //Do nothing
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+                return
+            }
+            //Do nothing
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+                return
+            }
+
+
+        })
     }
 
     override fun getItemCount(): Int {

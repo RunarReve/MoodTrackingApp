@@ -1,7 +1,7 @@
 package com.rever.moodtrack
 
 data class Question(
-    val title: String,
-    val rate: Int = 4
+        val title: String,
+        var rate: Int = 4
 ) {
 }
