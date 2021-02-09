@@ -34,12 +34,12 @@ class DayMood : AppCompatActivity() {
 
 
         btnNext.setOnClickListener {
-            var listo = mutableListOf(questionAdapter.getItemCount2(0))
-            for(i in 1 until questionAdapter.getSize())
-                listo.add(questionAdapter.getItemCount2(i))
-            Toast.makeText(applicationContext,  "Lols ${listo}", Toast.LENGTH_SHORT).show()
+            val moodQuestion = Array<String>(questionAdapter.getSize()){""}
+            for(i in 0 until questionAdapter.getSize())
+                moodQuestion[i] =  questionAdapter.getItemCount2(i)
 
             val intent = Intent(this, DayQuestions::class.java)
+            intent.putExtra("moodQ", moodQuestion)
             startActivity(intent)
         }
 

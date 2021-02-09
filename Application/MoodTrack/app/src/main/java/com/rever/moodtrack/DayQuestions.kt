@@ -28,16 +28,15 @@ class DayQuestions : AppCompatActivity() {
         actionBar.setDisplayHomeAsUpEnabled(true)
 
         btnNext.setOnClickListener {
-            var listo = mutableListOf(questionAdapter.getItemCount2(0))
-            for(i in 1 until questionAdapter.getSize())
-                listo.add(questionAdapter.getItemCount2(i))
-            Toast.makeText(applicationContext,  "Lols ${listo}", Toast.LENGTH_SHORT).show()
-            println("POKO1: " +listo.toList())
-            println("POKO2: " +listo.toTypedArray())
-            println("POKO2: " +listo.toString())
+
+            val needQuestion = Array<String>(questionAdapter.getSize()){""}
+            for(i in 0 until questionAdapter.getSize())
+                needQuestion[i] =  questionAdapter.getItemCount2(i)
+            val intentOld = intent
 
             val intent = Intent(this, Statistics::class.java)
-            intent.putExtra("arr", listo.toString())
+            intent.putExtra("moodQ", intentOld.getStringArrayExtra("moodQ"))
+            intent.putExtra("needQ", needQuestion)
             startActivity(intent)
         }
 
