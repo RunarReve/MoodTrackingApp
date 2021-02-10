@@ -24,7 +24,7 @@ class QuestionAdapter (
 
     fun addQuestion(question: Question){
         questions.add(question)
-        notifyItemInserted(questions.size -1)
+        notifyItemInserted(questions.size - 1)
     }
 
     //Returns a comma seperated string with
@@ -44,7 +44,6 @@ class QuestionAdapter (
         }
         holder.itemView.sbRankBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-                //DEBUG:                println("YOLO + " +p1)
                 curQuestion.rate = p1
             }
 
