@@ -1,19 +1,12 @@
 package com.rever.moodtrack
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.core.view.forEach
-import androidx.core.view.get
-import androidx.core.view.size
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_day_mood.*
+import com.rever.moodtrack.Adapters.QuestionAdapter
 import kotlinx.android.synthetic.main.activity_day_mood.btnNext
 import kotlinx.android.synthetic.main.activity_day_mood.rvQuestionItems
-import kotlinx.android.synthetic.main.activity_day_questions.*
-import kotlinx.android.synthetic.main.activity_main.*
 
 class DayMood : AppCompatActivity() {
     private lateinit var questionAdapter: QuestionAdapter

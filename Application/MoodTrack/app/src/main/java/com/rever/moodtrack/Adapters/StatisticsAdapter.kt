@@ -1,13 +1,13 @@
-package com.rever.moodtrack
+package com.rever.moodtrack.Adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_statistics.*
-import kotlinx.android.synthetic.main.activity_statistics.view.*
+import com.rever.moodtrack.Question
+import com.rever.moodtrack.QuestionCollection
+import com.rever.moodtrack.R
 import kotlinx.android.synthetic.main.statistics_item.view.*
 
 class StatisticsAdapter(
@@ -28,7 +28,7 @@ class StatisticsAdapter(
         )
     }
 
-    fun addStat( question: Question, index: Int){
+    fun addStat(question: Question, index: Int){
         println("KOKO2: "+statistics[index].id + " " + statistics[index].qList.toString())
         statistics[index].qList.add(question)
         notifyItemInserted(statistics.size - 1)

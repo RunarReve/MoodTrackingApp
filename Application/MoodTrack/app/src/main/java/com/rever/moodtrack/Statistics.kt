@@ -3,7 +3,7 @@ package com.rever.moodtrack
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_settings.*
+import com.rever.moodtrack.Adapters.StatisticsAdapter
 import kotlinx.android.synthetic.main.activity_statistics.*
 
 class Statistics : AppCompatActivity() {

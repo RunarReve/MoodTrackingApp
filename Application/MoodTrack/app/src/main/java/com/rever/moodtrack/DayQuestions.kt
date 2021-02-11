@@ -3,8 +3,8 @@ package com.rever.moodtrack
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rever.moodtrack.Adapters.QuestionAdapter
 import kotlinx.android.synthetic.main.activity_day_questions.*
 
 class DayQuestions : AppCompatActivity() {

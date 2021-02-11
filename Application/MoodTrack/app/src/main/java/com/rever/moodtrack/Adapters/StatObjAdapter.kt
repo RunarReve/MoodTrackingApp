@@ -1,8 +1,10 @@
-package com.rever.moodtrack
+package com.rever.moodtrack.Adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.rever.moodtrack.Question
+import com.rever.moodtrack.R
 import kotlinx.android.synthetic.main.stat_obj_item.view.*
 
 class StatObjAdapter(
