@@ -29,13 +29,11 @@ class StatisticsAdapter(
     }
 
     fun addStat(question: Question, index: Int){
-        println("KOKO2: "+statistics[index].id + " " + statistics[index].qList.toString())
         statistics[index].qList.add(question)
         notifyItemInserted(statistics.size - 1)
     }
 
    fun newInput(title: String){
-        println("KOKO1: ${title}")
         val start = QuestionCollection(title)
         statistics.add(start)
         notifyItemInserted(statistics.size - 1)
@@ -53,9 +51,6 @@ class StatisticsAdapter(
             curStats.qList.forEach{
                 x += " "+ it.rate
             }
-
-            println("OSSSO: ${x} {tvStat.text}")
-            tvTempStat.text =  x
 
             statObjAdapter = StatObjAdapter(mutableListOf())
             curStats.qList.forEach {

@@ -26,17 +26,5 @@
         app:layout_constraintTop_toTopOf="@+id/rvStatisticItem"
         app:srcCompat="@android:drawable/ic_menu_delete"/>
 
-    <TextView
-        android:id="@+id/tvTempStat"
-        android:layout_width="wrap_content"
-        android:layout_height="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="tempText"
-        app:layout_constraintBottom_toBottomOf="@+id/rvStatisticItem"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/rvStatisticItem"
-        app:layout_constraintTop_toTopOf="@+id/rvStatisticItem" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
