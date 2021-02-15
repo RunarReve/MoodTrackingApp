@@ -14,5 +14,9 @@ interface QuestionDao {
     @Query("SELECT * FROM question_table ORDER BY id ASC")
     fun readAllData(): LiveData<List<QuestionStore>>
 
+
+    @Query("DELETE FROM question_table")
+    fun deletLocalData()
+
     //TODO add get all same name
 }

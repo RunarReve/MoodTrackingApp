@@ -15,6 +15,9 @@ class QuestionRepository(
         questionDao.deleteQuestion(questionStore)
     }
 
-    fun readAllData() = questionDao.readAllData()
+
+    fun deletLocalData(){
+        questionDao.deletLocalData()
+    }
 
 }
