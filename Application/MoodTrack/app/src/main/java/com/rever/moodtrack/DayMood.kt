@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rever.moodtrack.Adapters.QuestionAdapter
+import com.rever.moodtrack.data.QuestionStore
 import kotlinx.android.synthetic.main.activity_day_mood.btnNext
 import kotlinx.android.synthetic.main.activity_day_mood.rvQuestionItems
 
@@ -16,8 +17,8 @@ class DayMood : AppCompatActivity() {
         setContentView(R.layout.activity_day_mood)
 
         questionAdapter = QuestionAdapter(mutableListOf())
-        val q = Question("Mood")
-        questionAdapter.addQuestion(q)
+        questionAdapter.addQuestion("Mood")
+
         rvQuestionItems.adapter = questionAdapter
         rvQuestionItems.layoutManager = LinearLayoutManager(this)
 

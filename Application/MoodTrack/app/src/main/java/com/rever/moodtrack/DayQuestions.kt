@@ -3,8 +3,10 @@ package com.rever.moodtrack
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rever.moodtrack.Adapters.QuestionAdapter
+import com.rever.moodtrack.data.QuestionStore
 import kotlinx.android.synthetic.main.activity_day_questions.*
 
 class DayQuestions : AppCompatActivity() {
@@ -16,22 +18,24 @@ class DayQuestions : AppCompatActivity() {
         setContentView(R.layout.activity_day_questions)
 
         questionAdapter = QuestionAdapter(mutableListOf())
-        questionAdapter.addQuestion(Question("Sleep"))
-        questionAdapter.addQuestion(Question("Movement"))
-        questionAdapter.addQuestion(Question("Social"))
+        questionAdapter.addQuestion("Sleep")
+        questionAdapter.addQuestion("Movement")
+        questionAdapter.addQuestion("Social")
         rvQuestionItems.adapter = questionAdapter
         rvQuestionItems.layoutManager = LinearLayoutManager(this)
 
 
-        val actionBar = supportActionBar
-        actionBar!!.title = "Needs fulfilled"
-        actionBar.setDisplayHomeAsUpEnabled(true)
-
         btnNext.setOnClickListener {
+            val mUserViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
 
             val needQuestion = Array<String>(questionAdapter.getSize()){""}
-            for(i in 0 until questionAdapter.getSize())
-                needQuestion[i] =  questionAdapter.getItemCount2(i)
+            for(i in 0 until questionAdapter.getSize()) {
+                needQuestion[i] = questionAdapter.getItemCount2(i)
+                val q = QuestionStore(0,1,"TEMP",
+                    questionAdapter.getTitle(i), questionAdapter.getrate(i)
+                )
+                mUserViewModel.addQuestion(q)
+            }
             val intentOld = intent
 
             val intent = Intent(this, Statistics::class.java)
@@ -40,5 +44,8 @@ class DayQuestions : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val actionBar = supportActionBar
+        actionBar!!.title = "Needs fulfilled"
+        actionBar.setDisplayHomeAsUpEnabled(true)
     }
 }

@@ -7,10 +7,11 @@ import android.widget.SeekBar
 import androidx.recyclerview.widget.RecyclerView
 import com.rever.moodtrack.Question
 import com.rever.moodtrack.R
+import com.rever.moodtrack.data.QuestionStore
 import kotlinx.android.synthetic.main.question_item.view.*
 
 class QuestionAdapter (
-    private val questions: MutableList<Question>
+    private val questions: MutableList<QuestionStore>
         ): RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder>() {
         class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -24,24 +25,37 @@ class QuestionAdapter (
         )
     }
 
-    fun addQuestion(question: Question){
+    fun addQuestion(question: QuestionStore){
         questions.add(question)
+        notifyItemInserted(questions.size - 1)
+    }
+
+    fun addQuestion(tile: String){
+        val q =QuestionStore(0,1,"DEL", tile,4)
+        questions.add(q)
         notifyItemInserted(questions.size - 1)
     }
 
     //Returns a comma seperated string with
     fun getItemCount2(i: Int): String {
-        return questions[i].title + ',' + questions[i].rate
+        return questions[i].questionTitle + ',' + questions[i].rate
     }
 
     fun getSize(): Int {
         return questions.size
     }
 
+    fun getTitle(i: Int): String{
+        return questions[i].questionTitle
+    }
+    fun getrate(i: Int): Int{
+        return questions[i].rate
+    }
+
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
         val curQuestion = questions[position]
         holder.itemView.apply {
-            tvHeader.text = curQuestion.title
+            tvHeader.text = curQuestion.questionTitle
             sbRankBar.progress = curQuestion.rate
         }
         holder.itemView.sbRankBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{

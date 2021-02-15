@@ -8,17 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rever.moodtrack.Question
 import com.rever.moodtrack.QuestionCollection
 import com.rever.moodtrack.R
+import com.rever.moodtrack.data.QuestionStore
 import kotlinx.android.synthetic.main.statistics_item.view.*
 
 class StatisticsAdapter(
-    private val statistics: MutableList<QuestionCollection>
+        private val statistics: MutableList<QuestionCollection>
 ): RecyclerView.Adapter<StatisticsAdapter.StatisticViewHolder>() {
-    private lateinit var statObjAdapter: StatObjAdapter
 
+    private lateinit var statObjAdapter: StatObjAdapter
     class StatisticViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatisticViewHolder {
-
         return StatisticViewHolder(
             LayoutInflater.from(parent.context).inflate(
                     R.layout.statistics_item,
@@ -29,6 +29,11 @@ class StatisticsAdapter(
     }
 
     fun addStat(question: Question, index: Int){
+        val q = QuestionStore(0,1,"DEL", question.title, question.rate)
+        statistics[index].qList.add(q)
+        notifyItemInserted(statistics.size - 1)
+    }
+    fun addStat(question: QuestionStore, index: Int){
         statistics[index].qList.add(question)
         notifyItemInserted(statistics.size - 1)
     }
