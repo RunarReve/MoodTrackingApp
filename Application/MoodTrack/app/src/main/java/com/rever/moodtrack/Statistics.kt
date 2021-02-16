@@ -17,13 +17,13 @@ class Statistics : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statistics)
         val mUserViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
+        val actionBar = supportActionBar
+        actionBar!!.title = "Satistics"
+        actionBar.setDisplayHomeAsUpEnabled(true)
 
         qqList = StatisticsAdapter(mutableListOf())
-        //qqList.newInput("Day1")
-        val time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("y/M/d H:m:ss")).toString()
-        tvStat.text =time
-
-        var check = true //Make sure it only runs this once
+        //Get data stored in db
+        var check = true //Loop once
         mUserViewModel.readAllData.observe(this, Observer {
             if (check) {
                 it.forEach {
@@ -39,8 +39,5 @@ class Statistics : AppCompatActivity() {
 
         //TODO make a recycle view to display collected data simlesly (with delete)
 
-        val actionBar = supportActionBar
-        actionBar!!.title = "Satistics"
-        actionBar.setDisplayHomeAsUpEnabled(true)
     }
 }

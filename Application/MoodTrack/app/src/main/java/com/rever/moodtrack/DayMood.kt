@@ -14,17 +14,16 @@ class DayMood : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_day_mood)
-
-        questionAdapter = QuestionAdapter(mutableListOf())
-        questionAdapter.addQuestion("Mood")
-
-        rvQuestionItems.adapter = questionAdapter
-        rvQuestionItems.layoutManager = LinearLayoutManager(this)
-
         val actionBar = supportActionBar
         actionBar!!.title = "Enter Mood of day"
         actionBar.setDisplayHomeAsUpEnabled(true)
 
+        //-------------Setting up the Questions being asked
+        questionAdapter = QuestionAdapter(mutableListOf())
+        questionAdapter.addQuestion("Mood")
+        rvQuestionItems.adapter = questionAdapter
+        rvQuestionItems.layoutManager = LinearLayoutManager(this)
+        //-------------Setting up the Questions being asked
 
         btnNext.setOnClickListener {
             val moodQuestion = Array<String>(questionAdapter.getSize()){""}
@@ -35,6 +34,5 @@ class DayMood : AppCompatActivity() {
             intent.putExtra("moodQ", moodQuestion)
             startActivity(intent)
         }
-
     }
 }

@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar!!.title = "Home"
 
+        //--------------Home-Buttons-----------------
         btnNew.setOnClickListener {
             startActivity(Intent(this, DayMood::class.java))
         }
@@ -28,10 +29,6 @@ class MainActivity : AppCompatActivity() {
         btnAbout.setOnClickListener {
             startActivity(Intent(this, About::class.java))
         }
-
-
+        //--------------Home-Buttons-----------------
     }
-
-
-
 }

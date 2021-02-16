@@ -61,17 +61,10 @@ class QuestionAdapter (
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 curQuestion.rate = p1
             }
-
             //Do nothing
-            override fun onStartTrackingTouch(p0: SeekBar?) {
-                return
-            }
+            override fun onStartTrackingTouch(p0: SeekBar?) {return}
             //Do nothing
-            override fun onStopTrackingTouch(p0: SeekBar?) {
-                return
-            }
-
-
+            override fun onStopTrackingTouch(p0: SeekBar?) {return}
         })
     }
 

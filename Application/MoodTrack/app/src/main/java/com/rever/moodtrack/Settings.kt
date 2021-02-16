@@ -10,6 +10,9 @@ class Settings : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+        val actionBar = supportActionBar
+        actionBar!!.title = "Settings"
+        actionBar.setDisplayHomeAsUpEnabled(true)
 
         btnDeleteTable.setOnClickListener {
             val mUserViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
@@ -18,8 +21,5 @@ class Settings : AppCompatActivity() {
         }
 
 
-        val actionBar = supportActionBar
-        actionBar!!.title = "Settings"
-        actionBar.setDisplayHomeAsUpEnabled(true)
     }
 }

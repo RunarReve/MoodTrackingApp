@@ -16,7 +16,7 @@ interface QuestionDao {
 
 
     @Query("DELETE FROM question_table")
-    fun deletLocalData()
+    fun deleteLocalData()
 
     //TODO add get all same name
 }

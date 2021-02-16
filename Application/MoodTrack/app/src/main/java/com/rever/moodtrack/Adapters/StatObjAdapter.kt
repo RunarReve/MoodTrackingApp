@@ -25,6 +25,7 @@ class StatObjAdapter(
         stats.add(question)
         notifyItemInserted(stats.size - 1)
     }
+
     override fun onBindViewHolder(holder: StatisticsAdapter.StatisticViewHolder, position: Int) {
         val curStat = stats[position]
         holder.itemView.apply {
@@ -32,6 +33,7 @@ class StatObjAdapter(
             tvQuestionRate.text  = curStat.rate.toString()
         }
     }
+
     override fun getItemCount(): Int {
         return stats.size
     }

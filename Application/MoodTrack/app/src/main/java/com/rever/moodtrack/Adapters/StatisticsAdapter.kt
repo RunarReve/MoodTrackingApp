@@ -29,9 +29,7 @@ class StatisticsAdapter(
 
     fun addStat(question: Question){
         var check = false //check if the question has been added
-        for(i in 0..statistics.size-1){
-            println("LO2: ${i} to ${statistics.size-2}")
-            println("LOL3 ${statistics[i].qList.get(0).time} against ${question.time}")
+        for(i in 0 until statistics.size){
             if(statistics[i].qList.get(0).time == question.time) {
                 statistics[i].qList.add(question)
                 check = true
@@ -48,7 +46,6 @@ class StatisticsAdapter(
     fun getSize(): Int{
         return statistics.size
     }
-
 
     override fun onBindViewHolder(holder: StatisticViewHolder, position: Int) {
         val curStats = statistics[position]
@@ -74,5 +71,4 @@ class StatisticsAdapter(
     override fun getItemCount(): Int {
         return statistics.size
     }
-
 }

@@ -32,11 +32,9 @@ class QuestionViewModel(application: Application):AndroidViewModel(application){
         }
     }
 
-    fun getAllQuetionItems() = repository.readAllData
-
     fun deleteLocalData(){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deletLocalData()
+            repository.deleteLocalData()
         }
     }
 
