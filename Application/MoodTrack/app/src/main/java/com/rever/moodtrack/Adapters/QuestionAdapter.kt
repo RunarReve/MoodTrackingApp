@@ -5,13 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.recyclerview.widget.RecyclerView
-import com.rever.moodtrack.Question
 import com.rever.moodtrack.R
-import com.rever.moodtrack.data.QuestionStore
+import com.rever.moodtrack.data.Question
 import kotlinx.android.synthetic.main.question_item.view.*
 
 class QuestionAdapter (
-    private val questions: MutableList<QuestionStore>
+    private val questions: MutableList<Question>
         ): RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder>() {
         class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -25,13 +24,13 @@ class QuestionAdapter (
         )
     }
 
-    fun addQuestion(question: QuestionStore){
+    fun addQuestion(question: Question){
         questions.add(question)
         notifyItemInserted(questions.size - 1)
     }
 
     fun addQuestion(tile: String){
-        val q =QuestionStore(0,1,"DEL", tile,4)
+        val q =Question(0,0,"NULL", "DEL", tile,4)
         questions.add(q)
         notifyItemInserted(questions.size - 1)
     }

@@ -6,13 +6,13 @@ import androidx.room.*
 @Dao
 interface QuestionDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addQuestion(questionStore: QuestionStore)
+    suspend fun addQuestion(question: Question)
 
     @Delete
-    suspend fun deleteQuestion(questionStore: QuestionStore)
+    suspend fun deleteQuestion(question: Question)
 
     @Query("SELECT * FROM question_table ORDER BY id ASC")
-    fun readAllData(): LiveData<List<QuestionStore>>
+    fun readAllData(): LiveData<List<Question>>
 
 
     @Query("DELETE FROM question_table")

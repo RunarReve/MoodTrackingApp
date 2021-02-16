@@ -5,10 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.rever.moodtrack.Question
 import com.rever.moodtrack.QuestionCollection
 import com.rever.moodtrack.R
-import com.rever.moodtrack.data.QuestionStore
+import com.rever.moodtrack.data.Question
 import kotlinx.android.synthetic.main.statistics_item.view.*
 
 class StatisticsAdapter(
@@ -28,19 +27,21 @@ class StatisticsAdapter(
         )
     }
 
-    fun addStat(question: Question, index: Int){
-        val q = QuestionStore(0,1,"DEL", question.title, question.rate)
-        statistics[index].qList.add(q)
-        notifyItemInserted(statistics.size - 1)
-    }
-    fun addStat(question: QuestionStore, index: Int){
-        statistics[index].qList.add(question)
-        notifyItemInserted(statistics.size - 1)
-    }
-
-   fun newInput(title: String){
-        val start = QuestionCollection(title)
-        statistics.add(start)
+    fun addStat(question: Question){
+        var check = false //check if the question has been added
+        for(i in 0..statistics.size-1){
+            println("LO2: ${i} to ${statistics.size-2}")
+            println("LOL3 ${statistics[i].qList.get(0).time} against ${question.time}")
+            if(statistics[i].qList.get(0).time == question.time) {
+                statistics[i].qList.add(question)
+                check = true
+            }
+        }
+        if(!check) {
+            val o =QuestionCollection(question.time)
+            o.qList.add(question)
+            statistics.add(o)
+        }
         notifyItemInserted(statistics.size - 1)
     }
 

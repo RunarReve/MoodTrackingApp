@@ -6,13 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.rever.moodtrack.data.QuestionDatabase
 import com.rever.moodtrack.data.QuestionRepository
-import com.rever.moodtrack.data.QuestionStore
+import com.rever.moodtrack.data.Question
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class QuestionViewModel(application: Application):AndroidViewModel(application){
 
-    val readAllData: LiveData<List<QuestionStore>>
+    val readAllData: LiveData<List<Question>>
     private val repository: QuestionRepository
 
     init {
@@ -21,14 +21,14 @@ class QuestionViewModel(application: Application):AndroidViewModel(application){
         readAllData = repository.readAllData
     }
 
-    fun addQuestion(questionStore: QuestionStore){
+    fun addQuestion(question: Question){
         viewModelScope.launch(Dispatchers.IO){
-            repository.addQuestion(questionStore)
+            repository.addQuestion(question)
         }
     }
-    fun deleteQuestion(questionStore: QuestionStore){
+    fun deleteQuestion(question: Question){
         viewModelScope.launch(Dispatchers.IO){
-            repository.deleteQuestion(questionStore)
+            repository.deleteQuestion(question)
         }
     }
 

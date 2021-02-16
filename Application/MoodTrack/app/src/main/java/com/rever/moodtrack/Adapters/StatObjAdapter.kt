@@ -3,13 +3,12 @@ package com.rever.moodtrack.Adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.rever.moodtrack.Question
 import com.rever.moodtrack.R
-import com.rever.moodtrack.data.QuestionStore
+import com.rever.moodtrack.data.Question
 import kotlinx.android.synthetic.main.stat_obj_item.view.*
 
 class StatObjAdapter(
-        private val stats: MutableList<QuestionStore>
+        private val stats: MutableList<Question>
 ): RecyclerView.Adapter<StatisticsAdapter.StatisticViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatisticsAdapter.StatisticViewHolder {
@@ -22,7 +21,7 @@ class StatObjAdapter(
         )
     }
 
-    fun addObj(question: QuestionStore){
+    fun addObj(question: Question){
         stats.add(question)
         notifyItemInserted(stats.size - 1)
     }
