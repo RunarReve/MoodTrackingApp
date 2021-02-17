@@ -26,6 +26,11 @@ class StatObjAdapter(
         notifyItemInserted(stats.size - 1)
     }
 
+    fun deleteObj(question: Question){
+        stats.remove(question)
+        notifyItemInserted(stats.size -1)
+    }
+
     override fun onBindViewHolder(holder: StatisticsAdapter.StatisticViewHolder, position: Int) {
         val curStat = stats[position]
         holder.itemView.apply {
