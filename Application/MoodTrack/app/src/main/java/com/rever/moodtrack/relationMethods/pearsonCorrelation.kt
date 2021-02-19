@@ -41,6 +41,7 @@ object pearsonCorrelation {
         var listOfLists = mutableListOf<Int>()
 
         //Find list of mood
+        //TODO method of having two moods
         list.forEach {
             it.qList.forEach{
                 if(it.isPrimary == 1)
@@ -51,13 +52,12 @@ object pearsonCorrelation {
         val result = arrayListOf<Double>()
         //test each question
         for (question in 0..list[0].qList.size-1) {
-            var currentQTitle = list[0].qList[question].questionTitle
+            var currentQTitle = list[0].qList[question].questionTitle //Current question title
             listOfLists.clear()
             list.forEach {
                 it.qList.forEach {
-                    if (it.isPrimary != 1 && it.questionTitle == currentQTitle) {
+                    if (it.isPrimary != 1 && it.questionTitle == currentQTitle)
                         listOfLists.add(it.rate)
-                    }
                 }
             }
             if (listOfLists.size != 0){
