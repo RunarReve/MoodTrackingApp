@@ -5,13 +5,17 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rever.moodtrack.Adapters.PearsonAdapter
 import com.rever.moodtrack.Adapters.StatisticsAdapter
+import com.rever.moodtrack.relationMethods.pearsonCorrelation
 import kotlinx.android.synthetic.main.activity_statistics.*
+import kotlinx.android.synthetic.main.statistics_item.view.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class Statistics : AppCompatActivity() {
     private lateinit var qqList: StatisticsAdapter
+    private lateinit var pearsonList: MutableList<QuestionCollection>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,13 +35,20 @@ class Statistics : AppCompatActivity() {
                     qqList.addStat(it)
                 }
                 rvStatistics.adapter = qqList
-                rvStatistics.layoutManager = LinearLayoutManager(this)
+
+                val pearson = PearsonAdapter(mutableListOf(), mutableListOf())
+                pearson.doPearson(qqList.getList())
+                rvPearson.adapter = pearson
             }
         })
 
         rvStatistics.layoutManager = LinearLayoutManager(this)
+        rvPearson.layoutManager = LinearLayoutManager(this)
+        rvPearson?.layoutManager =
+                LinearLayoutManager(rvPearson.context,
+                        LinearLayoutManager.HORIZONTAL,
+                        false)
 
-        //TODO make a recycle view to display collected data simlesly (with delete)
-
+        //TODO Add delete
     }
 }

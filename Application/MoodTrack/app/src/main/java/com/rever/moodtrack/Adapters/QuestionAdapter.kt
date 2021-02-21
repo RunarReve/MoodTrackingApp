@@ -29,8 +29,13 @@ class QuestionAdapter (
         notifyItemInserted(questions.size - 1)
     }
 
+    fun addQuestionPrimary(tile: String){
+        val q =Question(1,"NULL", "DEL", tile,4,0)
+        questions.add(q)
+        notifyItemInserted(questions.size - 1)
+    }
     fun addQuestion(tile: String){
-        val q =Question(0,0,"NULL", "DEL", tile,4)
+        val q =Question(0,"NULL", "DEL", tile,4, 0)
         questions.add(q)
         notifyItemInserted(questions.size - 1)
     }
@@ -43,7 +48,6 @@ class QuestionAdapter (
     fun getSize(): Int {
         return questions.size
     }
-
     fun getTitle(i: Int): String{
         return questions[i].questionTitle
     }

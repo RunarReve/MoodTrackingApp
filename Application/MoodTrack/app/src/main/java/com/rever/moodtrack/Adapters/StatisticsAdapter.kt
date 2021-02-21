@@ -3,17 +3,12 @@ package com.rever.moodtrack.Adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rever.moodtrack.QuestionCollection
-import com.rever.moodtrack.QuestionViewModel
 import com.rever.moodtrack.R
 import com.rever.moodtrack.data.Question
 import kotlinx.android.synthetic.main.statistics_item.view.*
-import kotlin.coroutines.coroutineContext
 
 class StatisticsAdapter(
         private val statistics: MutableList<QuestionCollection>
@@ -30,6 +25,9 @@ class StatisticsAdapter(
                     false
             )
         )
+    }
+    fun getList():MutableList<QuestionCollection>{
+        return statistics
     }
 
     fun addStat(question: Question){
@@ -54,11 +52,6 @@ class StatisticsAdapter(
         //Fill each RV with each set of questions
         statObjAdapter = StatObjAdapter(mutableListOf())
         holder.itemView.apply {
-            var x =curStats.id
-            curStats.qList.forEach{
-                x += " "+ it.rate
-            }
-
             curStats.qList.forEach {
                 statObjAdapter.addObj(it)
             }
@@ -68,9 +61,6 @@ class StatisticsAdapter(
                     LinearLayoutManager.HORIZONTAL,
                     false)
         }
-
-
-
         return
     }
 

@@ -20,7 +20,7 @@ class DayMood : AppCompatActivity() {
 
         //-------------Setting up the Questions being asked
         questionAdapter = QuestionAdapter(mutableListOf())
-        questionAdapter.addQuestion("Mood")
+        questionAdapter.addQuestionPrimary("Mood")
         rvQuestionItems.adapter = questionAdapter
         rvQuestionItems.layoutManager = LinearLayoutManager(this)
         //-------------Setting up the Questions being asked

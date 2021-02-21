@@ -66,4 +66,18 @@ object pearsonCorrelation {
         }
         return result
     }
+
+    fun getQuestionTitle(list : List<QuestionCollection>): List<String>{
+        if(list.size == 0)
+            return listOf("")
+
+        var titleList = mutableListOf<String>()
+        list[0].qList.forEach{
+            if (it.isPrimary == 0)
+                titleList.add(it.questionTitle)
+        }
+        println("LOL1: $list")
+        println("LOL: $titleList")
+        return titleList
+    }
 }

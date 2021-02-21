@@ -22,8 +22,8 @@ class DayQuestions : AppCompatActivity() {
         //Hardcoded questions To be asked
         questionAdapter = QuestionAdapter(mutableListOf())
         questionAdapter.addQuestion("Sleep")
-        //questionAdapter.addQuestion("Movement")
-        //questionAdapter.addQuestion("Social")
+        questionAdapter.addQuestion("Movement")
+        questionAdapter.addQuestion("Social")
         rvQuestionItems.adapter = questionAdapter //Display
         rvQuestionItems.layoutManager = LinearLayoutManager(this)
 
@@ -36,9 +36,7 @@ class DayQuestions : AppCompatActivity() {
 
             for(i in 0 until questionAdapter.getSize()) {
                 needQuestion[i] = questionAdapter.getItemCount2(i)
-                val q = Question(0,2, time,"TEMP",
-                    questionAdapter.getTitle(i), questionAdapter.getrate(i)
-                )
+                val q = Question(0, time,"TEMP2", questionAdapter.getTitle(i), questionAdapter.getrate(i),0)
                 mUserViewModel.addQuestion(q)
             }
 
@@ -46,7 +44,7 @@ class DayQuestions : AppCompatActivity() {
             val moodQuestion = intent.getStringArrayExtra("moodQ")
             moodQuestion?.forEach {
                 val split = it.split(',')
-                val q = Question(0,1, time, "TEMP", split[0], split[1].toInt())
+                val q = Question(1, time, "TEMP2", split[0], split[1].toInt(),0)
                 mUserViewModel.addQuestion(q)
             }
 

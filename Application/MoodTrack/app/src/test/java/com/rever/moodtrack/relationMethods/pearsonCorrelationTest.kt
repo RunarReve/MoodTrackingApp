@@ -162,4 +162,20 @@ class pearsonCorrelationQuestionTest{
         val result = pearsonCorrelation.questionCol2PearsonCor(list)
         assertThat(result).isEqualTo(listOf(1.0,-1.0))
     }
+
+    @Test
+    fun getTitleArray(){
+        val list = mutableListOf<QuestionCollection>()
+        for (i in 0..5){
+            var qcoll = QuestionCollection("Day${i}")
+            qcoll.qList.add(Question(0,1,"NULL","Day${i}","Mood1", 6+i))
+            qcoll.qList.add(Question(0,0,"NULL","Day${i}","Trait1", i))
+            qcoll.qList.add(Question(0,0,"NULL","Day${i}","Trait2", 8-i))
+            list.add(qcoll)
+        }
+
+        val result = pearsonCorrelation.getQuestionTitle(list)
+        assertThat(result).isEqualTo(listOf("Trait1", "Trait2"))
+    }
+
 }
