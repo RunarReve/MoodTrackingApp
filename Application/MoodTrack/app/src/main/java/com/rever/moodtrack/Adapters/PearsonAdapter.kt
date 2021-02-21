@@ -42,7 +42,7 @@ class PearsonAdapter(
     override fun onBindViewHolder(holder: StatisticsAdapter.StatisticViewHolder, position: Int) {
         holder.itemView.apply {
             tvQuestionTitle.text = titleList[position]
-            tvQuestionRate.text  = scoreList[position].toString()
+            tvQuestionRate.text  = String.format("%.3f",scoreList[position])
         }
     }
 
