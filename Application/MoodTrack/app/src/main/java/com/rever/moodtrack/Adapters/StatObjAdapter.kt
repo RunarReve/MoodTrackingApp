@@ -23,6 +23,7 @@ class StatObjAdapter(
 
     fun addObj(question: Question){
         stats.add(question)
+        stats.sortWith(compareBy({it.isPrimary},{it.questionTitle}))
         notifyItemInserted(stats.size - 1)
     }
 
