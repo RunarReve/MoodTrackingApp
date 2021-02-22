@@ -80,4 +80,24 @@ object pearsonCorrelation {
         println("LOL: $titleList")
         return titleList
     }
+
+    fun doAll(list : List<QuestionCollection>): MutableList<PearsonObject>{
+        val titles = getQuestionTitle(list)
+        val scores = questionCol2PearsonCor(list)
+        return merge2Object(titles,scores)
+    }
+
+    fun merge2Object(titles: List<String>, scores: List<Double> ): MutableList<PearsonObject>{
+        val preresult = mutableListOf<PearsonObject>()
+        for (i in titles.indices){
+            val new = PearsonObject(titles[i],scores[i],0)
+            preresult.add(new)
+        }
+        //Could not sort into mutable List, this is to convert back after sorting
+        val result = mutableListOf<PearsonObject>()
+        preresult.sortedBy{it.title}.forEach {
+            result.add(it)
+        }
+        return result
+    }
 }

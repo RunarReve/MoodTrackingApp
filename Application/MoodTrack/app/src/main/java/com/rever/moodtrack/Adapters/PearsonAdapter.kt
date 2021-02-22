@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rever.moodtrack.QuestionCollection
 import com.rever.moodtrack.R
+import com.rever.moodtrack.relationMethods.PearsonObject
 import com.rever.moodtrack.relationMethods.pearsonCorrelation
 import kotlinx.android.synthetic.main.stat_obj_item.view.*
 
 class PearsonAdapter(
-        private var titleList: MutableList<String>,
-        private var scoreList: MutableList<Double>
+        private var pearsonList: MutableList<PearsonObject>
         ) : RecyclerView.Adapter<StatisticsAdapter.StatisticViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatisticsAdapter.StatisticViewHolder {
@@ -23,30 +23,24 @@ class PearsonAdapter(
         )
     }
 
-    fun addAll(titleListInn: MutableList<String>, scoreListInn: MutableList<Double>){
-        titleList = titleListInn
-        scoreList = scoreListInn
-        notifyItemInserted(titleList.size - 1)
+    fun addAll(inn: MutableList<PearsonObject>){
+        pearsonList = inn
+        notifyItemInserted(pearsonList.size - 1)
     }
 
     fun doPearson(questionCollList: MutableList<QuestionCollection>){
-        pearsonCorrelation.questionCol2PearsonCor(questionCollList).forEach {
-            scoreList.add(it)
-        }
-        pearsonCorrelation.getQuestionTitle(questionCollList).forEach {
-            titleList.add(it)
-        }
-        notifyItemInserted(titleList.size - 1)
+        pearsonList = pearsonCorrelation.doAll(questionCollList)
+        notifyItemInserted(pearsonList.size - 1)
     }
 
     override fun onBindViewHolder(holder: StatisticsAdapter.StatisticViewHolder, position: Int) {
         holder.itemView.apply {
-            tvQuestionTitle.text = titleList[position]
-            tvQuestionRate.text  = String.format("%.3f",scoreList[position])
+            tvQuestionTitle.text = pearsonList[position].title
+            tvQuestionRate.text  = String.format("%.3f",pearsonList[position].score)
         }
     }
 
     override fun getItemCount(): Int {
-        return titleList.size
+        return pearsonList.size
     }
 }

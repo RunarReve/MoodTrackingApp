@@ -31,7 +31,7 @@ class Statistics : AppCompatActivity() {
                 }
                 rvStatistics.adapter = qqList
 
-                val pearson = PearsonAdapter(mutableListOf(), mutableListOf())
+                val pearson = PearsonAdapter(mutableListOf())
                 pearson.doPearson(qqList.getList())
                 rvPearson.adapter = pearson
             }
