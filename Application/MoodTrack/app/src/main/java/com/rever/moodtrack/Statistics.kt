@@ -7,19 +7,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rever.moodtrack.Adapters.PearsonAdapter
 import com.rever.moodtrack.Adapters.StatisticsAdapter
-import com.rever.moodtrack.relationMethods.pearsonCorrelation
 import kotlinx.android.synthetic.main.activity_statistics.*
-import kotlinx.android.synthetic.main.statistics_item.view.*
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class Statistics : AppCompatActivity() {
     private lateinit var qqList: StatisticsAdapter
-    private lateinit var pearsonList: MutableList<QuestionCollection>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_statistics2)
+        setContentView(R.layout.activity_statistics)
         val mUserViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
         val actionBar = supportActionBar
         actionBar!!.title = "Satistics"
