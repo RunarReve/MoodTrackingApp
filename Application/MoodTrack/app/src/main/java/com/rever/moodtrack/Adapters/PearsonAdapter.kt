@@ -23,11 +23,6 @@ class PearsonAdapter(
         )
     }
 
-    fun addAll(inn: MutableList<PearsonObject>){
-        pearsonList = inn
-        notifyItemInserted(pearsonList.size - 1)
-    }
-
     fun doPearson(questionCollList: MutableList<QuestionCollection>){
         pearsonList = pearsonCorrelation.doAll(questionCollList)
         notifyItemInserted(pearsonList.size - 1)
