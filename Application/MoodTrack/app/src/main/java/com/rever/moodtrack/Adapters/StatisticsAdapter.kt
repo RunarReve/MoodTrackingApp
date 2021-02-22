@@ -60,6 +60,7 @@ class StatisticsAdapter(
                 LinearLayoutManager(rvStatisticItem.context,
                     LinearLayoutManager.HORIZONTAL,
                     false)
+            tvDayHeader.text = curStats.qList[0].time //TODO change to only date format
         }
         return
     }

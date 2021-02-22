@@ -1,5 +1,6 @@
 package com.rever.moodtrack.Adapters
 
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -14,17 +15,17 @@ class StatObjAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatisticsAdapter.StatisticViewHolder {
         return StatisticsAdapter.StatisticViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                    R.layout.stat_obj_item,
-                    parent,
-                    false
+                R.layout.stat_obj_item,
+                parent,
+                false
             )
         )
     }
 
     fun addObj(question: Question){
         stats.add(question)
-        stats.sortBy { it.questionTitle}
-        stats.sortByDescending { it.isPrimary}
+        stats.sortBy { it.questionTitle} //Sorting method to get alphabetical ...
+        stats.sortByDescending { it.isPrimary}// ...but also moods first
         notifyItemInserted(stats.size - 1)
     }
 
