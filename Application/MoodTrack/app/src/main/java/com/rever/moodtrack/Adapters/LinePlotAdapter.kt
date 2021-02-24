@@ -22,23 +22,16 @@ class LinePlotAdapter(
     }
 
     fun testAdd(){
-        println("ECHO Test ")
         val entries = ArrayList<Entry>()
-        for (x in 0..7) {
-            println("ECHO Test loop ${x}")
+        for (x in 0..7)
             entries.add(Entry(x.toFloat(), x.toFloat()))
-        }
-        println("ECHO Test 2")
 
         val vl = LineDataSet(entries, "Thing One")
-        println("ECHO Test 3")
         vl.setDrawValues(false)
-        println("ECHO Test 4")
         vl.lineWidth = 5f
         vl.color = R.color.black
 
         dataSet.add(vl)
-        println("ECHO ${dataSet}")
         notifyItemInserted(dataSet.size - 1)
     }
 
