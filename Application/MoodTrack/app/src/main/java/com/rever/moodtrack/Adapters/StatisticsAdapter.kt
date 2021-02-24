@@ -1,5 +1,6 @@
 package com.rever.moodtrack.Adapters
 
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,6 +62,7 @@ class StatisticsAdapter(
                     LinearLayoutManager.HORIZONTAL,
                     false)
             tvDayHeader.text = curStats.qList[0].time //TODO change to only date format
+            tvDayHeader.gravity = Gravity.CENTER_HORIZONTAL
         }
         return
     }
