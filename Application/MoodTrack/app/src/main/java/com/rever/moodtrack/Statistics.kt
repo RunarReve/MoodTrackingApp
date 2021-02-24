@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rever.moodtrack.Adapters.LinePlotAdapter
 import com.rever.moodtrack.Adapters.PearsonAdapter
 import com.rever.moodtrack.Adapters.StatisticsAdapter
 import kotlinx.android.synthetic.main.activity_statistics.*
@@ -29,11 +30,17 @@ class Statistics : AppCompatActivity() {
                     check =false
                     qqList.addStat(it)
                 }
+                //rvStatistics.layoutManager = LinearLayoutManager(this)
                 rvStatistics.adapter = qqList
 
                 val pearson = PearsonAdapter(mutableListOf())
                 pearson.doPearson(qqList.getList())
+                //rvPearson.layoutManager = LinearLayoutManager(this)
                 rvPearson.adapter = pearson
+                val linePlotAdapter = LinePlotAdapter(mutableListOf(), this)
+                linePlotAdapter.testAdd()
+                rvLineCharts.layoutManager = LinearLayoutManager(this)
+                rvLineCharts.adapter = linePlotAdapter
             }
         })
 

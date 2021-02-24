@@ -13,6 +13,11 @@ class PearsonAdapter(
         private var pearsonList: MutableList<PearsonObject>
         ) : RecyclerView.Adapter<StatisticsAdapter.StatisticViewHolder>(){
 
+    fun doPearson(questionCollList: MutableList<QuestionCollection>){
+        pearsonList = pearsonCorrelation.doAll(questionCollList)
+        notifyItemInserted(pearsonList.size - 1)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatisticsAdapter.StatisticViewHolder {
         return StatisticsAdapter.StatisticViewHolder(
             LayoutInflater.from(parent.context).inflate(
@@ -21,11 +26,6 @@ class PearsonAdapter(
                 false
             )
         )
-    }
-
-    fun doPearson(questionCollList: MutableList<QuestionCollection>){
-        pearsonList = pearsonCorrelation.doAll(questionCollList)
-        notifyItemInserted(pearsonList.size - 1)
     }
 
     override fun onBindViewHolder(holder: StatisticsAdapter.StatisticViewHolder, position: Int) {
