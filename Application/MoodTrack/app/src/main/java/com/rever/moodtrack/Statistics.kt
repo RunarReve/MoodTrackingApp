@@ -30,15 +30,12 @@ class Statistics : AppCompatActivity() {
                     check =false
                     qqList.addStat(it)
                 }
-                //rvStatistics.layoutManager = LinearLayoutManager(this)
                 rvStatistics.adapter = qqList
 
                 val pearson = PearsonAdapter(mutableListOf())
                 pearson.doPearson(qqList.getList())
-                //rvPearson.layoutManager = LinearLayoutManager(this)
                 rvPearson.adapter = pearson
                 val linePlotAdapter = LinePlotAdapter(mutableListOf(), this)
-                //linePlotAdapter.testAdd()
                 linePlotAdapter.addDataSet(qqList.getList())
                 rvLineCharts.layoutManager = LinearLayoutManager(this)
                 rvLineCharts.adapter = linePlotAdapter

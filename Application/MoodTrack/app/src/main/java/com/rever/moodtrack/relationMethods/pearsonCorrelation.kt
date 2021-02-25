@@ -29,7 +29,6 @@ object pearsonCorrelation {
         //If there are no relation in the data, just return 0.0
         if (rD == 0.0)
             return 0.0
-
         return rUp/rD
     }
 

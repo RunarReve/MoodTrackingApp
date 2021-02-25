@@ -49,6 +49,7 @@ class LinePlotAdapter(
         notifyItemInserted(dataSet.size - 1)
     }
 
+    //Gets index for color to use
     private fun getTitlePoss(title: String):Int{
         for(i in 0 until qTitleList.size) //Check if it has been added
             if(title == qTitleList[i])
@@ -78,6 +79,6 @@ class LinePlotAdapter(
     }
 
     override fun getItemCount(): Int {
-        return dataSet.size
+        return 1
     }
 }
