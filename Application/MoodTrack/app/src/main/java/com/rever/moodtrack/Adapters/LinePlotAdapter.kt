@@ -40,10 +40,11 @@ class LinePlotAdapter(
                 day += 1f
             }
 
-            val data = LineDataSet(entries, list[0].qList[0].questionTitle)
+            val data = LineDataSet(entries, list[0].qList[i].questionTitle)
             val x = getTitlePoss(list[0].qList[i].questionTitle)
             data.color = colorList[x]
-            data.lineWidth = 5f
+            data.lineWidth = 4f
+            data.setDrawValues(false)
             dataSet.add(data)
         }
         notifyItemInserted(dataSet.size - 1)
@@ -75,6 +76,11 @@ class LinePlotAdapter(
         holder.itemView.apply {
             lineChart.data = LineData(dataSet as List<ILineDataSet>)
             lineChart.setPinchZoom(true)
+            lineChart.description.text = "Line Chart for Needs"
+            lineChart.setScaleEnabled(false)
+            lineChart.axisRight.isEnabled = false //Removes values from right axis
+            lineChart.xAxis.isGranularityEnabled = true //Set the interval to Natural numbers
+
         }
     }
 
