@@ -38,7 +38,8 @@ class Statistics : AppCompatActivity() {
                 //rvPearson.layoutManager = LinearLayoutManager(this)
                 rvPearson.adapter = pearson
                 val linePlotAdapter = LinePlotAdapter(mutableListOf(), this)
-                linePlotAdapter.testAdd()
+                //linePlotAdapter.testAdd()
+                linePlotAdapter.addDataSet(qqList.getList())
                 rvLineCharts.layoutManager = LinearLayoutManager(this)
                 rvLineCharts.adapter = linePlotAdapter
             }
