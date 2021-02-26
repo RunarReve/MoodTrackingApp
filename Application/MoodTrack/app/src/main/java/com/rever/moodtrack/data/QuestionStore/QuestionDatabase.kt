@@ -1,4 +1,4 @@
-package com.rever.moodtrack.data
+package com.rever.moodtrack.data.QuestionStore
 
 import android.content.Context
 import androidx.room.Database
@@ -14,7 +14,7 @@ abstract class QuestionDatabase: RoomDatabase(){
         @Volatile
         private var INSTANCE: QuestionDatabase? = null
 
-        fun getDatabase(context: Context):QuestionDatabase{
+        fun getDatabase(context: Context): QuestionDatabase {
             val tempInstance = INSTANCE
             if(tempInstance != null) {
                 return tempInstance

@@ -5,6 +5,9 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
+import com.rever.moodtrack.data.QuestionStore.Question
+import com.rever.moodtrack.data.QuestionStore.QuestionDao
+import com.rever.moodtrack.data.QuestionStore.QuestionDatabase
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before

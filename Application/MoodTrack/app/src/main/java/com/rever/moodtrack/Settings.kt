@@ -1,9 +1,11 @@
 package com.rever.moodtrack
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.rever.moodtrack.data.QuestionStore.QuestionViewModel
 import kotlinx.android.synthetic.main.activity_settings.*
 
 class Settings : AppCompatActivity() {
@@ -19,6 +21,11 @@ class Settings : AppCompatActivity() {
             mUserViewModel.deleteLocalData()
             Toast.makeText(this, "Deleted Local Data", Toast.LENGTH_SHORT).show()
         }
+        btnEditNeed.setOnClickListener {
+            startActivity(Intent(this, SettingsNeedEdit::class.java))
+        }
+
+        //TODO Edit method for custom needs
 
 
     }

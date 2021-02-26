@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.recyclerview.widget.RecyclerView
 import com.rever.moodtrack.R
-import com.rever.moodtrack.data.Question
+import com.rever.moodtrack.data.QuestionStore.Question
 import kotlinx.android.synthetic.main.question_item.view.*
 
 class QuestionAdapter (
@@ -30,12 +30,12 @@ class QuestionAdapter (
     }
 
     fun addQuestionPrimary(tile: String){
-        val q =Question(1,"NULL", "DEL", tile,4,0)
+        val q = Question(1,"NULL", "DEL", tile,4,0)
         questions.add(q)
         notifyItemInserted(questions.size - 1)
     }
     fun addQuestion(tile: String){
-        val q =Question(0,"NULL", "DEL", tile,4, 0)
+        val q = Question(0,"NULL", "DEL", tile,4, 0)
         questions.add(q)
         notifyItemInserted(questions.size - 1)
     }

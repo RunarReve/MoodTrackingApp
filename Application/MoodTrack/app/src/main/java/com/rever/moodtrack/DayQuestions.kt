@@ -6,7 +6,8 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rever.moodtrack.Adapters.QuestionAdapter
-import com.rever.moodtrack.data.Question
+import com.rever.moodtrack.data.QuestionStore.Question
+import com.rever.moodtrack.data.QuestionStore.QuestionViewModel
 import kotlinx.android.synthetic.main.activity_day_questions.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -19,11 +20,13 @@ class DayQuestions : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_day_questions)
 
-        //Hardcoded questions To be asked
         questionAdapter = QuestionAdapter(mutableListOf())
+        //Preset constant Need
         questionAdapter.addQuestion("Sleep")
         questionAdapter.addQuestion("Movement")
         questionAdapter.addQuestion("Social")
+        //TODO Get custom needs
+
         rvQuestionItems.adapter = questionAdapter //Display
         rvQuestionItems.layoutManager = LinearLayoutManager(this)
 
@@ -53,7 +56,7 @@ class DayQuestions : AppCompatActivity() {
         }
 
         val actionBar = supportActionBar
-        actionBar!!.title = "Needs fulfilled"
+        actionBar!!.title = "Need fulfilled"
         actionBar.setDisplayHomeAsUpEnabled(true)
     }
 }

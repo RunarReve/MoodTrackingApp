@@ -1,6 +1,6 @@
 package com.rever.moodtrack
 
-import com.rever.moodtrack.data.Question
+import com.rever.moodtrack.data.QuestionStore.Question
 
 data class QuestionCollection(
     var id : String,

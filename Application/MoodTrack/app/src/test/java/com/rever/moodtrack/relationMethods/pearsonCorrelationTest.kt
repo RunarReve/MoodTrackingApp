@@ -3,7 +3,7 @@ package com.rever.moodtrack.relationMethods
 
 import com.google.common.truth.Truth.assertThat
 import com.rever.moodtrack.QuestionCollection
-import com.rever.moodtrack.data.Question
+import com.rever.moodtrack.data.QuestionStore.Question
 import org.junit.Test
 
 class pearsonCorrelationTest {

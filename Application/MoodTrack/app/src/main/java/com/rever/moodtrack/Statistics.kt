@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.rever.moodtrack.Adapters.LinePlotAdapter
 import com.rever.moodtrack.Adapters.PearsonAdapter
 import com.rever.moodtrack.Adapters.StatisticsAdapter
+import com.rever.moodtrack.data.QuestionStore.QuestionViewModel
 import kotlinx.android.synthetic.main.activity_statistics.*
 
 class Statistics : AppCompatActivity() {
@@ -30,6 +31,8 @@ class Statistics : AppCompatActivity() {
                     check =false
                     qqList.addStat(it)
                 }
+                //TODO sort qqList
+                //TODO rename qqList to something better
                 rvStatistics.adapter = qqList
 
                 val pearson = PearsonAdapter(mutableListOf())

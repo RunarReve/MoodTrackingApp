@@ -1,12 +1,9 @@
-package com.rever.moodtrack
+package com.rever.moodtrack.data.QuestionStore
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.rever.moodtrack.data.QuestionDatabase
-import com.rever.moodtrack.data.QuestionRepository
-import com.rever.moodtrack.data.Question
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
