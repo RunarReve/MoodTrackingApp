@@ -33,7 +33,7 @@ class DayMood : AppCompatActivity() {
         val needViewModel = ViewModelProvider(this).get(NeedViewModel::class.java)
         needViewModel.readAllData.observe(this, Observer {
             it.forEach {
-                if(it.isPrimary == 1)
+                if(it.isPrimary == 1) //Normally not much data, -> OK to just pull all
                     questionAdapter.addNeed(it)
             }
         })

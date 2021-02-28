@@ -34,7 +34,7 @@ class DayQuestions : AppCompatActivity() {
         val needViewModel = ViewModelProvider(this).get(NeedViewModel::class.java)
         needViewModel.readAllData.observe(this, Observer {
             it.forEach {
-                if(it.isPrimary == 0)
+                if(it.isPrimary == 0) //Normally not much data, -> OK to just pull all
                     questionAdapter.addNeed(it)
             }
         })
