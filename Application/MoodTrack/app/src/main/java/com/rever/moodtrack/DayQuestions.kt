@@ -3,9 +3,11 @@ package com.rever.moodtrack
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rever.moodtrack.Adapters.QuestionAdapter
+import com.rever.moodtrack.data.NeedStore.NeedViewModel
 import com.rever.moodtrack.data.QuestionStore.Question
 import com.rever.moodtrack.data.QuestionStore.QuestionViewModel
 import kotlinx.android.synthetic.main.activity_day_questions.*
@@ -21,15 +23,21 @@ class DayQuestions : AppCompatActivity() {
         setContentView(R.layout.activity_day_questions)
 
         questionAdapter = QuestionAdapter(mutableListOf())
+        rvQuestionItems.adapter = questionAdapter //Display
+        rvQuestionItems.layoutManager = LinearLayoutManager(this)
+
         //Preset constant Need
         questionAdapter.addQuestion("Sleep")
         questionAdapter.addQuestion("Movement")
         questionAdapter.addQuestion("Social")
-        //TODO Get custom needs
-
-        rvQuestionItems.adapter = questionAdapter //Display
-        rvQuestionItems.layoutManager = LinearLayoutManager(this)
-
+        //Get custom needs goals from DB
+        val needViewModel = ViewModelProvider(this).get(NeedViewModel::class.java)
+        needViewModel.readAllData.observe(this, Observer {
+            it.forEach {
+                if(it.isPrimary == 0)
+                    questionAdapter.addNeed(it)
+            }
+        })
 
         btnNext.setOnClickListener {
             val mUserViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)

@@ -3,8 +3,11 @@ package com.rever.moodtrack
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rever.moodtrack.Adapters.QuestionAdapter
+import com.rever.moodtrack.data.NeedStore.NeedViewModel
 import kotlinx.android.synthetic.main.activity_day_mood.btnNext
 import kotlinx.android.synthetic.main.activity_day_mood.rvQuestionItems
 
@@ -19,18 +22,26 @@ class DayMood : AppCompatActivity() {
         actionBar!!.title = "Enter Mood of day"
         actionBar.setDisplayHomeAsUpEnabled(true)
 
-        //-------------Setting up the Questions being asked
         questionAdapter = QuestionAdapter(mutableListOf())
-        //Preset constant Need goals
-        questionAdapter.addQuestionPrimary("Mood")
-        //TODO Get custom need goals
-
         rvQuestionItems.adapter = questionAdapter
         rvQuestionItems.layoutManager = LinearLayoutManager(this)
+
+        //-------------Setting up the Questions being asked
+        //Preset constant Need goals
+        questionAdapter.addQuestionPrimary("Mood")
+        //Get custom needs goals from DB
+        val needViewModel = ViewModelProvider(this).get(NeedViewModel::class.java)
+        needViewModel.readAllData.observe(this, Observer {
+            it.forEach {
+                if(it.isPrimary == 1)
+                    questionAdapter.addNeed(it)
+            }
+        })
+
         //-------------Setting up the Questions being asked
 
         btnNext.setOnClickListener {
-            val moodQuestion = Array<String>(questionAdapter.getSize()){""}
+            val moodQuestion = Array(questionAdapter.getSize()){""}
             for(i in 0 until questionAdapter.getSize())
                 moodQuestion[i] =  questionAdapter.getItemCount2(i)
 

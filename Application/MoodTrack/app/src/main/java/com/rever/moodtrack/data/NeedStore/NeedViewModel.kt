@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 class NeedViewModel(application: Application):AndroidViewModel(application) {
 
     val readAllData: LiveData<List<Need>>
+
     private val repository: NeedRepository
 
     init{

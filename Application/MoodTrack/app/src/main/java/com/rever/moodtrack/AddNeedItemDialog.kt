@@ -14,7 +14,6 @@ class AddNeedItemDialog (context: Context, var needViewModel: NeedViewModel):App
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_add_need_item)
 
-
         btnAddNeed.setOnClickListener {
             val needTitle = etNeedTitle.text.toString()
             if(needTitle.isEmpty()){

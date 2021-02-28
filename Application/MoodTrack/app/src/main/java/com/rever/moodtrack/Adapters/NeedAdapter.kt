@@ -3,13 +3,11 @@ package com.rever.moodtrack.Adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.rever.moodtrack.R
 import com.rever.moodtrack.data.NeedStore.Need
 import com.rever.moodtrack.data.NeedStore.NeedViewModel
 import kotlinx.android.synthetic.main.need_item.view.*
-import java.text.FieldPosition
 
 class NeedAdapter(
     var needList: List<Need>,
