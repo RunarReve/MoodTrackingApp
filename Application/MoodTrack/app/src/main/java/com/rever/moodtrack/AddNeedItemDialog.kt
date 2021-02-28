@@ -27,12 +27,7 @@ class AddNeedItemDialog (context: Context, var needViewModel: NeedViewModel):App
             val need = Need(isPrimary, needTitle,"Temp", 0)
             needViewModel.addNeed(need)
             Toast.makeText(context, "Added this: ${needTitle}", Toast.LENGTH_SHORT).show()
-            dismiss()
-        }
 
-        ivDeleteNeed.setOnClickListener {
-            needViewModel.deleteLocalData()
-            Toast.makeText(context, "Deleted all", Toast.LENGTH_SHORT).show()
             dismiss()
         }
 

@@ -11,11 +11,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
         android:ems="10"
         android:hint="Need Name"
         android:inputType="text"
-        app:layout_constraintEnd_toStartOf="@+id/ivDeleteNeed"
         app:layout_constraintStart_toStartOf="@+id/btnCancel"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -38,23 +36,15 @@
         android:textAllCaps="true"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/ivDeleteNeed"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/etNeedTitle"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/ivDeleteNeed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddNeed"
-        app:layout_constraintEnd_toEndOf="@+id/btnAddNeed"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_delete" />
 
     <Button
         android:id="@+id/btnAddNeed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
         android:text="Add"

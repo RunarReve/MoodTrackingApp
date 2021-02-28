@@ -6,7 +6,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rever.moodtrack.Adapters.NeedAdapter
-import com.rever.moodtrack.data.NeedStore.Need
 import com.rever.moodtrack.data.NeedStore.NeedViewModel
 import kotlinx.android.synthetic.main.activity_settings_need_edit.*
 
@@ -24,9 +23,9 @@ class SettingsNeedEdit() : AppCompatActivity() {
         val needViewModel = ViewModelProvider(this).get(NeedViewModel::class.java)
 
         var check = true //Loop once, avoids duplications when updated
-        needAdapter = NeedAdapter(mutableListOf())
+        needAdapter = NeedAdapter(mutableListOf(), needViewModel)
         rvNeedList.layoutManager = LinearLayoutManager(this)
-        needViewModel.readAllData.observe(this, Observer {
+        /*needViewModel.readAllData.observe(this, Observer {
             if (check) {
                 it.forEach {
                     check =false
@@ -34,6 +33,12 @@ class SettingsNeedEdit() : AppCompatActivity() {
                 }
                 rvNeedList.adapter = needAdapter
             }
+        })*/
+        rvNeedList.adapter = needAdapter
+        needViewModel.readAllData.observe(this, Observer {
+            //needAdapter.addNeed(it)
+            needAdapter.needList = it
+            needAdapter.notifyDataSetChanged()
         })
 
         fabAdd.setOnClickListener {
