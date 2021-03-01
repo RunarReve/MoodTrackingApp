@@ -2,40 +2,51 @@ package com.rever.moodtrack.Adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.rever.moodtrack.data.QuestionCollection
 import com.rever.moodtrack.R
-import com.rever.moodtrack.relationMethods.PearsonObject
+import com.rever.moodtrack.data.PearsonCollection
+import com.rever.moodtrack.data.QuestionCollection
 import com.rever.moodtrack.relationMethods.pearsonCorrelation
-import kotlinx.android.synthetic.main.stat_obj_item.view.*
+import kotlinx.android.synthetic.main.pearson_item.view.*
 
 class PearsonAdapter(
-        private var pearsonList: MutableList<PearsonObject>
-        ) : RecyclerView.Adapter<StatisticsAdapter.StatisticViewHolder>(){
+private var pearsonList: List<PearsonCollection>
+) : RecyclerView.Adapter<StatisticsAdapter.StatisticViewHolder>(){
 
     fun doPearson(questionCollList: MutableList<QuestionCollection>){
-        pearsonList = pearsonCorrelation.doAll(questionCollList)
+        pearsonList = pearsonCorrelation.doPearson(questionCollList)
+        println("OST: ${pearsonList.size}")
         notifyItemInserted(pearsonList.size - 1)
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatisticsAdapter.StatisticViewHolder {
         return StatisticsAdapter.StatisticViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.stat_obj_item,
-                parent,
-                false
+                    R.layout.pearson_item,
+                    parent,
+                    false
             )
         )
     }
 
     override fun onBindViewHolder(holder: StatisticsAdapter.StatisticViewHolder, position: Int) {
+        val curPearsonItem = pearsonList[position]
+        println("TEEE: ${curPearsonItem.id}")
+        val pearsonItemAdapter = PearsonItemAdapter(curPearsonItem)
         holder.itemView.apply {
-            tvQuestionTitle.text = pearsonList[position].title
-            tvQuestionRate.text  = String.format("%.3f",pearsonList[position].score)
+            rvPearsonItem.adapter =pearsonItemAdapter
+            rvPearsonItem?.layoutManager =
+                LinearLayoutManager(
+                    rvPearsonItem.context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false)
+            tvPearsonItemHeader.text = curPearsonItem.id
         }
+
     }
 
     override fun getItemCount(): Int {
         return pearsonList.size
     }
+
 }

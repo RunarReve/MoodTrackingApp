@@ -49,7 +49,7 @@ class Statistics : AppCompatActivity() {
         rvPearson.layoutManager = LinearLayoutManager(this)
         rvPearson?.layoutManager =
                 LinearLayoutManager(rvPearson.context,
-                        LinearLayoutManager.HORIZONTAL,
+                        LinearLayoutManager.VERTICAL,
                         false)
 
         //TODO Add delete
