@@ -3,11 +3,8 @@ package com.rever.moodtrack.Adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.rever.moodtrack.data.QuestionCollection
 import com.rever.moodtrack.R
 import com.rever.moodtrack.data.PearsonCollection
-import com.rever.moodtrack.relationMethods.PearsonObject
-import com.rever.moodtrack.relationMethods.pearsonCorrelation
 import kotlinx.android.synthetic.main.stat_obj_item.view.*
 
 class PearsonItemAdapter(

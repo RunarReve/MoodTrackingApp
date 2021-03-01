@@ -7,7 +7,7 @@ import com.rever.moodtrack.R
 import com.rever.moodtrack.data.QuestionStore.Question
 import kotlinx.android.synthetic.main.stat_obj_item.view.*
 
-class StatObjAdapter(
+class StatisticsItemAdapter(
         private val stats: MutableList<Question>
 ): RecyclerView.Adapter<StatisticsAdapter.StatisticViewHolder>() {
 

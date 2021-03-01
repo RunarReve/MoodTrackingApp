@@ -14,7 +14,7 @@ class StatisticsAdapter(
         private val statistics: MutableList<QuestionCollection>
 ): RecyclerView.Adapter<StatisticsAdapter.StatisticViewHolder>() {
 
-    private lateinit var statObjAdapter: StatObjAdapter
+    private lateinit var statisticsItemAdapter: StatisticsItemAdapter
     class StatisticViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatisticViewHolder {
@@ -50,12 +50,12 @@ class StatisticsAdapter(
         val curStats = statistics[position]
 
         //Fill each RV with each set of questions
-        statObjAdapter = StatObjAdapter(mutableListOf())
+        statisticsItemAdapter = StatisticsItemAdapter(mutableListOf())
         holder.itemView.apply {
             curStats.qList.forEach {
-                statObjAdapter.addObj(it)
+                statisticsItemAdapter.addObj(it)
             }
-            rvStatisticItem.adapter = statObjAdapter
+            rvStatisticItem.adapter = statisticsItemAdapter
             rvStatisticItem?.layoutManager =
                 LinearLayoutManager(rvStatisticItem.context,
                     LinearLayoutManager.HORIZONTAL,
