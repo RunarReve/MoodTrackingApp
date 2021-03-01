@@ -14,6 +14,7 @@ class PearsonItemAdapter(
         private var pearsonList: PearsonCollection
         ) : RecyclerView.Adapter<StatisticsAdapter.StatisticViewHolder>(){
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatisticsAdapter.StatisticViewHolder {
         return StatisticsAdapter.StatisticViewHolder(
             LayoutInflater.from(parent.context).inflate(

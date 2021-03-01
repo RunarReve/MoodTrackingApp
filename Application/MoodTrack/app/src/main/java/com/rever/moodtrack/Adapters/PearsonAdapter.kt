@@ -16,7 +16,6 @@ private var pearsonList: List<PearsonCollection>
 
     fun doPearson(questionCollList: MutableList<QuestionCollection>){
         pearsonList = pearsonCorrelation.doPearson(questionCollList)
-        println("OST: ${pearsonList.size}")
         notifyItemInserted(pearsonList.size - 1)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatisticsAdapter.StatisticViewHolder {
@@ -31,7 +30,6 @@ private var pearsonList: List<PearsonCollection>
 
     override fun onBindViewHolder(holder: StatisticsAdapter.StatisticViewHolder, position: Int) {
         val curPearsonItem = pearsonList[position]
-        println("TEEE: ${curPearsonItem.id}")
         val pearsonItemAdapter = PearsonItemAdapter(curPearsonItem)
         holder.itemView.apply {
             rvPearsonItem.adapter =pearsonItemAdapter

@@ -108,16 +108,20 @@ object pearsonCorrelation {
         val prePearsonList = mutableListOf<PearsonCollection>()
         val testTitles = mutableListOf<String>()
         var numberLists = 0
+
         list.forEach {
+            //Sort for future easier use
+            it.qList.sortBy { it.name }
+            it.qList.sortBy{it.isPrimary}
+            
             it.qList.forEach {
                 val index = checkStringInList(it.questionTitle, prePearsonList)
                 if(prePearsonList.size == index){
                     prePearsonList.add(PearsonCollection(it.questionTitle))
                     if(it.isPrimary == 1)
                         testTitles.add(it.questionTitle)
-                    for(i in 0..numberLists-1){ //If not empty values before, add now
+                    for(i in 0..numberLists-1) //If not empty values before, add now
                         prePearsonList[index].rateList.add(-1.0)
-                    }
                 }
                 prePearsonList[index].rateList.add(it.rate.toDouble())
             }
