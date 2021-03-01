@@ -1,4 +1,4 @@
-package com.rever.moodtrack
+package com.rever.moodtrack.data
 
 import com.rever.moodtrack.data.QuestionStore.Question
 

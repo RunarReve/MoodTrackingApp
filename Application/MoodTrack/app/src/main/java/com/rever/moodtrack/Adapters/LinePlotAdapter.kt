@@ -1,7 +1,6 @@
 package com.rever.moodtrack.Adapters
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Color.*
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.utils.Utils
-import com.rever.moodtrack.QuestionCollection
+import com.rever.moodtrack.data.QuestionCollection
 import com.rever.moodtrack.R
 import kotlinx.android.synthetic.main.line_plot.view.*
 

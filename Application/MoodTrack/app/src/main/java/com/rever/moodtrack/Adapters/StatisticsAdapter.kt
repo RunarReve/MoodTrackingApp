@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.rever.moodtrack.QuestionCollection
+import com.rever.moodtrack.data.QuestionCollection
 import com.rever.moodtrack.R
 import com.rever.moodtrack.data.QuestionStore.Question
 import kotlinx.android.synthetic.main.statistics_item.view.*
@@ -39,7 +39,7 @@ class StatisticsAdapter(
             }
         }
         if(!check) {
-            val o =QuestionCollection(question.time)
+            val o = QuestionCollection(question.time)
             o.qList.add(question)
             statistics.add(o)
         }

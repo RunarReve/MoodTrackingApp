@@ -39,7 +39,7 @@ class QuestionDaoTest {
 
     @Test
     fun insertQuestion() = runBlocking {
-        val question = Question(1,0,"NULL", "TEST", "TEST",5)
+        val question = Question(0,"NULL", "TEST", "TEST",5, 1)
 
         dao.addQuestion(question)
         var list = dao.readAllDataList()
@@ -49,8 +49,8 @@ class QuestionDaoTest {
 
     @Test
     fun deleteQuestion() = runBlocking {
-        val question1 = Question(1,0,"NULL", "TEST", "TEST",5)
-        val question2 = Question(2,0,"NULL", "TEST", "TEST",5)
+        val question1 = Question(0,"NULL", "TEST", "TEST",5, 1)
+        val question2 = Question(0,"NULL", "TEST", "TEST",5, 2)
 
         dao.addQuestion(question1)
         dao.addQuestion(question2)
@@ -63,7 +63,7 @@ class QuestionDaoTest {
 
     @Test
     fun increaseOnlyOne() = runBlocking {
-        val question1 = Question(1,0,"NULL", "TEST", "TEST",5)
+        val question1 = Question(0,"NULL", "TEST", "TEST",5, 1)
 
         val sizeBefore = dao.readAllDataList().size
         dao.addQuestion(question1)
@@ -74,8 +74,8 @@ class QuestionDaoTest {
 
     @Test
     fun deleteAll() = runBlocking {
-        val question1 = Question(1,0,"NULL", "TEST", "TEST",5)
-        val question2 = Question(2,0,"NULL", "TEST", "TEST",5)
+        val question1 = Question(0,"NULL", "TEST", "TEST",5, 1)
+        val question2 = Question(0,"NULL", "TEST", "TEST",5, 2)
 
         dao.addQuestion(question1)
         dao.addQuestion(question2)
