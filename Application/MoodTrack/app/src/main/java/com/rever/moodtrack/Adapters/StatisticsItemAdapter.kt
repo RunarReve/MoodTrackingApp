@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rever.moodtrack.R
 import com.rever.moodtrack.data.QuestionStore.Question
-import kotlinx.android.synthetic.main.stat_obj_item.view.*
+import kotlinx.android.synthetic.main.need_score_item.view.*
 
 class StatisticsItemAdapter(
         private val stats: MutableList<Question>
@@ -14,7 +14,7 @@ class StatisticsItemAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatisticsAdapter.StatisticViewHolder {
         return StatisticsAdapter.StatisticViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.stat_obj_item,
+                R.layout.need_score_item,
                 parent,
                 false
             )

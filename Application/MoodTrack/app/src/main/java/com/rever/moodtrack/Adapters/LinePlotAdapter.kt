@@ -12,7 +12,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.utils.Utils
 import com.rever.moodtrack.data.QuestionCollection
 import com.rever.moodtrack.R
-import kotlinx.android.synthetic.main.line_plot.view.*
+import kotlinx.android.synthetic.main.line_plot_item.view.*
 
 class LinePlotAdapter(
     private val dataSet: MutableList<LineDataSet>,
@@ -64,7 +64,7 @@ class LinePlotAdapter(
         Utils.init(parent.context)
         return StatisticsAdapter.StatisticViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.line_plot,
+                R.layout.line_plot_item,
                 parent,
                 false
             )

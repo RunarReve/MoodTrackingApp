@@ -42,11 +42,9 @@ class DayQuestions : AppCompatActivity() {
         btnNext.setOnClickListener {
             val mUserViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
 
-            val needQuestion = Array(questionAdapter.getSize()){""}
-            val time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("y/M/d H:m:ss")).toString()
+            val time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("y/M/d H:m")).toString()
 
             for(i in 0 until questionAdapter.getSize()) {
-                needQuestion[i] = questionAdapter.getItemCount2(i)
                 val q = Question(0, time,"TEMP2", questionAdapter.getTitle(i), questionAdapter.getrate(i),0)
                 mUserViewModel.addQuestion(q)
             }

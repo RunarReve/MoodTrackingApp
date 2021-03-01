@@ -31,9 +31,6 @@ class QuestionAdapter (
         )
     }
 
-    fun getQuestionFromDB(viewModelStoreOwner: ViewModelStoreOwner){
-
-    }
     fun addNeed(need: Need){
         val q = Question(need.isPrimary,"NULL", need.userID, need.needTitle,4,0)
         questions.add(q)
