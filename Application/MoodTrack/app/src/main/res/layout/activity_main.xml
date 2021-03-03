@@ -14,7 +14,7 @@
         android:text="New Input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ivMainImageShadow" />
 
     <Button
         android:id="@+id/btnStat"
@@ -47,23 +47,37 @@
         app:layout_constraintTop_toBottomOf="@+id/btnSettings" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivMainImageShadow"
         android:layout_width="166dp"
         android:layout_height="166dp"
         android:layout_marginTop="32dp"
+        android:rotationX="-6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/btn_star" />
+        app:srcCompat="@drawable/ic_baseline_emoji_events_24"
+        app:tint="@color/purple_700" />
+
+    <ImageView
+        android:id="@+id/ivMainImage"
+        android:layout_width="155dp"
+        android:layout_height="155dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMainImageShadow"
+        app:layout_constraintEnd_toEndOf="@+id/ivMainImageShadow"
+        app:layout_constraintStart_toStartOf="@+id/ivMainImageShadow"
+        app:layout_constraintTop_toTopOf="@+id/ivMainImageShadow"
+        app:srcCompat="@drawable/ic_baseline_emoji_events_24"
+        app:tint="@color/purple_500" />
 
     <TextView
-        android:id="@+id/tvText"
+        android:id="@+id/tvMainScreenText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TempText"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        android:layout_marginBottom="32dp"
+        android:text="TempStreak"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMainImageShadow"
+        app:layout_constraintEnd_toEndOf="@+id/ivMainImageShadow"
+        app:layout_constraintStart_toStartOf="@+id/ivMainImageShadow"
+        app:layout_constraintTop_toTopOf="@+id/ivMainImageShadow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

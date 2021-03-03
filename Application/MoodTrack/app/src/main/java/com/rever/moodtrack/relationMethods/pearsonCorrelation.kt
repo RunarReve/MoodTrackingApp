@@ -53,8 +53,6 @@ object pearsonCorrelation {
                 val index = getIndexinList(it.questionTitle, pearsonList) //Get index of title
                 if(pearsonList.size == index){  //If not seen add to list
                     pearsonList.add(PearsonCollection(it.questionTitle))
-                  //  if(it.isPrimary == 1) // if need is subjective need, add to test list
-                  //     pearsonList.add(it.questionTitle)
                     for(i in 0..numberLists-1) //If recently added...
                         pearsonList[index].rateList.add(-1.0) //... fill past data points
                 }
@@ -65,6 +63,10 @@ object pearsonCorrelation {
                 while(it.rateList.size < numberLists) //If not added anything this iteration, add empty
                     it.rateList.add(-1.0)
             }
+        }
+        //To get the list in ascending order
+        pearsonList.forEach {
+            it.rateList.reverse()
         }
         return pearsonList
     }
