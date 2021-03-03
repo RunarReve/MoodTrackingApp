@@ -43,7 +43,12 @@ class StatisticsAdapter(
             o.qList.add(question)
             statistics.add(o)
         }
+        sortList()
         notifyItemInserted(statistics.size - 1)
+    }
+
+    fun sortList(){
+        statistics.sortByDescending { it.qList[0].time}
     }
 
     override fun onBindViewHolder(holder: StatisticViewHolder, position: Int) {

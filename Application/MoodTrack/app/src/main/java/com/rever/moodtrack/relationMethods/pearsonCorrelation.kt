@@ -39,10 +39,8 @@ object pearsonCorrelation {
         return list.size
     }
 
-    fun doPearson(list : List<QuestionCollection>): List<PearsonCollection>{
+    fun questionCollection2PearsonCollection(list : List<QuestionCollection>):List<PearsonCollection>{
         val pearsonList = mutableListOf<PearsonCollection>()
-        val prePearsonList = mutableListOf<PearsonCollection>()
-        val testTitles = mutableListOf<String>()
         var numberLists = 0
 
         //Store all the sets of data in a structure based of the different needs
@@ -52,18 +50,40 @@ object pearsonCorrelation {
             it.qList.sortBy{it.isPrimary}
 
             it.qList.forEach {
-                val index = getIndexinList(it.questionTitle, prePearsonList) //Get index of title
-                if(prePearsonList.size == index){  //If not seen add to list
-                    prePearsonList.add(PearsonCollection(it.questionTitle))
-                    if(it.isPrimary == 1) // if need is subjective need, add to test list
-                        testTitles.add(it.questionTitle)
+                val index = getIndexinList(it.questionTitle, pearsonList) //Get index of title
+                if(pearsonList.size == index){  //If not seen add to list
+                    pearsonList.add(PearsonCollection(it.questionTitle))
+                  //  if(it.isPrimary == 1) // if need is subjective need, add to test list
+                  //     pearsonList.add(it.questionTitle)
                     for(i in 0..numberLists-1) //If recently added...
-                        prePearsonList[index].rateList.add(-1.0) //... fill past data points
+                        pearsonList[index].rateList.add(-1.0) //... fill past data points
                 }
-                prePearsonList[index].rateList.add(it.rate.toDouble())
+                pearsonList[index].rateList.add(it.rate.toDouble())
             }
             numberLists++ //Counts number of iterations stored
+            pearsonList.forEach {
+                while(it.rateList.size < numberLists) //If not added anything this iteration, add empty
+                    it.rateList.add(-1.0)
+            }
         }
+        return pearsonList
+    }
+
+    fun getPrimaryTitels(list : List<QuestionCollection>):List<String>{
+        val testTitles = mutableListOf<String>()
+        list.forEach {
+            it.qList.forEach {
+                if(it.isPrimary == 1)
+                    testTitles.add(it.questionTitle)
+            }
+        }
+        return testTitles
+    }
+
+    fun doPearson(list : List<QuestionCollection>): List<PearsonCollection>{
+        val pearsonList = mutableListOf<PearsonCollection>()
+        val prePearsonList = questionCollection2PearsonCollection(list) // get question list in a sorted list of list based on questionTitles
+        val testTitles = getPrimaryTitels(list) //Get Question that to test against
 
         //Do the Pearson test for between each subjective need against other needs
         prePearsonList.forEach{

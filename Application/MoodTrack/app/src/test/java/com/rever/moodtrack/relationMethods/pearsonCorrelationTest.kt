@@ -123,4 +123,72 @@ class pearsonCorrelationTest {
         val result = pearsonCorrelation.doPearson(list)
         assertThat(result[0].rateList.size).isEqualTo(3)
     }
+
+    @Test
+    fun unbalancedComparison(){
+        val list = mutableListOf<QuestionCollection>()
+        for (i in 0..5) {
+            val qcoll = QuestionCollection("Day${i}")
+            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
+            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood2",  i, 0))
+            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
+            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait2", 8 - i, 0))
+            if(i == 2)
+                qcoll.qList.add(Question(0, "NULL", "Day${i}", "TraitOnce", i, 0))
+            list.add(qcoll)
+        }
+        val result = pearsonCorrelation.doPearson(list)
+        println(result)
+        assertThat(result[0].rateList.size).isEqualTo(4)
+    }
+
+    @Test
+    fun correctInputAllTablesInTact(){
+        val list = mutableListOf<QuestionCollection>()
+        for (i in 0..5) {
+            val qcoll = QuestionCollection("Day${i}")
+            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
+            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
+            list.add(qcoll)
+        }
+        val result = pearsonCorrelation.questionCollection2PearsonCollection(list)
+        //Get list of all given values
+        val resultTitle = mutableListOf<String>()
+        result.forEach {
+            resultTitle.add(it.id)
+        }
+        assertThat(resultTitle).contains("Mood1")
+        assertThat(resultTitle).contains("Trait1")
+        assertThat(resultTitle.size).isEqualTo(2)
+        //Make sure all needs contain same number of rates
+        for(i in 0..2-1)
+            for(x in 0..2 -1)
+                assertThat(result[i].rateList.size).isEqualTo(result[x].rateList.size)
+    }
+    @Test
+    fun unbalancedInput(){
+        val list = mutableListOf<QuestionCollection>()
+        for (i in 0..5) {
+            val qcoll = QuestionCollection("Day${i}")
+            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
+            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
+            if(i == 2)
+                qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait2", i, 0))
+            list.add(qcoll)
+        }
+        val result = pearsonCorrelation.questionCollection2PearsonCollection(list)//Get list of all given values
+        val resultTitle = mutableListOf<String>()
+        result.forEach {
+            resultTitle.add(it.id)
+        }
+        assertThat(resultTitle).contains("Mood1")
+        assertThat(resultTitle).contains("Trait1")
+        assertThat(resultTitle).contains("Trait2")
+        assertThat(resultTitle.size).isEqualTo(3)
+        //Make sure all needs contain same number of rates
+        for(i in 0..3-1)
+            for(x in 0..3 -1)
+                assertThat(result[i].rateList.size).isEqualTo(result[x].rateList.size)
+    }
+
 }
