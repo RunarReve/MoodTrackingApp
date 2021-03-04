@@ -8,6 +8,7 @@ import kotlin.math.sqrt
 object pearsonCorrelation {
 
     fun pearsonCorrelation(list1: List<Double>, list2: List<Double>): Double{
+        //TODO do not compare data points not logged (<0)
         if(list1.size != list2.size)
             return 0.0
         if(list1.size == 0) //because previous if list2 has to be same size as list1

@@ -31,7 +31,7 @@ class LinePlotAdapter(
             parseColor("#CC5880"))
 
     //Takes in a list of questionCollections and plots it
-    fun addDataSet(list : List<QuestionCollection>){
+    fun addDataSet(list : List<QuestionCollection>){//TODO sort so annotation is same as rest
         val newList = pearsonCorrelation.questionCollection2PearsonCollection(list)
         val primaryList = pearsonCorrelation.getPrimaryTitels(list)
         newList.forEach {
@@ -42,34 +42,18 @@ class LinePlotAdapter(
                 day += 1f
                 if (it >= 0.0)
                     entries.add(Entry(day, it.toFloat()))
-            }De
+            }
             val data = LineDataSet(entries, current)
             val x = getTitlePoss(current)
             data.color = colorList[x]
             if (it.id in primaryList)
-                data.lineWidth = 10f
+                data.lineWidth = 6f
             else
                 data.lineWidth = 4f
 
             data.setDrawValues(false)
             dataSet.add(data)
         }
-
-   /*     for (i in 0 until list[0].qList.size){ //TODO only based on position, not questionTitle
-            val entries = ArrayList<Entry>()
-            var day = 0f
-            list.forEach {
-                entries.add(Entry(day, it.qList[i].rate.toFloat()))
-                day += 1f
-            }
-
-            val data = LineDataSet(entries, list[0].qList[i].questionTitle)
-            val x = getTitlePoss(list[0].qList[i].questionTitle)
-            data.color = colorList[x]
-            data.lineWidth = 4f
-            data.setDrawValues(false)
-            dataSet.add(data)
-        }*/
         notifyItemInserted(dataSet.size - 1)
     }
 
