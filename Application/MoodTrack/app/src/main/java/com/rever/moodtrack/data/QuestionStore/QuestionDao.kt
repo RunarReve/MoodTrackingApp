@@ -17,6 +17,11 @@ interface QuestionDao {
     @Query("SELECT * FROM question_table ORDER BY id ASC")
     fun readAllDataList():List<Question>
 
+    //Just count all needTitles for 'Mood' as every instance will have it
+    @Query("SELECT count(*) FROM question_table WHERE questionTitle ='Mood' ")
+    fun getNumberOfInputSets(): LiveData<Int>
+
+
 
     @Query("DELETE FROM question_table")
     fun deleteLocalData()

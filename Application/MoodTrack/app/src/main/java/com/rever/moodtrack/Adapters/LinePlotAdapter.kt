@@ -33,19 +33,24 @@ class LinePlotAdapter(
     //Takes in a list of questionCollections and plots it
     fun addDataSet(list : List<QuestionCollection>){
         val newList = pearsonCorrelation.questionCollection2PearsonCollection(list)
+        val primaryList = pearsonCorrelation.getPrimaryTitels(list)
         newList.forEach {
             val current = it.id
             val entries = ArrayList<Entry>()
             var day = 0f
             it.rateList.forEach {
                 day += 1f
-                if(it >= 0.0)
-                    entries.add(Entry(day,it.toFloat()))
-            }
+                if (it >= 0.0)
+                    entries.add(Entry(day, it.toFloat()))
+            }De
             val data = LineDataSet(entries, current)
             val x = getTitlePoss(current)
             data.color = colorList[x]
-            data.lineWidth = 4f
+            if (it.id in primaryList)
+                data.lineWidth = 10f
+            else
+                data.lineWidth = 4f
+
             data.setDrawValues(false)
             dataSet.add(data)
         }

@@ -6,6 +6,8 @@ class QuestionRepository(
         private val questionDao: QuestionDao
 ){
     val readAllData: LiveData<List<Question>> = questionDao.readAllData()
+    val numberOfInputSets: LiveData<Int> = questionDao.getNumberOfInputSets()
+    //val numberOfInputSets: Int = 5
 
     //Add a new question
     suspend fun addQuestion(question: Question){
@@ -16,6 +18,7 @@ class QuestionRepository(
     suspend fun deleteQuestion(question: Question){
         questionDao.deleteQuestion(question)
     }
+
 
     //Delete all local data
     fun deleteLocalData(){

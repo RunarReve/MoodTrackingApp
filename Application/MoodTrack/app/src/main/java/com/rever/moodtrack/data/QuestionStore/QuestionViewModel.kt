@@ -11,11 +11,13 @@ class QuestionViewModel(application: Application):AndroidViewModel(application){
 
     val readAllData: LiveData<List<Question>>
     private val repository: QuestionRepository
+    val numberOfIterations : LiveData<Int>
 
     init {
         val questionDao = QuestionDatabase.getDatabase(application).questionDao()
         repository = QuestionRepository(questionDao)
         readAllData = repository.readAllData
+        numberOfIterations = repository.numberOfInputSets
     }
 
     fun addQuestion(question: Question){
@@ -28,6 +30,7 @@ class QuestionViewModel(application: Application):AndroidViewModel(application){
             repository.deleteQuestion(question)
         }
     }
+
 
     fun deleteLocalData(){
         viewModelScope.launch(Dispatchers.IO) {

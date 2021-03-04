@@ -32,7 +32,6 @@ class Statistics : AppCompatActivity() {
                     qqList.addStat(it)
                 }
 
-                //TODO sort qqList
                 //TODO rename qqList to something better
                 rvStatistics.adapter = qqList
 

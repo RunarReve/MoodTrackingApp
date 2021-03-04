@@ -20,4 +20,6 @@ interface NeedDao {
 
     @Query("DELETE FROM need_table")
     fun deleteLocalData()
+
+
 }
