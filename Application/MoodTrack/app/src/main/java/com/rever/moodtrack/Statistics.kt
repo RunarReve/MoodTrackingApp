@@ -12,34 +12,33 @@ import com.rever.moodtrack.data.QuestionStore.QuestionViewModel
 import kotlinx.android.synthetic.main.activity_statistics.*
 
 class Statistics : AppCompatActivity() {
-    private lateinit var qqList: StatisticsAdapter
+    private lateinit var statisticsAdapter: StatisticsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statistics)
-        val mUserViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
+        val questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
         val actionBar = supportActionBar
-        actionBar!!.title = "Satistics"
+        actionBar!!.title = "Statistics"
         actionBar.setDisplayHomeAsUpEnabled(true)
 
-        qqList = StatisticsAdapter(mutableListOf())
+        statisticsAdapter = StatisticsAdapter(mutableListOf())
         //Get data stored in db
-        var check = true //Loop once
-        mUserViewModel.readAllData.observe(this, Observer {
+        var check = true //Loop once TODO fix this
+        questionViewModel.readAllData.observe(this, Observer {
             if (check) {
                 it.forEach {
                     check =false
-                    qqList.addStat(it)
+                    statisticsAdapter.addStat(it)
                 }
 
-                //TODO rename qqList to something better
-                rvStatistics.adapter = qqList
+                rvStatistics.adapter = statisticsAdapter
 
                 val pearson = PearsonAdapter(mutableListOf())
-                pearson.doPearson(qqList.getList())
+                pearson.doPearson(statisticsAdapter.getList())
                 rvPearson.adapter = pearson
                 val linePlotAdapter = LinePlotAdapter(mutableListOf(), this)
-                linePlotAdapter.addDataSet(qqList.getList())
+                linePlotAdapter.addDataSet(statisticsAdapter.getList())
                 rvLineCharts.layoutManager = LinearLayoutManager(this)
                 rvLineCharts.adapter = linePlotAdapter
             }

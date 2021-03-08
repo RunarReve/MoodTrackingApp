@@ -46,5 +46,4 @@ private var pearsonList: List<PearsonCollection>
     override fun getItemCount(): Int {
         return pearsonList.size
     }
-
 }

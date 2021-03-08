@@ -43,13 +43,13 @@ class InputNeed : AppCompatActivity() {
         })
 
         btnNext.setOnClickListener {
-            val mUserViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
+            val questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
 
             val time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("y/MM/dd H:mm:ss")).toString()
 
             for(i in 0 until questionAdapter.getSize()) {
                 val q = Question(0, time,"TEMP2", questionAdapter.getTitle(i), questionAdapter.getrate(i),0)
-                mUserViewModel.addQuestion(q)
+                questionViewModel.addQuestion(q)
             }
 
             //All questions from previous
@@ -57,7 +57,7 @@ class InputNeed : AppCompatActivity() {
             moodQuestion?.forEach {
                 val split = it.split(',')
                 val q = Question(1, time, "TEMP2", split[0], split[1].toInt(),0)
-                mUserViewModel.addQuestion(q)
+                questionViewModel.addQuestion(q)
             }
 
             val intent = Intent(this, Statistics::class.java)

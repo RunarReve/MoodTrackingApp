@@ -1,20 +1,14 @@
 package com.rever.moodtrack.Adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.rever.moodtrack.R
 import com.rever.moodtrack.data.NeedStore.Need
-import com.rever.moodtrack.data.NeedStore.NeedViewModel
 import com.rever.moodtrack.data.QuestionStore.Question
-import kotlinx.android.synthetic.main.question_item.view.*
+import kotlinx.android.synthetic.main.need_question_item.view.*
 
 class QuestionAdapter (
     private val questions: MutableList<Question>
@@ -24,7 +18,7 @@ class QuestionAdapter (
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
         return QuestionViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.question_item,
+                R.layout.need_question_item,
                 parent,
                 false
             )

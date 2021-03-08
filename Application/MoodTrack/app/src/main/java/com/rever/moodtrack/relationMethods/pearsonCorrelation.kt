@@ -7,12 +7,23 @@ import kotlin.math.sqrt
 
 object pearsonCorrelation {
 
-    fun pearsonCorrelation(list1: List<Double>, list2: List<Double>): Double{
-        //TODO do not compare data points not logged (<0)
-        if(list1.size != list2.size)
+    fun pearsonCorrelation(inList1: List<Double>, inList2: List<Double>): Double{
+        if(inList1.size != inList2.size)
             return 0.0
-        if(list1.size == 0) //because previous if list2 has to be same size as list1
+        if(inList1.isEmpty()) //because previous if list2 has to be same size as list1
             return 0.0
+
+        //Remove all values where one of the list has a NA input
+        //New list due to shallow copy problem (deleted from raw input, not a copy)
+        var list1 = mutableListOf<Double>()
+        var list2 = mutableListOf<Double>()
+        for(i in 0..inList1.size-1){
+            if(inList1[i] >= 0 && inList2[i] >= 0){
+                list1.add(inList1[i])
+                list2.add(inList2[i])
+            }
+        }
+
         val mean1 = list1.sum()/list1.size
         val mean2 = list2.sum()/list2.size
 
@@ -52,14 +63,14 @@ object pearsonCorrelation {
 
             it.qList.forEach {
                 val index = getIndexinList(it.questionTitle, pearsonList) //Get index of title
-                if(pearsonList.size == index){  //If not seen add to list
+                if(pearsonList.size == index){ //If not seen add to list
                     pearsonList.add(PearsonCollection(it.questionTitle))
-                    for(i in 0..numberLists-1) //If recently added...
-                        pearsonList[index].rateList.add(-1.0) //... fill past data points
+                    for(i in 0..numberLists-1) //Fill previous inputs not in list as NA (-1)
+                        pearsonList[index].rateList.add(-1.0)
                 }
                 pearsonList[index].rateList.add(it.rate.toDouble())
             }
-            numberLists++ //Counts number of iterations stored
+            numberLists++ //Counts number of inputs stored
             pearsonList.forEach {
                 while(it.rateList.size < numberLists) //If not added anything this iteration, add empty
                     it.rateList.add(-1.0)
@@ -96,6 +107,7 @@ object pearsonCorrelation {
 
                 prePearsonList.forEach {
                     if (current != it) {//No need to test against itself
+                        println("\n---------\n${current.id}\t${current.rateList}\n${it.id}\t${it.rateList}")
                         pearsonList[pearsonList.size - 1].rateList.add(pearsonCorrelation(current.rateList, it.rateList))
                         pearsonList[pearsonList.size - 1].titleList.add(it.id)
                     }
