@@ -10,17 +10,20 @@ import com.rever.moodtrack.Adapters.QuestionAdapter
 import com.rever.moodtrack.data.NeedStore.NeedViewModel
 import com.rever.moodtrack.data.QuestionStore.Question
 import com.rever.moodtrack.data.QuestionStore.QuestionViewModel
-import kotlinx.android.synthetic.main.activity_day_questions.*
+import kotlinx.android.synthetic.main.activity_day_need.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class DayQuestions : AppCompatActivity() {
-
+class InputNeed : AppCompatActivity() {
     private lateinit var questionAdapter: QuestionAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_day_questions)
+        setContentView(R.layout.activity_day_need)
+
+        val actionBar = supportActionBar
+        actionBar!!.title = "Rate need fulfillment"
+        actionBar.setDisplayHomeAsUpEnabled(true)
 
         questionAdapter = QuestionAdapter(mutableListOf())
         rvQuestionItems.adapter = questionAdapter //Display
@@ -61,8 +64,5 @@ class DayQuestions : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val actionBar = supportActionBar
-        actionBar!!.title = "Need fulfilled"
-        actionBar.setDisplayHomeAsUpEnabled(true)
     }
 }

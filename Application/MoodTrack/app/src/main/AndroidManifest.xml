@@ -21,10 +21,10 @@
             android:name=".Statistics"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".DayQuestions"
-            android:parentActivityName=".DayMood" />
+            android:name=".InputNeed"
+            android:parentActivityName=".InputWant" />
         <activity
-            android:name=".DayMood"
+            android:name=".InputWant"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

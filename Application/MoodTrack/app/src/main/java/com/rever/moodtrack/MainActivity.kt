@@ -7,7 +7,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.rever.moodtrack.data.QuestionStore.QuestionViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.need_item.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         //--------------Home-Buttons-----------------
         btnNew.setOnClickListener {
-            startActivity(Intent(this, DayMood::class.java))
+            startActivity(Intent(this, InputWant::class.java))
         }
 
         btnStat.setOnClickListener {
