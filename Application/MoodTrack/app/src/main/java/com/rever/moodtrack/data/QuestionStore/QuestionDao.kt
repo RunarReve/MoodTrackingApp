@@ -18,7 +18,7 @@ interface QuestionDao {
     fun readAllDataList():List<Question>
 
     //Just count all needTitles for 'Mood' as every instance will have it
-    @Query("SELECT count(*) FROM question_table WHERE questionTitle ='Mood' ")
+    @Query("SELECT count(*) FROM question_table WHERE questionTitle ='Happiness' ")
     fun getNumberOfInputSets(): LiveData<Int>
 
 

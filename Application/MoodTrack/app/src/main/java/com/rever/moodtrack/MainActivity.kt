@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         val questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
         questionViewModel.numberOfIterations.observe(this, Observer{
             tvMainScreenText.text = "${it}\nDays"
+            println("LOL${it}")
         })
 
         //--------------Home-Buttons-----------------

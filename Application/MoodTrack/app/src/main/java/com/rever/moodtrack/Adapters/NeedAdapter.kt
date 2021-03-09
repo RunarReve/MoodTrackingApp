@@ -34,12 +34,11 @@ class NeedAdapter(
 
         holder.itemView.tvNeedHeader.text = curNeed.needTitle
         if (curNeed.isPrimary == 0)
-            holder.itemView.tvNeedType.text = "Active Need"
+            holder.itemView.tvNeedType.text = "Need"
         else
-            holder.itemView.tvNeedType.text = "Subjective  Need"
+            holder.itemView.tvNeedType.text = "Want"
 
         holder.itemView.ivDeleteNeed.setOnClickListener {
-            println("LLLLLLOOOOLLL")
             needViewModel.deleteNeed(curNeed)
         }
     }
