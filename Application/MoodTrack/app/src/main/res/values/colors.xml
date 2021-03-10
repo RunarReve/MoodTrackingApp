@@ -10,9 +10,19 @@
     <color name="yellow">#CDDC39</color>
     <color name="blue">#3F51B5</color>
     <color name="green">#155802</color>
-    <color name="orange">#FF5722</color>
     <color name="lime">#8BC34A</color>
     <color name="red">#FF1100</color>
     <color name="pink">#CC5880</color>
+
+    <color name="orange">#DE6E35</color>
+    <color name="orangeAccent">#DCA919</color>
+    <color name="orangeOnText">#000000</color>
+    <color name="whiteAccent">#F4F4DA</color>
+
+    <color name="burgundy">#883936</color>
+    <color name="burgundyAccent">#AA4441</color>
+    <color name="burgundyOnText">#FFFFFFFF</color>
+
+
 
 </resources>

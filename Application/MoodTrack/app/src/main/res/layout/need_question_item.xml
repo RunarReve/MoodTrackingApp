@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="15dp"
     android:layout_margin="5dp"
-    app:cardBackgroundColor="@color/design_default_color_secondary_variant"
-    app:cardCornerRadius="5dp"
+    app:cardBackgroundColor="@color/burgundy"
+    app:cardCornerRadius="10dp"
     app:contentPadding="5dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,19 +20,39 @@
             android:text="Header"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:textColor="@color/burgundyOnText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <SeekBar
-            android:id="@+id/sbRankBar"
-            style="@style/Widget.AppCompat.SeekBar.Discrete"
-            android:layout_width="278dp"
-            android:layout_height="70dp"
-            android:max="7"
-            android:progress="5"
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:cardBackgroundColor="@color/orange"
+            app:cardCornerRadius="20dp"
+            app:contentPadding="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvHeader" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHeader">
+
+            <SeekBar
+                android:id="@+id/sbRankBar"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/black"
+                android:colorControlActivated="@color/orange"
+
+                android:max="7"
+                android:progress="5"
+                android:progressTint="@color/orangeAccent"
+                android:thumbTint="@color/black" />
+        </androidx.cardview.widget.CardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

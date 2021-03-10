@@ -5,7 +5,7 @@
     app:cardCornerRadius="10dp"
     android:layout_height="200dp"
     android:layout_margin="5dp"
-    app:cardBackgroundColor="@color/design_default_color_secondary_variant"
+    app:cardBackgroundColor="@color/burgundyAccent"
     app:contentPadding="5dp">
 
     <com.github.mikephil.charting.charts.LineChart

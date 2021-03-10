@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv1"
     android:layout_margin="5dp"
-    app:cardBackgroundColor="@color/design_default_color_secondary_variant"
+    app:cardBackgroundColor="@color/burgundyAccent"
     app:cardCornerRadius="5dp"
     app:contentPadding="5dp">
 

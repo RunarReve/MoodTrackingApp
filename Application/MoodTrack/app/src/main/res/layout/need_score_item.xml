@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv1"
     android:layout_margin="5dp"
-    app:cardBackgroundColor="#F44336"
+    app:cardBackgroundColor="@color/orange"
     app:cardCornerRadius="5dp"
     app:contentPadding="5dp">
 
