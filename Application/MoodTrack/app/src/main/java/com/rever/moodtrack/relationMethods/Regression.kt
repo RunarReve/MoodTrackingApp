@@ -2,7 +2,6 @@ package com.rever.moodtrack.relationMethods
 
 import com.rever.moodtrack.data.PearsonCollection
 import com.rever.moodtrack.data.QuestionCollection
-import com.rever.moodtrack.data.regressionScore
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -57,6 +56,21 @@ object Regression {
         return listOf(m,n)
     }
 
+    //Removes missing values from both list, missing values are indicated as < 0
+    fun removeMissingValues(list1: List<Double>, list2: List<Double>): List<List<Double>>{
+        if(list1.size != list2.size)
+            return emptyList()
+        val list1New = mutableListOf<Double>()
+        val list2New = mutableListOf<Double>()
+        for(i in 0..list1.size-1){
+            if(list1[i] >= 0 && list2[i] >= 0){
+                list1New.add(list1[i])
+                list2New.add(list2[i])
+            }
+        }
+        return listOf(list1New, list2New)
+    }
+
     //Get list of  wants in given list
     fun getPrimaryTitels(list : List<QuestionCollection>):List<String>{
         val testTitles = mutableListOf<String>()
@@ -77,7 +91,7 @@ object Regression {
         return list.size
     }
 
-    private fun questionCollection2Regression(list : List<QuestionCollection>):List<PearsonCollection> {
+    fun collection2ListList(list : List<QuestionCollection>):List<PearsonCollection> {
         val listOfRatings = mutableListOf<PearsonCollection>()
         var numberLists = 0
         list.forEach {
@@ -106,7 +120,7 @@ object Regression {
 
     fun doRegression(list : List<QuestionCollection>): List<PearsonCollection>{
         val result = mutableListOf<PearsonCollection>()
-        val structuredList = questionCollection2Regression(list) // get question list in a sorted list of list based on questionTitles
+        val structuredList = collection2ListList(list) // get question list in a sorted list of list based on questionTitles
         val testTitles = getPrimaryTitels(list) //Get Question that to test against
 
         structuredList.forEach {firstIt ->
@@ -115,7 +129,8 @@ object Regression {
                 structuredList.forEach { secondIt ->
                     if (firstIt != secondIt) { //No need of comparing to itself
                         result[result.size - 1].titleList.add(secondIt.id)
-                        val regressionScore = regression(secondIt.rateList, firstIt.rateList)
+                        val listRmMissing = removeMissingValues(secondIt.rateList, firstIt.rateList)
+                        val regressionScore = regression(listRmMissing[0], listRmMissing[1])
                         result[result.size - 1].rateList.add(regressionScore[0])
                     }
                 }

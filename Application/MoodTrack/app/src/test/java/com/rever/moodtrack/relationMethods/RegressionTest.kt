@@ -6,8 +6,10 @@ import com.rever.moodtrack.data.QuestionStore.Question
 import org.junit.Test
 
 class RegressionTest{
-    private val allowedDif = 0.25 // allowed difference from expected
+    private val allowedDif = 0.2 // allowed difference from expected
 
+
+    //-------------TEST-REGRESSION-----------------
     @Test
     fun simplePositiveRegression(){
         val yList = listOf(1.0,2.0,3.0)
@@ -86,6 +88,73 @@ class RegressionTest{
         assertThat(result[1]).isAtMost(4 + allowedDif)
         assertThat(result[1]).isAtLeast(4 - allowedDif)
     }
+    //--------------------TEST-QUESTION-LIST-2-LIST--------------------------
+
+    @Test
+    fun missingValueRemoval(){
+        val list1 = listOf(1.0,2.0,3.0)
+        val list2 = listOf(3.0,-1.0,1.0)
+
+        val result = Regression.removeMissingValues(list1, list2)
+        assertThat(result[0]).isEqualTo(listOf(1.0,3.0))
+        assertThat(result[1]).isEqualTo(listOf(3.0,1.0))
+    }
+    @Test
+    fun missingValueRemovalNoMissing(){
+        val list1 = listOf(1.0,2.0,3.0)
+        val list2 = listOf(3.0,2.0,1.0)
+
+        val result = Regression.removeMissingValues(list1, list2)
+        assertThat(result[0]).isEqualTo(listOf(1.0,2.0,3.0))
+        assertThat(result[1]).isEqualTo(listOf(3.0,2.0,1.0))
+    }
+
+    @Test
+    fun questionList2ListList(){
+        val list = mutableListOf<QuestionCollection>()
+        for (i in 1..3) {
+            val newDay = QuestionCollection("Day${i}")
+            newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
+            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
+            list.add(newDay)
+        }
+        val result = Regression.collection2ListList(list)
+        assertThat(result.size).isEqualTo(2)
+        assertThat(result[0].rateList.size).isEqualTo(3)
+        assertThat(result[0].rateList).isEqualTo(listOf(1.0,2.0,3.0))
+    }
+    @Test
+    fun questionList2ListListLarge(){
+        val list = mutableListOf<QuestionCollection>()
+        for (i in 1..20) {
+            val newDay = QuestionCollection("Day${i}")
+            newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
+            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
+            list.add(newDay)
+        }
+        val result = Regression.collection2ListList(list)
+
+        assertThat(result.size).isEqualTo(2)
+        assertThat(result[0].rateList.size).isEqualTo(20)
+    }
+
+    @Test
+    fun questionList2ListListMissingValues(){
+        val list = mutableListOf<QuestionCollection>()
+        for (i in 1..3) {
+            val newDay = QuestionCollection("Day${i}")
+            newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
+            if(i != 2)
+                newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
+            list.add(newDay)
+        }
+        val result = Regression.collection2ListList(list)
+
+        assertThat(result.size).isEqualTo(2)
+        assertThat(result[0].rateList).isEqualTo(listOf(1.0,-1.0,3.0))
+    }
+
+    //--------------------TEST-REGRESSION-ON-QUESTION-LISTS------------------
 
     @Test
     fun simpleQuestion2Reg(){
@@ -117,7 +186,7 @@ class RegressionTest{
         for (i in 0..5) {
             val newDay = QuestionCollection("Day${i}")
             newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
-            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", -i, 0))
+            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", 5-i, 0))
             list.add(newDay)
         }
         val result = Regression.doRegression(list)
@@ -181,6 +250,8 @@ class RegressionTest{
         assertThat(result[0].rateList[0]).isAtLeast(1 - allowedDif) //Is the tilt somewhat correct
         assertThat(result[0].rateList[0]).isAtMost(1 + allowedDif)
     }
+
+
 
     @Test //TODO FIX
     fun simpleQuestion2RegMissingValues(){
