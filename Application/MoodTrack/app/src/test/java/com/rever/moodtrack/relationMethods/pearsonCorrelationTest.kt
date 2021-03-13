@@ -2,7 +2,7 @@ package com.rever.moodtrack.relationMethods
 
 
 import com.google.common.truth.Truth.assertThat
-import com.rever.moodtrack.data.QuestionCollection
+import com.rever.moodtrack.data.questionCollection
 import com.rever.moodtrack.data.QuestionStore.Question
 import org.junit.Test
 
@@ -75,16 +75,16 @@ class pearsonCorrelationTest {
 
     @Test
     fun emptyListGiving(){
-        val list = mutableListOf<QuestionCollection>()
+        val list = mutableListOf<questionCollection>()
         val result = pearsonCorrelation.doPearson(list)
         assertThat(result).isEmpty()
     }
 
     @Test
     fun oneSubjectiveGiving(){
-        val list = mutableListOf<QuestionCollection>()
+        val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
-            val qcoll = QuestionCollection("Day${i}")
+            val qcoll = questionCollection("Day${i}")
             qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
             qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
             qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait2", 8 - i, 0))
@@ -96,9 +96,9 @@ class pearsonCorrelationTest {
 
     @Test
     fun twoSubjectiveGiving(){
-        val list = mutableListOf<QuestionCollection>()
+        val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
-            val qcoll = QuestionCollection("Day${i}")
+            val qcoll = questionCollection("Day${i}")
             qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
             qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood2",  i, 0))
             qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
@@ -111,9 +111,9 @@ class pearsonCorrelationTest {
 
     @Test
     fun twoSubjectivGivenComparisonCount(){
-        val list = mutableListOf<QuestionCollection>()
+        val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
-            val qcoll = QuestionCollection("Day${i}")
+            val qcoll = questionCollection("Day${i}")
             qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
             qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood2",  i, 0))
             qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
@@ -126,9 +126,9 @@ class pearsonCorrelationTest {
 
     @Test
     fun unbalancedComparison(){
-        val list = mutableListOf<QuestionCollection>()
+        val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
-            val qcoll = QuestionCollection("Day${i}")
+            val qcoll = questionCollection("Day${i}")
             qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
             qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood2",  i, 0))
             qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
@@ -144,9 +144,9 @@ class pearsonCorrelationTest {
 
     @Test
     fun correctInputAllTablesInTact(){
-        val list = mutableListOf<QuestionCollection>()
+        val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
-            val qcoll = QuestionCollection("Day${i}")
+            val qcoll = questionCollection("Day${i}")
             qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
             qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
             list.add(qcoll)
@@ -167,9 +167,9 @@ class pearsonCorrelationTest {
     }
     @Test
     fun unbalancedInput(){
-        val list = mutableListOf<QuestionCollection>()
+        val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
-            val qcoll = QuestionCollection("Day${i}")
+            val qcoll = questionCollection("Day${i}")
             qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
             qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
             if(i == 2)

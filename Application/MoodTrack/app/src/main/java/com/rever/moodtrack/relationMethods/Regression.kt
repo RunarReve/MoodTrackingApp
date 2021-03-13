@@ -1,7 +1,7 @@
 package com.rever.moodtrack.relationMethods
 
-import com.rever.moodtrack.data.PearsonCollection
-import com.rever.moodtrack.data.QuestionCollection
+import com.rever.moodtrack.data.relationCollection
+import com.rever.moodtrack.data.questionCollection
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -72,7 +72,7 @@ object Regression {
     }
 
     //Get list of  wants in given list
-    fun getPrimaryTitels(list : List<QuestionCollection>):List<String>{
+    fun getPrimaryTitels(list : List<questionCollection>):List<String>{
         val testTitles = mutableListOf<String>()
         list.forEach {
             it.qList.forEach {
@@ -84,15 +84,15 @@ object Regression {
     }
 
     //Checks where a string is in a list, if not it'll be size of string
-    private fun getIndexinList(string: String, list: List<PearsonCollection>): Int{
+    private fun getIndexinList(string: String, list: List<relationCollection>): Int{
         for(i in 0..list.size-1)
             if(list[i].id == string )
                 return i
         return list.size
     }
 
-    fun collection2ListList(list : List<QuestionCollection>):List<PearsonCollection> {
-        val listOfRatings = mutableListOf<PearsonCollection>()
+    fun collection2ListList(list : List<questionCollection>):List<relationCollection> {
+        val listOfRatings = mutableListOf<relationCollection>()
         var numberLists = 0
         list.forEach {
             //Sort makes it easier to use in the future
@@ -102,7 +102,7 @@ object Regression {
             it.qList.forEach {
                 val index =  getIndexinList(it.questionTitle, listOfRatings)
                 if(listOfRatings.size == index){ //If not seen add to list
-                    listOfRatings.add(PearsonCollection(it.questionTitle))
+                    listOfRatings.add(relationCollection(it.questionTitle))
                     for(i in 0..numberLists-1) //Fill previous inputs not in list as NA (-1)
                         listOfRatings[index].rateList.add(-1.0)
                 }
@@ -118,14 +118,14 @@ object Regression {
         return listOfRatings
     }
 
-    fun doRegression(list : List<QuestionCollection>): List<PearsonCollection>{
-        val result = mutableListOf<PearsonCollection>()
+    fun doRegression(list : List<questionCollection>): List<relationCollection>{
+        val result = mutableListOf<relationCollection>()
         val structuredList = collection2ListList(list) // get question list in a sorted list of list based on questionTitles
         val testTitles = getPrimaryTitels(list) //Get Question that to test against
 
         structuredList.forEach {firstIt ->
             if(firstIt.id in testTitles) { //If want
-                result.add(PearsonCollection(firstIt.id))
+                result.add(relationCollection(firstIt.id))
                 structuredList.forEach { secondIt ->
                     if (firstIt != secondIt) { //No need of comparing to itself
                         result[result.size - 1].titleList.add(secondIt.id)

@@ -1,7 +1,7 @@
 package com.rever.moodtrack.relationMethods
 
-import com.rever.moodtrack.data.PearsonCollection
-import com.rever.moodtrack.data.QuestionCollection
+import com.rever.moodtrack.data.relationCollection
+import com.rever.moodtrack.data.questionCollection
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -44,15 +44,15 @@ object pearsonCorrelation {
     }
 
     //Checks where a string is in a list, if not it'll be size of string
-    private fun getIndexinList(string: String, list: List<PearsonCollection>): Int{
+    private fun getIndexinList(string: String, list: List<relationCollection>): Int{
         for(i in 0..list.size-1)
             if(list[i].id == string )
                 return i
         return list.size
     }
 
-    fun questionCollection2PearsonCollection(list : List<QuestionCollection>):List<PearsonCollection>{
-        val pearsonList = mutableListOf<PearsonCollection>()
+    fun questionCollection2PearsonCollection(list : List<questionCollection>):List<relationCollection>{
+        val pearsonList = mutableListOf<relationCollection>()
         var numberLists = 0
 
         //Store all the sets of data in a structure based of the different needs
@@ -64,7 +64,7 @@ object pearsonCorrelation {
             it.qList.forEach {
                 val index = getIndexinList(it.questionTitle, pearsonList) //Get index of title
                 if(pearsonList.size == index){ //If not seen add to list
-                    pearsonList.add(PearsonCollection(it.questionTitle))
+                    pearsonList.add(relationCollection(it.questionTitle))
                     for(i in 0..numberLists-1) //Fill previous inputs not in list as NA (-1)
                         pearsonList[index].rateList.add(-1.0)
                 }
@@ -83,7 +83,7 @@ object pearsonCorrelation {
         return pearsonList
     }
 
-    fun getPrimaryTitels(list : List<QuestionCollection>):List<String>{
+    fun getPrimaryTitels(list : List<questionCollection>):List<String>{
         val testTitles = mutableListOf<String>()
         list.forEach {
             it.qList.forEach {
@@ -94,8 +94,8 @@ object pearsonCorrelation {
         return testTitles
     }
 
-    fun doPearson(list : List<QuestionCollection>): List<PearsonCollection>{
-        val pearsonList = mutableListOf<PearsonCollection>()
+    fun doPearson(list : List<questionCollection>): List<relationCollection>{
+        val pearsonList = mutableListOf<relationCollection>()
         val prePearsonList = questionCollection2PearsonCollection(list) // get question list in a sorted list of list based on questionTitles
         val testTitles = getPrimaryTitels(list) //Get Question that to test against
 
@@ -103,7 +103,7 @@ object pearsonCorrelation {
         prePearsonList.forEach{
             val current = it
             if(current.id in testTitles) { //Check if current is in need for testing
-                pearsonList.add(PearsonCollection(current.id))
+                pearsonList.add(relationCollection(current.id))
 
                 prePearsonList.forEach {
                     if (current != it) {//No need to test against itself

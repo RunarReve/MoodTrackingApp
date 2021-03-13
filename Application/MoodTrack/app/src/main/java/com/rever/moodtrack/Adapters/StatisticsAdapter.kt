@@ -5,13 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.rever.moodtrack.data.QuestionCollection
+import com.rever.moodtrack.data.questionCollection
 import com.rever.moodtrack.R
 import com.rever.moodtrack.data.QuestionStore.Question
 import kotlinx.android.synthetic.main.statistics_item.view.*
 
 class StatisticsAdapter(
-        private val statistics: MutableList<QuestionCollection>
+        private val statistics: MutableList<questionCollection>
 ): RecyclerView.Adapter<StatisticsAdapter.StatisticViewHolder>() {
 
     private lateinit var statisticsItemAdapter: StatisticsItemAdapter
@@ -26,7 +26,7 @@ class StatisticsAdapter(
             )
         )
     }
-    fun getList():MutableList<QuestionCollection>{
+    fun getList():MutableList<questionCollection>{
         return statistics
     }
 
@@ -39,7 +39,7 @@ class StatisticsAdapter(
             }
         }
         if(!check) {
-            val o = QuestionCollection(question.time)
+            val o = questionCollection(question.time)
             o.qList.add(question)
             statistics.add(o)
         }

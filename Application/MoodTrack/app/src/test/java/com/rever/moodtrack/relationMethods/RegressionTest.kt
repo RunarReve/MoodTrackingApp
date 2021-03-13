@@ -1,7 +1,7 @@
 package com.rever.moodtrack.relationMethods
 
 import com.google.common.truth.Truth.assertThat
-import com.rever.moodtrack.data.QuestionCollection
+import com.rever.moodtrack.data.questionCollection
 import com.rever.moodtrack.data.QuestionStore.Question
 import org.junit.Test
 
@@ -111,9 +111,9 @@ class RegressionTest{
 
     @Test
     fun questionList2ListList(){
-        val list = mutableListOf<QuestionCollection>()
+        val list = mutableListOf<questionCollection>()
         for (i in 1..3) {
-            val newDay = QuestionCollection("Day${i}")
+            val newDay = questionCollection("Day${i}")
             newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
             newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
             list.add(newDay)
@@ -125,9 +125,9 @@ class RegressionTest{
     }
     @Test
     fun questionList2ListListLarge(){
-        val list = mutableListOf<QuestionCollection>()
+        val list = mutableListOf<questionCollection>()
         for (i in 1..20) {
-            val newDay = QuestionCollection("Day${i}")
+            val newDay = questionCollection("Day${i}")
             newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
             newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
             list.add(newDay)
@@ -140,9 +140,9 @@ class RegressionTest{
 
     @Test
     fun questionList2ListListMissingValues(){
-        val list = mutableListOf<QuestionCollection>()
+        val list = mutableListOf<questionCollection>()
         for (i in 1..3) {
-            val newDay = QuestionCollection("Day${i}")
+            val newDay = questionCollection("Day${i}")
             newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
             if(i != 2)
                 newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
@@ -158,9 +158,9 @@ class RegressionTest{
 
     @Test
     fun simpleQuestion2Reg(){
-        val list = mutableListOf<QuestionCollection>()
+        val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
-            val newDay = QuestionCollection("Day${i}")
+            val newDay = questionCollection("Day${i}")
             newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
             newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
             list.add(newDay)
@@ -182,9 +182,9 @@ class RegressionTest{
 
     @Test
     fun simpleQuestion2RegNegative(){
-        val list = mutableListOf<QuestionCollection>()
+        val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
-            val newDay = QuestionCollection("Day${i}")
+            val newDay = questionCollection("Day${i}")
             newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
             newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", 5-i, 0))
             list.add(newDay)
@@ -205,9 +205,9 @@ class RegressionTest{
     }
     @Test
     fun simpleQuestion2RegNoChange(){
-        val list = mutableListOf<QuestionCollection>()
+        val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
-            val newDay = QuestionCollection("Day${i}")
+            val newDay = questionCollection("Day${i}")
             newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
             newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", 3, 0))
             list.add(newDay)
@@ -229,9 +229,9 @@ class RegressionTest{
 
     @Test
     fun simpleQuestion2RegMoreValues(){
-        val list = mutableListOf<QuestionCollection>()
+        val list = mutableListOf<questionCollection>()
         for (i in 0..20) {
-            val newDay = QuestionCollection("Day${i}")
+            val newDay = questionCollection("Day${i}")
             newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
             newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
             list.add(newDay)
@@ -253,11 +253,11 @@ class RegressionTest{
 
 
 
-    @Test //TODO FIX
+    @Test
     fun simpleQuestion2RegMissingValues(){
-        val list = mutableListOf<QuestionCollection>()
+        val list = mutableListOf<questionCollection>()
         for (i in 0..20) {
-            val newDay = QuestionCollection("Day${i}")
+            val newDay = questionCollection("Day${i}")
             newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
             if(i % 2 == 0)
                 newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
@@ -280,9 +280,9 @@ class RegressionTest{
 
     @Test
     fun manyQuestion2Reg(){
-        val list = mutableListOf<QuestionCollection>()
+        val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
-            val newDay = QuestionCollection("Day${i}")
+            val newDay = questionCollection("Day${i}")
             newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
             newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
             newDay.qList.add(Question(0, "NULL", "Day${i}", "Need2", 5-i, 0))
@@ -309,5 +309,4 @@ class RegressionTest{
         assertThat(result[0].rateList[2]).isAtLeast(0 - allowedDif) //Is the tilt somewhat correct
         assertThat(result[0].rateList[2]).isAtMost(0 + allowedDif)
     }
-
 }
