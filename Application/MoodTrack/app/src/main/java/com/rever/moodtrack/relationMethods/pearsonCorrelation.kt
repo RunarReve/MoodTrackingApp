@@ -107,7 +107,6 @@ object pearsonCorrelation {
 
                 prePearsonList.forEach {
                     if (current != it) {//No need to test against itself
-                        println("\n---------\n${current.id}\t${current.rateList}\n${it.id}\t${it.rateList}")
                         pearsonList[pearsonList.size - 1].rateList.add(pearsonCorrelation(current.rateList, it.rateList))
                         pearsonList[pearsonList.size - 1].titleList.add(it.id)
                     }

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rever.moodtrack.Adapters.LinePlotAdapter
 import com.rever.moodtrack.Adapters.PearsonAdapter
+import com.rever.moodtrack.Adapters.RegressionAdapter
 import com.rever.moodtrack.Adapters.StatisticsAdapter
 import com.rever.moodtrack.data.QuestionStore.QuestionViewModel
 import kotlinx.android.synthetic.main.activity_statistics.*
@@ -32,11 +33,31 @@ class Statistics : AppCompatActivity() {
                     statisticsAdapter.addStat(it)
                 }
 
+                //------Input-List------
                 rvStatistics.adapter = statisticsAdapter
+                rvStatistics.layoutManager = LinearLayoutManager(this)
 
-                val pearson = PearsonAdapter(mutableListOf())
-                pearson.doPearson(statisticsAdapter.getList())
-                rvPearson.adapter = pearson
+                //------Pearson------
+                val pearsonAdapter = PearsonAdapter(mutableListOf())
+                pearsonAdapter.doPearson(statisticsAdapter.getList())
+                rvPearson.adapter = pearsonAdapter
+                rvPearson.layoutManager = LinearLayoutManager(this)
+                rvPearson?.layoutManager =
+                        LinearLayoutManager(rvPearson.context,
+                                LinearLayoutManager.VERTICAL,
+                                false)
+
+                //------Regression------
+                val regressionAdapter = RegressionAdapter(mutableListOf())
+                regressionAdapter.doRegression(statisticsAdapter.getList())
+                rvRegression.adapter = regressionAdapter
+                rvRegression.layoutManager = LinearLayoutManager(this)
+                rvRegression?.layoutManager =
+                        LinearLayoutManager(rvPearson.context,
+                                LinearLayoutManager.VERTICAL,
+                                false)
+
+                //------Line-Plot------
                 val linePlotAdapter = LinePlotAdapter(mutableListOf(), this)
                 linePlotAdapter.addDataSet(statisticsAdapter.getList())
                 rvLineCharts.layoutManager = LinearLayoutManager(this)
@@ -44,13 +65,6 @@ class Statistics : AppCompatActivity() {
             }
         })
 
-        rvStatistics.layoutManager = LinearLayoutManager(this)
-        rvPearson.layoutManager = LinearLayoutManager(this)
-        rvPearson?.layoutManager =
-                LinearLayoutManager(rvPearson.context,
-                        LinearLayoutManager.VERTICAL,
-                        false)
 
-        //TODO Add delete
     }
 }
