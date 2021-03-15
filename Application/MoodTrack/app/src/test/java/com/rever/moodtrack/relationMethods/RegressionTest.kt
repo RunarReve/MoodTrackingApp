@@ -88,6 +88,54 @@ class RegressionTest{
         assertThat(result[1]).isAtMost(4 + allowedDif)
         assertThat(result[1]).isAtLeast(4 - allowedDif)
     }
+
+    @Test
+    fun randomTestForRealScenario(){
+        val yList = listOf(4.0,5.0,6.0)
+        val xList = listOf(4.0,5.0,6.0)
+        val result = Regression.regression(yList, xList)
+
+        println("Expected:  f(x)= 1.00x + 0.00 ")
+        println("Predicted: f(x)= ${String.format("%.3f",result[0])}x + ${String.format("%.3f",result[1])}")
+
+        assertThat(result[0]).isAtMost(1 + allowedDif)
+        assertThat(result[0]).isAtLeast(1- allowedDif) //Is the tilt somewhat correct
+
+        assertThat(result[1]).isAtMost(0 + allowedDif) //Is the constant somewhat correct
+        assertThat(result[1]).isAtLeast(0 - allowedDif)
+    }
+
+    @Test
+    fun randomTestForRealScenarioNegative(){
+        val yList = listOf(6.0,5.0,4.0)
+        val xList = listOf(4.0,5.0,6.0)
+        val result = Regression.regression(yList, xList)
+
+        println("Expected:  f(x)= -1.00x + 10.00 ")
+        println("Predicted: f(x)= ${String.format("%.3f",result[0])}x + ${String.format("%.3f",result[1])}")
+
+        assertThat(result[0]).isAtMost(-1 + allowedDif)
+        assertThat(result[0]).isAtLeast(-1- allowedDif) //Is the tilt somewhat correct
+
+        assertThat(result[1]).isAtMost(10 + allowedDif) //Is the constant somewhat correct
+        assertThat(result[1]).isAtLeast(10 - allowedDif)
+    }
+
+    @Test
+    fun randomTestForRealScenarioNoCorrelation(){
+        val yList = listOf(6.0,5.0,6.0)
+        val xList = listOf(4.0,5.0,6.0)
+        val result = Regression.regression(yList, xList)
+
+        println("Expected:  f(x)= 0.00x + 5.67 ")
+        println("Predicted: f(x)= ${String.format("%.3f",result[0])}x + ${String.format("%.3f",result[1])}")
+
+        assertThat(result[0]).isAtMost(0 + allowedDif)
+        assertThat(result[0]).isAtLeast(0- allowedDif) //Is the tilt somewhat correct
+
+        assertThat(result[1]).isAtMost(5.67 + allowedDif) //Is the constant somewhat correct
+        assertThat(result[1]).isAtLeast(5.67 - allowedDif)
+    }
     //--------------------TEST-QUESTION-LIST-2-LIST--------------------------
 
     @Test
@@ -309,4 +357,37 @@ class RegressionTest{
         assertThat(result[0].rateList[2]).isAtLeast(0 - allowedDif) //Is the tilt somewhat correct
         assertThat(result[0].rateList[2]).isAtMost(0 + allowedDif)
     }
+
+    @Test
+    fun realCaseTest() {
+        val list = mutableListOf<questionCollection>()
+        for (i in 0..3) {
+            val newDay = questionCollection("Day${i}")
+            newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", 4 + i , 0))
+            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", 4 + 0, 0))
+            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need2", 4 - i, 0))
+            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need3", 4 + i, 0))
+            list.add(newDay)
+        }
+        val result = Regression.doRegression(list)
+
+        assertThat(result.size).isEqualTo(1)
+        assertThat(result[0].titleList.size).isEqualTo(3)
+
+        println("Expected1:  f(x)= 0.00x + ANY ")
+        println("Predicted1: f(x)= ${String.format("%.3f",result[0].rateList[0])}x + ANY")
+        assertThat(result[0].rateList[0]).isAtLeast(0 - allowedDif) //Is the tilt somewhat correct
+        assertThat(result[0].rateList[0]).isAtMost(0 + allowedDif)
+
+        println("Expected2:  f(x)= -1.00x + ANY ")
+        println("Predicted2: f(x)= ${String.format("%.3f",result[0].rateList[1])}x + ANY")
+        assertThat(result[0].rateList[1]).isAtLeast(-1 - allowedDif) //Is the tilt somewhat correct
+        assertThat(result[0].rateList[1]).isAtMost(-1 + allowedDif)
+
+        println("Expected3:  f(x)= +1.00x + ANY ")
+        println("Predicted3: f(x)= ${String.format("%.3f",result[0].rateList[2])}x + ANY")
+        assertThat(result[0].rateList[2]).isAtLeast(1 - allowedDif) //Is the tilt somewhat correct
+        assertThat(result[0].rateList[2]).isAtMost(1 + allowedDif)
+    }
+
 }

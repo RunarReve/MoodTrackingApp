@@ -14,10 +14,10 @@ import kotlin.math.sqrt
 object Regression {
 
     fun regression(yList: List<Double>, xList:List<Double>):List<Double>{
-        val learningRate = 0.01 //Tuning of learning rate
-        val epochs = 1000      //Number of iterations
+        var learningRate = 0.001 //Tuning of learning rate
+        val epochs = 10000      //Number of iterations
         var m = 0.0 //Start position of tilt
-        var n = 2.0 //Start position of start
+        var n = 0.0 //Start position of start
 
         /**
          * Find Average deviancy between prediction and given list
@@ -30,29 +30,40 @@ object Regression {
             return sqrt(tot)/predictionList.size //Returns avg deviancy of function
         }
 
-
         (0..epochs).forEach{
 
-            //-------CHANGE 'm'-------------------
-            var standard = averageDeviancy(xList.map {(m * it) + n })               //Default
-            val tilt = averageDeviancy(xList.map {((m+ learningRate) * it) + n })   //Increase *x
+            //Calculate for all
+            val calculationList = mutableListOf<List<Double>>()
+            val listOfChanges =  listOf(
+                listOf(m,n), //Default
+                //Change only one variable
+                listOf(m+learningRate,n),
+                listOf(m-learningRate,n),
+                listOf(m,n+learningRate),
+                listOf(m,n-learningRate),
+                //Change both variables
+                listOf(m+learningRate,n+learningRate),
+                listOf(m+learningRate,n-learningRate),
+                listOf(m-learningRate,n-learningRate),
+                listOf(m-learningRate,n+learningRate),
+            )
+            //-------CALCULATE-AVERAGE-DEVIANCY-------------------
+            listOfChanges.forEach { vars ->
+                calculationList.add(listOf(averageDeviancy(xList.map {(vars[0] * it) + vars[1]}), vars[0], vars[1]))
+            }
 
-            if(standard < tilt)
-                m -= learningRate
-            else
-                m += learningRate
-
-            //-------CHANGE 'n'-------------------
-            standard = averageDeviancy(xList.map {(m * it) + n })                   //Default
-            val rotation = averageDeviancy(xList.map {(m * it) + n + learningRate}) //Rotate
-
-            if(standard < rotation)
-                n -= learningRate
-            else
-                n += learningRate
+            //-------COMPARE-AND-SET-TO-BEST-DEVIANCY-------------
+            var best = 1000.0
+            calculationList.forEach{
+                if(it[0] < best){ //If the best, do a change
+                    best = it[0]
+                    m    = it[1]
+                    n    = it[2]
+                }
+            }
         }
         //Debug: print the formula, looks nice :3
-        //println("f(x)= ${String.format("%.3f",m)}x + ${String.format("%.3f",n)}")
+        //println("f(x)= ${String.format("%.3f",m)}x + ${String.format("%.3f",n)}  = ${String.format("%.3f",averageDeviancy(xList.map {(m * it) + n }))}")
         return listOf(m,n)
     }
 
@@ -137,5 +148,52 @@ object Regression {
             }
         }
         return result
+    }
+
+
+
+    fun regressionOld(yList: List<Double>, xList:List<Double>):List<Double>{
+        var learningRate = 0.01 //Tuning of learning rate
+        val epochs = 1000      //Number of iterations
+        var m = 0.0 //Start position of tilt
+        var n = 0.0 //Start position of start
+
+        /**
+         * Find Average deviancy between prediction and given list
+         */
+        fun averageDeviancy(predictionList: List<Double>):Double{
+            var tot = 0.0
+            (0..predictionList.size-1).forEach {
+                tot += (predictionList[it] - yList[it]).pow(2)
+            }
+            return sqrt(tot)/predictionList.size //Returns avg deviancy of function
+        }
+
+        (0..epochs).forEach{
+            //-------CHANGE 'm'-------------------
+            var standard = averageDeviancy(xList.map {(m * it) + n})                    //Default
+            val tiltUp = averageDeviancy(xList.map {((m + learningRate) * it) + n})     //Increase *x
+            val tiltDown = averageDeviancy(xList.map {((m - learningRate) * it) + n})   //Decrease *x
+
+            //tilt if it makes it better
+            if(tiltUp < standard)
+                m += learningRate
+            else if(tiltDown <standard)
+                m -= learningRate
+
+            //-------CHANGE 'n'-------------------
+            standard = averageDeviancy(xList.map {(m * it) + n })                   //Default
+            val increase = averageDeviancy(xList.map {(m * it) + n + learningRate}) //Increase
+            val decrease = averageDeviancy(xList.map {(m * it) + n - learningRate}) //Decrease
+
+            //Increase start
+            if(increase < standard)
+                n += learningRate
+            else if (decrease < standard)
+                n -= learningRate
+        }
+        //Debug: print the formula, looks nice :3
+        //println("f(x)= ${String.format("%.3f",m)}x + ${String.format("%.3f",n)}  = ${String.format("%.3f",averageDeviancy(xList.map {(m * it) + n }))}")
+        return listOf(m,n)
     }
 }
