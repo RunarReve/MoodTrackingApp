@@ -13,9 +13,10 @@ import kotlin.math.sqrt
  */
 object Regression {
 
+    //Linear regression to get function "f(x)=m*x + n"
     fun regression(yList: List<Double>, xList:List<Double>):List<Double>{
-        var learningRate = 0.001 //Tuning of learning rate
-        val epochs = 10000      //Number of iterations
+        val learningRate = 0.001 //Tuning of learning rate
+        val epochs = 10_000      //Number of iterations
         var m = 0.0 //Start position of tilt
         var n = 0.0 //Start position of start
 
@@ -61,6 +62,8 @@ object Regression {
                     n    = it[2]
                 }
             }
+            if(best == calculationList[0][0]) //If current is optimal, return it
+                return listOf(m,n)
         }
         //Debug: print the formula, looks nice :3
         //println("f(x)= ${String.format("%.3f",m)}x + ${String.format("%.3f",n)}  = ${String.format("%.3f",averageDeviancy(xList.map {(m * it) + n }))}")
@@ -83,7 +86,7 @@ object Regression {
     }
 
     //Get list of  wants in given list
-    fun getPrimaryTitels(list : List<questionCollection>):List<String>{
+    private fun getPrimaryTitels(list : List<questionCollection>):List<String>{
         val testTitles = mutableListOf<String>()
         list.forEach {
             it.qList.forEach {
@@ -95,7 +98,7 @@ object Regression {
     }
 
     //Checks where a string is in a list, if not it'll be size of string
-    private fun getIndexinList(string: String, list: List<relationCollection>): Int{
+    private fun getIndexInList(string: String, list: List<relationCollection>): Int{
         for(i in 0..list.size-1)
             if(list[i].id == string )
                 return i
@@ -111,7 +114,7 @@ object Regression {
             it.qList.sortBy{it.isPrimary}
 
             it.qList.forEach {
-                val index =  getIndexinList(it.questionTitle, listOfRatings)
+                val index =  getIndexInList(it.questionTitle, listOfRatings)
                 if(listOfRatings.size == index){ //If not seen add to list
                     listOfRatings.add(relationCollection(it.questionTitle))
                     for(i in 0..numberLists-1) //Fill previous inputs not in list as NA (-1)

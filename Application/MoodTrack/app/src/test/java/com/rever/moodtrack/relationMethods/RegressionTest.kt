@@ -41,6 +41,23 @@ class RegressionTest{
         assertThat(result[1]).isAtMost(0 + allowedDif) //Is the constant somewhat correct
         assertThat(result[1]).isAtLeast(0 - allowedDif)
     }
+
+    @Test
+    fun emptyLists(){
+        val yList = listOf<Double>()
+        val xList = listOf<Double>()
+        val result = Regression.regression(yList, xList)
+
+        println("Expected:  f(x)= 1.00x + 0.00 ")
+        println("Predicted: f(x)= ${String.format("%.3f",result[0])}x + ${String.format("%.3f",result[1])}")
+
+        assertThat(result[0]).isAtMost(0 + allowedDif)//Is the tilt somewhat correct
+        assertThat(result[0]).isAtLeast(0 - allowedDif)
+
+        assertThat(result[1]).isAtMost(0 + allowedDif) //Is the constant somewhat correct
+        assertThat(result[1]).isAtLeast(0 - allowedDif)
+    }
+
     @Test
     fun simpleNoChange(){
         val yList = listOf(2.0,2.0,2.0)
@@ -64,7 +81,6 @@ class RegressionTest{
 
         println("Expected:  f(x)= -1.00x + 0.00 ")
         println("Predicted: f(x)= ${String.format("%.3f",result[0])}x + ${String.format("%.3f",result[1])}")
-
 
         assertThat(result[0]).isAtMost(-1 + allowedDif)
         assertThat(result[0]).isAtLeast(-1 - allowedDif)
@@ -211,6 +227,7 @@ class RegressionTest{
             val newDay = questionCollection("Day${i}")
             newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
             newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
+
             list.add(newDay)
         }
         val result = Regression.doRegression(list)
@@ -359,11 +376,11 @@ class RegressionTest{
     }
 
     @Test
-    fun realCaseTest() {
+    fun multiCaseTest() {
         val list = mutableListOf<questionCollection>()
         for (i in 0..3) {
             val newDay = questionCollection("Day${i}")
-            newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", 4 + i , 0))
+            newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", 4 + i, 0))
             newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", 4 + 0, 0))
             newDay.qList.add(Question(0, "NULL", "Day${i}", "Need2", 4 - i, 0))
             newDay.qList.add(Question(0, "NULL", "Day${i}", "Need3", 4 + i, 0))

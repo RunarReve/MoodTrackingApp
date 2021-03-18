@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">MoodTrack</string>
+    <string name="app_name">Need2Want</string>
+
+    <string name="btnNewInput">New Input</string>
+    <string name="btnGoToStatistics">Statistics</string>
+    <string name="btnGo2Settings">Settings</string>
+    <string name="btnGo2About">About</string>
+    <string name="preLoadStreak">Streak</string>
+
 </resources>

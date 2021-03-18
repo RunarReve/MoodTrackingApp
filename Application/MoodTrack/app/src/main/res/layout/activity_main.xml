@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/activityMain">
 
     <Button
-        android:id="@+id/btnNew"
+        android:id="@+id/btnNewInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="New Input"
+        android:text="@string/btnNewInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivMainImageShadow" />
@@ -21,17 +22,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Statistics"
+        android:text="@string/btnGoToStatistics"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnNew" />
+        app:layout_constraintTop_toBottomOf="@+id/btnNewInput" />
 
     <Button
         android:id="@+id/btnSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Settings"
+        android:text="@string/btnGo2Settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnStat" />
@@ -41,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="About"
+        android:text="@string/btnGo2About"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSettings" />
@@ -75,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:gravity="center"
-        android:text="TempStreak"
+        android:text="@string/preLoadStreak"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="@+id/ivMainImageShadow"
         app:layout_constraintEnd_toEndOf="@+id/ivMainImageShadow"
@@ -89,7 +90,7 @@
         android:layout_marginBottom="32dp"
         android:text="Total Inputs"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btnNew"
+        app:layout_constraintBottom_toTopOf="@+id/btnNewInput"
         app:layout_constraintEnd_toEndOf="@+id/ivMainImageShadow"
         app:layout_constraintStart_toStartOf="@+id/ivMainImageShadow"
         app:layout_constraintTop_toBottomOf="@+id/ivMainImage" />

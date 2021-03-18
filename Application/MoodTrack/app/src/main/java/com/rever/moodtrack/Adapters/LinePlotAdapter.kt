@@ -83,8 +83,8 @@ class LinePlotAdapter(
         holder.itemView.apply {
             lineChart.data = LineData(dataSet as List<ILineDataSet>)
             lineChart.setPinchZoom(true)
-            lineChart.description.text = "Line Chart for Need"
-            lineChart.setScaleEnabled(false)
+            lineChart.description.text = "Need2Want"
+            //lineChart.setScaleEnabled(false)
             lineChart.axisRight.isEnabled = false //Removes values from right axis
             lineChart.xAxis.isGranularityEnabled = true //Set the interval to Natural numbers
 

@@ -8,8 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rever.moodtrack.Adapters.QuestionAdapter
 import com.rever.moodtrack.data.NeedStore.NeedViewModel
-import kotlinx.android.synthetic.main.activity_day_want.btnNext
-import kotlinx.android.synthetic.main.activity_day_want.rvQuestionItems
+import kotlinx.android.synthetic.main.activity_day_want.*
 
 class InputWant : AppCompatActivity() {
     private lateinit var questionAdapter: QuestionAdapter
@@ -23,8 +22,8 @@ class InputWant : AppCompatActivity() {
         actionBar.setDisplayHomeAsUpEnabled(true)
 
         questionAdapter = QuestionAdapter(mutableListOf())
-        rvQuestionItems.adapter = questionAdapter
-        rvQuestionItems.layoutManager = LinearLayoutManager(this)
+        rvWantRateList.adapter = questionAdapter
+        rvWantRateList.layoutManager = LinearLayoutManager(this)
 
         //-------------Setting up the Questions being asked
         //Preset constant Need goals
@@ -40,7 +39,7 @@ class InputWant : AppCompatActivity() {
 
         //-------------Setting up the Questions being asked
 
-        btnNext.setOnClickListener {
+        btnToAddNeed.setOnClickListener {
             val moodQuestion = Array(questionAdapter.getSize()){""}
             for(i in 0 until questionAdapter.getSize())
                 moodQuestion[i] =  questionAdapter.getItemCount2(i)

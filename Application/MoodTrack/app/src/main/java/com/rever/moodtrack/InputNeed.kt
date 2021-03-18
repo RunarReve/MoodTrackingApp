@@ -26,8 +26,8 @@ class InputNeed : AppCompatActivity() {
         actionBar.setDisplayHomeAsUpEnabled(true)
 
         questionAdapter = QuestionAdapter(mutableListOf())
-        rvQuestionItems.adapter = questionAdapter //Display
-        rvQuestionItems.layoutManager = LinearLayoutManager(this)
+        rvNeedRateList.adapter = questionAdapter //Display
+        rvNeedRateList.layoutManager = LinearLayoutManager(this)
 
         //Preset constant Need
         questionAdapter.addQuestion("Sleep")
@@ -42,7 +42,7 @@ class InputNeed : AppCompatActivity() {
             }
         })
 
-        btnNext.setOnClickListener {
+        btnToStat.setOnClickListener {
             val questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
 
             val time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("y/MM/dd H:mm:ss")).toString()
