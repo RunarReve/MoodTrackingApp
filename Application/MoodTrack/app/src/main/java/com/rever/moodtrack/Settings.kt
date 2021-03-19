@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.rever.moodtrack.data.QuestionStore.QuestionViewModel
+import com.rever.moodtrack.data.Fabricated.FabData
 import kotlinx.android.synthetic.main.activity_settings.*
 
 class Settings : AppCompatActivity() {
@@ -25,7 +26,15 @@ class Settings : AppCompatActivity() {
             startActivity(Intent(this, SettingsNeedEdit::class.java))
         }
 
-        //TODO Edit method for custom needs
+        btnLoadPreData.setOnClickListener {
+            val questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
+            FabData.addData().forEach { questionCollection ->
+                questionCollection.qList.forEach{question ->
+                    questionViewModel.addQuestion(question)
+                }
+            }
+        }
+
 
 
     }

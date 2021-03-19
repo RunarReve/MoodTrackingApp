@@ -7,21 +7,12 @@
     tools:context=".Settings"
     android:id="@+id/activitySettings">
 
-    <TextView
-        android:id="@+id/tvSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/btnDeleteTable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete Local Table "
-        app:layout_constraintBottom_toTopOf="@+id/tvSettings"
+        app:layout_constraintBottom_toTopOf="@+id/btnEditNeed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,8 +22,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit Needs"
-        app:layout_constraintBottom_toTopOf="@+id/tvSettings"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnDeleteTable" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnLoadPreData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Load Gen Data"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEditNeed" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
