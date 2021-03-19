@@ -16,9 +16,6 @@ class RegressionAdapter(
 
     fun doRegression(questionCollList: MutableList<questionCollection>){
         relationList = Regression.doRegression(questionCollList)
-        relationList.forEach {
-            println("LOLP: ${it.id}")
-        }
         notifyItemInserted(relationList.size - 1)
     }
 
@@ -35,9 +32,7 @@ class RegressionAdapter(
     override fun onBindViewHolder(holder: StatisticsAdapter.StatisticViewHolder, position: Int) {
         val curRegressionItem = relationList[position]
         val regressionAdapter = PearsonItemAdapter(curRegressionItem)
-        relationList.forEach {
-            println("LOL1: ${it.id}")
-        }
+
         holder.itemView.apply {
             rvPearsonItem.adapter = regressionAdapter
             rvPearsonItem?.layoutManager =

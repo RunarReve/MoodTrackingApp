@@ -22,9 +22,10 @@ interface QuestionDao {
     fun getNumberOfInputSets(): LiveData<Int>
 
 
-
     @Query("DELETE FROM question_table")
     fun deleteLocalData()
 
     //TODO add get all same name
+
+    //TODO Delete of a given name
 }
