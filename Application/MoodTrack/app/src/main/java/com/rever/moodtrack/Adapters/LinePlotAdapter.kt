@@ -12,7 +12,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.utils.Utils
 import com.rever.moodtrack.data.questionCollection
 import com.rever.moodtrack.R
-import com.rever.moodtrack.relationMethods.pearsonCorrelation
+import com.rever.moodtrack.relationMethods.Correlation
 import kotlinx.android.synthetic.main.line_plot_item.view.*
 
 class LinePlotAdapter(
@@ -32,8 +32,8 @@ class LinePlotAdapter(
 
     //Takes in a list of questionCollections and plots it
     fun addDataSet(list : List<questionCollection>){//TODO sort so annotation is same as rest
-        val newList = pearsonCorrelation.questionCollection2PearsonCollection(list)
-        val primaryList = pearsonCorrelation.getPrimaryTitels(list)
+        val newList = Correlation.fillCorrelationList(list)
+        val primaryList = Correlation.getPrimaryTitels(list)
         newList.forEach {
             val current = it.id
             val entries = ArrayList<Entry>()

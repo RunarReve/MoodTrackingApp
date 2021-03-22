@@ -47,6 +47,16 @@ class Statistics : AppCompatActivity() {
                                 LinearLayoutManager.VERTICAL,
                                 false)
 
+                //------Spearman------
+                val spearmanAdapter = PearsonAdapter(mutableListOf())
+                spearmanAdapter.doSpearman(statisticsAdapter.getList())
+                rvSpearman.adapter = spearmanAdapter
+                rvSpearman.layoutManager = LinearLayoutManager(this)
+                rvSpearman?.layoutManager =
+                        LinearLayoutManager(rvSpearman.context,
+                                LinearLayoutManager.VERTICAL,
+                                false)
+
                 //------Regression------
                 val regressionAdapter = RegressionAdapter(mutableListOf())
                 regressionAdapter.doRegression(statisticsAdapter.getList())

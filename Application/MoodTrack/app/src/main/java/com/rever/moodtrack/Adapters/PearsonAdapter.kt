@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rever.moodtrack.R
 import com.rever.moodtrack.data.relationCollection
 import com.rever.moodtrack.data.questionCollection
-import com.rever.moodtrack.relationMethods.pearsonCorrelation
+import com.rever.moodtrack.relationMethods.Correlation
 import kotlinx.android.synthetic.main.pearson_item.view.*
 
 class PearsonAdapter(
@@ -15,10 +15,13 @@ class PearsonAdapter(
 ) : RecyclerView.Adapter<StatisticsAdapter.StatisticViewHolder>(){
 
     fun doPearson(questionCollList: MutableList<questionCollection>){
-        relationList = pearsonCorrelation.doPearson(questionCollList)
+        relationList = Correlation.doPearson(questionCollList)
         notifyItemInserted(relationList.size - 1)
     }
-
+    fun doSpearman(questionCollList: MutableList<questionCollection>){
+        relationList = Correlation.doSpearman(questionCollList)
+        notifyItemInserted(relationList.size - 1)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatisticsAdapter.StatisticViewHolder {
         return StatisticsAdapter.StatisticViewHolder(
             LayoutInflater.from(parent.context).inflate(

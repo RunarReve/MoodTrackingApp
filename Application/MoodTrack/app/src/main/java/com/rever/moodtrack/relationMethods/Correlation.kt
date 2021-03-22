@@ -5,7 +5,7 @@ import com.rever.moodtrack.data.questionCollection
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-object pearsonCorrelation {
+object Correlation {
 
     fun pearsonCorrelation(inList1: List<Double>, inList2: List<Double>): Double{
         if(inList1.size != inList2.size)
@@ -43,6 +43,46 @@ object pearsonCorrelation {
         return rUp/rD
     }
 
+    fun spearmanCorrelation(inList1: List<Double>, inList2: List<Double>): Double{
+        if(inList1.size != inList2.size)
+            return 0.0
+        if(inList1.isEmpty()) //because previous if list2 has to be same size as list1
+            return 0.0
+
+        //Remove all values where one of the list has a NA input
+        //New list due to shallow copy problem (deleted from raw input, not a copy)
+        var list1 = mutableListOf<Double>()
+        var list2 = mutableListOf<Double>()
+        for(i in 0..inList1.size-1){
+            if(inList1[i] >= 0 && inList2[i] >= 0){
+                list1.add(inList1[i])
+                list2.add(inList2[i])
+            }
+        }
+
+        return pearsonCorrelation(rank(list1), rank(list2))
+    }
+
+    fun rank(list: List<Double>):List<Double>{
+        val sortedList = list.sorted()
+        val rankedList = mutableListOf<Double>()
+
+        (1..sortedList.size).forEach {i ->
+            rankedList.add(i.toDouble())
+        }
+        val outRankedList = mutableListOf<Double>()
+        list.forEach { each ->
+            for( i in 0..sortedList.size -1){
+                if(each == sortedList[i]) {
+                    outRankedList.add(rankedList[i])
+                    break
+                }
+            }
+        }
+
+        return outRankedList
+    }
+
     //Checks where a string is in a list, if not it'll be size of string
     private fun getIndexinList(string: String, list: List<relationCollection>): Int{
         for(i in 0..list.size-1)
@@ -51,7 +91,7 @@ object pearsonCorrelation {
         return list.size
     }
 
-    fun questionCollection2PearsonCollection(list : List<questionCollection>):List<relationCollection>{
+    fun fillCorrelationList(list : List<questionCollection>):List<relationCollection>{
         val pearsonList = mutableListOf<relationCollection>()
         var numberLists = 0
 
@@ -96,7 +136,7 @@ object pearsonCorrelation {
 
     fun doPearson(list : List<questionCollection>): List<relationCollection>{
         val pearsonList = mutableListOf<relationCollection>()
-        val prePearsonList = questionCollection2PearsonCollection(list) // get question list in a sorted list of list based on questionTitles
+        val prePearsonList = fillCorrelationList(list) // get question list in a sorted list of list based on questionTitles
         val testTitles = getPrimaryTitels(list) //Get Question that to test against
 
         //Do the Pearson test for between each subjective need against other needs
@@ -114,5 +154,27 @@ object pearsonCorrelation {
             }
         }
         return pearsonList
+    }
+
+    fun doSpearman(list : List<questionCollection>): List<relationCollection>{
+        val spearmanList = mutableListOf<relationCollection>()
+        val preSpearmanList = fillCorrelationList(list) // get question list in a sorted list of list based on questionTitles
+        val testTitles = getPrimaryTitels(list) //Get Question that to test against
+
+        //Do the Pearson test for between each subjective need against other needs
+        preSpearmanList.forEach{
+            val current = it
+            if(current.id in testTitles) { //Check if current is in need for testing
+                spearmanList.add(relationCollection(current.id))
+
+                preSpearmanList.forEach {
+                    if (current != it) {//No need to test against itself
+                        spearmanList[spearmanList.size - 1].rateList.add(spearmanCorrelation(current.rateList, it.rateList))
+                        spearmanList[spearmanList.size - 1].titleList.add(it.id)
+                    }
+                }
+            }
+        }
+        return spearmanList
     }
 }
