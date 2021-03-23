@@ -7,7 +7,6 @@ class QuestionRepository(
 ){
     val readAllData: LiveData<List<Question>> = questionDao.readAllData()
     val numberOfInputSets: LiveData<Int> = questionDao.getNumberOfInputSets()
-    //val numberOfInputSets: Int = 5
 
     //Add a new question
     suspend fun addQuestion(question: Question){

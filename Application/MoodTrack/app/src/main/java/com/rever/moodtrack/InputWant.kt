@@ -26,7 +26,7 @@ class InputWant : AppCompatActivity() {
         rvWantRateList.layoutManager = LinearLayoutManager(this)
 
         //-------------Setting up the Questions being asked
-        //Preset constant Need goals
+        //Preset constant LastStep goals
         questionAdapter.addQuestionPrimary("Happiness")
         //Get custom needs goals from DB
         val needViewModel = ViewModelProvider(this).get(NeedViewModel::class.java)

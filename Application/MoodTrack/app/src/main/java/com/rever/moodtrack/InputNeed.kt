@@ -1,12 +1,17 @@
 package com.rever.moodtrack
 
+import android.content.Context
 import android.content.Intent
+import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rever.moodtrack.Adapters.QuestionAdapter
+import com.rever.moodtrack.Adapters.StepCounterAdapter
+import com.rever.moodtrack.data.LastStep.LastStep
+import com.rever.moodtrack.data.LastStep.StepViewModel
 import com.rever.moodtrack.data.NeedStore.NeedViewModel
 import com.rever.moodtrack.data.QuestionStore.Question
 import com.rever.moodtrack.data.QuestionStore.QuestionViewModel
@@ -25,11 +30,14 @@ class InputNeed : AppCompatActivity() {
         actionBar!!.title = "Rate need fulfillment"
         actionBar.setDisplayHomeAsUpEnabled(true)
 
+        val stepCounterAdapter = StepCounterAdapter()
+        stepCounterAdapter.startCount( getSystemService(Context.SENSOR_SERVICE) as SensorManager)
+
         questionAdapter = QuestionAdapter(mutableListOf())
         rvNeedRateList.adapter = questionAdapter //Display
         rvNeedRateList.layoutManager = LinearLayoutManager(this)
 
-        //Preset constant Need
+        //Preset constant LastStep
         questionAdapter.addQuestion("Sleep")
         questionAdapter.addQuestion("Movement")
         questionAdapter.addQuestion("Social")
@@ -41,6 +49,10 @@ class InputNeed : AppCompatActivity() {
                     questionAdapter.addNeed(it)
             }
         })
+
+        btnGetStep.setOnClickListener {
+            etStepBox.setText(stepCounterAdapter.getCurrentStep())
+        }
 
         btnToStat.setOnClickListener {
             val questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
@@ -59,6 +71,10 @@ class InputNeed : AppCompatActivity() {
                 val q = Question(1, time, "TEMP2", split[0], split[1].toInt(),0)
                 questionViewModel.addQuestion(q)
             }
+            //Get steps
+            val steps = etStepBox.text.toString().toIntOrNull()
+            if(steps != null)
+                questionViewModel.addQuestion(Question(-1, time, "TEMP2", "Steps", steps, 0))
 
             val intent = Intent(this, Statistics::class.java)
             startActivity(intent)

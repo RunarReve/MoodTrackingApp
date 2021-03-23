@@ -31,7 +31,6 @@ class QuestionViewModel(application: Application):AndroidViewModel(application){
         }
     }
 
-
     fun deleteLocalData(){
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteLocalData()

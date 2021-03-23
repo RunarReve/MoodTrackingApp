@@ -144,7 +144,7 @@ class MainActivityTest {
 
         onView(withId(R.id.activitySettingsNeedEdit)).check(matches(isDisplayed()))
         onView(withText("Need1")).check(matches(isDisplayed()))
-        onView(withText("Need")).check(matches(isDisplayed()))
+        onView(withText("LastStep")).check(matches(isDisplayed()))
 
         pressBack()
         pressBack()

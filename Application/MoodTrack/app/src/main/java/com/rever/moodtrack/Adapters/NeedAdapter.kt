@@ -34,7 +34,7 @@ class NeedAdapter(
 
         holder.itemView.tvNeedHeader.text = curNeed.needTitle
         if (curNeed.isPrimary == 0)
-            holder.itemView.tvNeedType.text = "Need"
+            holder.itemView.tvNeedType.text = "LastStep"
         else
             holder.itemView.tvNeedType.text = "Want"
 

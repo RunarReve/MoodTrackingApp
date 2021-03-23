@@ -61,7 +61,7 @@ class PearsonCorrelationTest {
         val list2 = listOf(4.0, 4.0, 4.0, 4.0)
         val result = Correlation.pearsonCorrelation(list1, list2)
 
-        //Need to be variation in data to be correlation
+        //LastStep to be variation in data to be correlation
         assertThat(result).isEqualTo(0.0)
     }
 
@@ -71,7 +71,7 @@ class PearsonCorrelationTest {
         val list2 = listOf(4.0, 4.0, 4.0, 4.0)
         val result = Correlation.pearsonCorrelation(list1, list2)
 
-        //Need to be variation in data to be correlation
+        //LastStep to be variation in data to be correlation
         assertThat(result).isEqualTo(0.0)
     }
 
