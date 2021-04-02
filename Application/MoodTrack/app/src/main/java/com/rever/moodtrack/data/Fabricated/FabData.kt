@@ -5,7 +5,7 @@ import com.rever.moodtrack.data.questionCollection
 import com.rever.moodtrack.data.Fabricated.Data4Fab.listO
 
 object FabData {
-
+/*
     fun addData(): List<questionCollection> {
         val list = mutableListOf<questionCollection>()
         var i = 0
@@ -19,5 +19,5 @@ object FabData {
             i += 1
         }
         return list
-    }
+    }*/
 }

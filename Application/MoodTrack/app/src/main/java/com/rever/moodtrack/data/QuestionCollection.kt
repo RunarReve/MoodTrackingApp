@@ -4,7 +4,7 @@ import com.rever.moodtrack.data.QuestionStore.Question
 
 data class questionCollection(
     var id : String,
-    val qList: MutableList<Question> = mutableListOf()
+    val qList: MutableList<FireQuestion> = mutableListOf()
 )
 
 

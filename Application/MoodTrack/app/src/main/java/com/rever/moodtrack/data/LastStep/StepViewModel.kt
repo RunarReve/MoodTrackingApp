@@ -25,7 +25,6 @@ class StepViewModel(application: Application):AndroidViewModel(application) {
 
     }
 
-
     fun updateStep(step: Int){
         viewModelScope.launch(Dispatchers.IO) {
             deleteLocalData()
@@ -33,7 +32,6 @@ class StepViewModel(application: Application):AndroidViewModel(application) {
             repository.addNeed(stepItem)
         }
     }
-
 
     fun deleteLocalData(){
         viewModelScope.launch(Dispatchers.IO) {

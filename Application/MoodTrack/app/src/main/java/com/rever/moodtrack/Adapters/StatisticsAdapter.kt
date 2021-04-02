@@ -11,7 +11,7 @@ import com.rever.moodtrack.data.QuestionStore.Question
 import kotlinx.android.synthetic.main.statistics_item.view.*
 
 class StatisticsAdapter(
-        private val statistics: MutableList<questionCollection>
+        private var statistics: MutableList<questionCollection>
 ): RecyclerView.Adapter<StatisticsAdapter.StatisticViewHolder>() {
 
     private lateinit var statisticsItemAdapter: StatisticsItemAdapter
@@ -29,26 +29,9 @@ class StatisticsAdapter(
     fun getList():MutableList<questionCollection>{
         return statistics
     }
-
-    fun addStat(question: Question){
-        var check = false //check if the question has been added
-        for(i in 0 until statistics.size){
-            if(statistics[i].qList.get(0).time == question.time) {
-                statistics[i].qList.add(question)
-                check = true
-            }
-        }
-        if(!check) {
-            val o = questionCollection(question.time)
-            o.qList.add(question)
-            statistics.add(o)
-        }
-        sortList()
+    fun setList(list: MutableList<questionCollection>){
+        statistics = list
         notifyItemInserted(statistics.size - 1)
-    }
-
-    fun sortList(){
-        statistics.sortByDescending { it.qList[0].time}
     }
 
     override fun onBindViewHolder(holder: StatisticViewHolder, position: Int) {
@@ -65,7 +48,7 @@ class StatisticsAdapter(
                 LinearLayoutManager(rvStatisticItem.context,
                     LinearLayoutManager.HORIZONTAL,
                     false)
-            tvDayHeader.text = curStats.qList[0].time //TODO change to only date format
+            tvDayHeader.text = curStats.id //TODO change to only date format
         }
         return
     }

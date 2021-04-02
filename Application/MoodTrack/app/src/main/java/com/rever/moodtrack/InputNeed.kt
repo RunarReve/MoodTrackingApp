@@ -8,8 +8,14 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.rever.moodtrack.Adapters.QuestionAdapter
 import com.rever.moodtrack.Adapters.StepCounterAdapter
+import com.rever.moodtrack.data.FireQuestion
 import com.rever.moodtrack.data.LastStep.LastStep
 import com.rever.moodtrack.data.LastStep.StepViewModel
 import com.rever.moodtrack.data.NeedStore.NeedViewModel
@@ -30,6 +36,8 @@ class InputNeed : AppCompatActivity() {
         actionBar!!.title = "Rate need fulfillment"
         actionBar.setDisplayHomeAsUpEnabled(true)
 
+        val userID = FirebaseAuth.getInstance().currentUser.uid
+
         val stepCounterAdapter = StepCounterAdapter()
         stepCounterAdapter.startCount( getSystemService(Context.SENSOR_SERVICE) as SensorManager)
 
@@ -42,11 +50,19 @@ class InputNeed : AppCompatActivity() {
         questionAdapter.addQuestion("Movement")
         questionAdapter.addQuestion("Social")
         //Get custom needs goals from DB
-        val needViewModel = ViewModelProvider(this).get(NeedViewModel::class.java)
-        needViewModel.readAllData.observe(this, Observer {
-            it.forEach {
-                if(it.isPrimary == 0) //Normally not much data, -> OK to just pull all
-                    questionAdapter.addNeed(it)
+        val database = FirebaseDatabase.getInstance().reference
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val shot = snapshot.child("user").child(userID).child("customNeed")
+                shot.children.forEach {
+                    val type = it.child("type").getValue().toString().toInt()
+                    val needName = it.child("needTitle").getValue().toString()
+                    if(type == 0 )
+                        questionAdapter.addQuestionPrimary(needName)
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read anything, Do nothing
             }
         })
 
@@ -55,27 +71,31 @@ class InputNeed : AppCompatActivity() {
         }
 
         btnToStat.setOnClickListener {
-            val questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
+            val questionList = mutableListOf<FireQuestion>()
+            val time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("y_MM_dd-H:mm:ss")).toString()
 
-            val time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("y/MM/dd H:mm:ss")).toString()
-
-            for(i in 0 until questionAdapter.getSize()) {
-                val q = Question(0, time,"TEMP2", questionAdapter.getTitle(i), questionAdapter.getrate(i),0)
-                questionViewModel.addQuestion(q)
-            }
-
-            //All questions from previous
-            val moodQuestion = intent.getStringArrayExtra("moodQ")
-            moodQuestion?.forEach {
+            //Get previous activities questions
+            intent.getStringArrayExtra("moodQ")?.forEach {
                 val split = it.split(',')
-                val q = Question(1, time, "TEMP2", split[0], split[1].toInt(),0)
-                questionViewModel.addQuestion(q)
+                val q = FireQuestion(split[0], 1, split[1].toInt())
+                questionList.add(q)
+            }
+            //Current activities questions
+            for(i in 0 until questionAdapter.getSize()) {
+                val q = FireQuestion(questionAdapter.getTitle(i), 0, questionAdapter.getrate(i))
+                questionList.add(q)
             }
             //Get steps
             val steps = etStepBox.text.toString().toIntOrNull()
             if(steps != null)
-                questionViewModel.addQuestion(Question(-1, time, "TEMP2", "Steps", steps, 0))
+                questionList.add(FireQuestion("Steps", -1, steps))
 
+            //Upload gathered data
+            val uploadLocation = database.child("user").child(userID).child("data").child(time)
+
+            questionList.forEach {question ->
+                uploadLocation.child(question.title).setValue(question)
+            }
             val intent = Intent(this, Statistics::class.java)
             startActivity(intent)
         }

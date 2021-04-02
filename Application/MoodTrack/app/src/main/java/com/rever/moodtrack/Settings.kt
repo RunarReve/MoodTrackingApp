@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.rever.moodtrack.data.QuestionStore.QuestionViewModel
 import com.rever.moodtrack.data.Fabricated.FabData
 import kotlinx.android.synthetic.main.activity_settings.*
@@ -17,6 +18,8 @@ class Settings : AppCompatActivity() {
         actionBar!!.title = "Settings"
         actionBar.setDisplayHomeAsUpEnabled(true)
 
+        val userID = FirebaseAuth.getInstance().currentUser.uid
+
         btnDeleteTable.setOnClickListener {
             val mUserViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
             mUserViewModel.deleteLocalData()
@@ -27,15 +30,18 @@ class Settings : AppCompatActivity() {
         }
 
         btnLoadPreData.setOnClickListener {
-            val questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
+      /*     val questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
             FabData.addData().forEach { questionCollection ->
                 questionCollection.qList.forEach{question ->
                     questionViewModel.addQuestion(question)
                 }
-            }
+            }*/
         }
 
-
-
+        btnEditUserData.setOnClickListener {
+            val intent = Intent(this, UserInfoEditActivity::class.java)
+            intent.putExtra("from", "edit")
+            startActivity(intent)
+        }
     }
 }

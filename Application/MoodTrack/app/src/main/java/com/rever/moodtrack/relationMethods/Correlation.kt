@@ -98,13 +98,13 @@ object Correlation {
         //Store all the sets of data in a structure based of the different needs
         list.forEach {
             //Sort makes it easier to use in the future
-            it.qList.sortBy {it.name}
-            it.qList.sortBy{it.isPrimary}
+            it.qList.sortBy {it.title}
+            it.qList.sortBy{it.type}
 
             it.qList.forEach {
-                val index = getIndexinList(it.questionTitle, pearsonList) //Get index of title
+                val index = getIndexinList(it.title, pearsonList) //Get index of title
                 if(pearsonList.size == index){ //If not seen add to list
-                    pearsonList.add(relationCollection(it.questionTitle))
+                    pearsonList.add(relationCollection(it.title))
                     for(i in 0..numberLists-1) //Fill previous inputs not in list as NA (-1)
                         pearsonList[index].rateList.add(-1.0)
                 }
@@ -127,8 +127,8 @@ object Correlation {
         val testTitles = mutableListOf<String>()
         list.forEach {
             it.qList.forEach {
-                if(it.isPrimary == 1)
-                    testTitles.add(it.questionTitle)
+                if(it.type == 1)
+                    testTitles.add(it.title)
             }
         }
         return testTitles

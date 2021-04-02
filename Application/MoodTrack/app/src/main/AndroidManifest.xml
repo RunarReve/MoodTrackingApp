@@ -9,8 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MoodTrack">
-        <activity android:name=".SettingsNeedEdit"
-            android:parentActivityName=".Settings" />
+        <activity android:name=".UserInfoEditActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SettingsNeedEdit"
+            android:parentActivityName=".Settings">
+        </activity>
         <activity
             android:name=".About"
             android:parentActivityName=".MainActivity" />
@@ -19,20 +30,15 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Statistics"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity">
+        </activity>
         <activity
             android:name=".InputNeed"
             android:parentActivityName=".InputWant" />
         <activity
             android:name=".InputWant"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

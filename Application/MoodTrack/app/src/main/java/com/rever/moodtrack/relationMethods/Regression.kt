@@ -90,8 +90,8 @@ object Regression {
         val testTitles = mutableListOf<String>()
         list.forEach {
             it.qList.forEach {
-                if(it.isPrimary == 1)
-                    testTitles.add(it.questionTitle)
+                if(it.type == 1)
+                    testTitles.add(it.title)
             }
         }
         return testTitles
@@ -110,13 +110,13 @@ object Regression {
         var numberLists = 0
         list.forEach {
             //Sort makes it easier to use in the future
-            it.qList.sortBy {it.name}
-            it.qList.sortBy{it.isPrimary}
+            it.qList.sortBy {it.title}
+            it.qList.sortBy{it.type}
 
             it.qList.forEach {
-                val index =  getIndexInList(it.questionTitle, listOfRatings)
+                val index =  getIndexInList(it.title, listOfRatings)
                 if(listOfRatings.size == index){ //If not seen add to list
-                    listOfRatings.add(relationCollection(it.questionTitle))
+                    listOfRatings.add(relationCollection(it.title))
                     for(i in 0..numberLists-1) //Fill previous inputs not in list as NA (-1)
                         listOfRatings[index].rateList.add(-1.0)
                 }
