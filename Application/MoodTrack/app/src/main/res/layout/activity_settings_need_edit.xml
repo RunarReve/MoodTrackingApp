@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsNeedEdit"
+    tools:context=".Activities.SettingsNeedEditActivity"
     android:id="@+id/activitySettingsNeedEdit">
 
     <androidx.recyclerview.widget.RecyclerView

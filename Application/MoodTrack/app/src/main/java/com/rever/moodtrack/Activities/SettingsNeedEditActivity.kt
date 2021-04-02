@@ -1,4 +1,4 @@
-package com.rever.moodtrack
+package com.rever.moodtrack.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,10 +9,12 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.rever.moodtrack.Adapters.NeedAdapter
+import com.rever.moodtrack.AddNeedItemDialog
+import com.rever.moodtrack.R
 import com.rever.moodtrack.data.CustomNeed
 import kotlinx.android.synthetic.main.activity_settings_need_edit.*
 
-class SettingsNeedEdit() : AppCompatActivity() {
+class SettingsNeedEditActivity() : AppCompatActivity() {
     private lateinit var needAdapter: NeedAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {

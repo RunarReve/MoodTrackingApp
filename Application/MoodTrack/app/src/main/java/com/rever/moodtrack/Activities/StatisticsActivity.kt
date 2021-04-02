@@ -1,4 +1,4 @@
-package com.rever.moodtrack
+package com.rever.moodtrack.Activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -12,18 +12,19 @@ import com.rever.moodtrack.Adapters.LinePlotAdapter
 import com.rever.moodtrack.Adapters.PearsonAdapter
 import com.rever.moodtrack.Adapters.RegressionAdapter
 import com.rever.moodtrack.Adapters.StatisticsAdapter
+import com.rever.moodtrack.R
 import com.rever.moodtrack.data.Question
 import com.rever.moodtrack.data.questionCollection
 import kotlinx.android.synthetic.main.activity_statistics.*
 
-class Statistics : AppCompatActivity() {
+class StatisticsActivity : AppCompatActivity() {
     private lateinit var statisticsAdapter: StatisticsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statistics)
         val actionBar = supportActionBar
-        actionBar!!.title = "Statistics"
+        actionBar!!.title = "StatisticsActivity"
         actionBar.setDisplayHomeAsUpEnabled(true)
 
         val userID = FirebaseAuth.getInstance().currentUser.uid
@@ -52,13 +53,13 @@ class Statistics : AppCompatActivity() {
 
                 //------Input-List------
                 rvStatistics.adapter = statisticsAdapter
-                rvStatistics.layoutManager = LinearLayoutManager(this@Statistics)
+                rvStatistics.layoutManager = LinearLayoutManager(this@StatisticsActivity)
 
                 //------Pearson------
                 val pearsonAdapter = PearsonAdapter(mutableListOf())
                 pearsonAdapter.doPearson(statisticsAdapter.getList())
                 rvPearson.adapter = pearsonAdapter
-                rvPearson.layoutManager = LinearLayoutManager(this@Statistics)
+                rvPearson.layoutManager = LinearLayoutManager(this@StatisticsActivity)
                 rvPearson?.layoutManager =
                         LinearLayoutManager(rvPearson.context,
                                 LinearLayoutManager.VERTICAL,
@@ -68,7 +69,7 @@ class Statistics : AppCompatActivity() {
                 val spearmanAdapter = PearsonAdapter(mutableListOf())
                 spearmanAdapter.doSpearman(statisticsAdapter.getList())
                 rvSpearman.adapter = spearmanAdapter
-                rvSpearman.layoutManager = LinearLayoutManager(this@Statistics)
+                rvSpearman.layoutManager = LinearLayoutManager(this@StatisticsActivity)
                 rvSpearman?.layoutManager =
                         LinearLayoutManager(rvSpearman.context,
                                 LinearLayoutManager.VERTICAL,
@@ -78,16 +79,16 @@ class Statistics : AppCompatActivity() {
                 val regressionAdapter = RegressionAdapter(mutableListOf())
                 regressionAdapter.doRegression(statisticsAdapter.getList())
                 rvRegression.adapter = regressionAdapter
-                rvRegression.layoutManager = LinearLayoutManager(this@Statistics)
+                rvRegression.layoutManager = LinearLayoutManager(this@StatisticsActivity)
                 rvRegression?.layoutManager =
                         LinearLayoutManager(rvPearson.context,
                                 LinearLayoutManager.VERTICAL,
                                 false)
 
                 //------Line-Plot------
-                val linePlotAdapter = LinePlotAdapter(mutableListOf(), this@Statistics)
+                val linePlotAdapter = LinePlotAdapter(mutableListOf(), this@StatisticsActivity)
                 linePlotAdapter.addDataSet(statisticsAdapter.getList())
-                rvLineCharts.layoutManager = LinearLayoutManager(this@Statistics)
+                rvLineCharts.layoutManager = LinearLayoutManager(this@StatisticsActivity)
                 rvLineCharts.adapter = linePlotAdapter
             }
 

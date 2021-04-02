@@ -1,4 +1,4 @@
-package com.rever.moodtrack
+package com.rever.moodtrack.Activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.rever.moodtrack.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -31,19 +32,19 @@ class MainActivity : AppCompatActivity() {
 
         //--------------Home-Buttons-----------------
         btnNewInput.setOnClickListener {
-            startActivity(Intent(this, InputWant::class.java))
+            startActivity(Intent(this, InputWantActivity::class.java))
         }
 
         btnStat.setOnClickListener {
-            startActivity(Intent(this, Statistics::class.java))
+            startActivity(Intent(this, StatisticsActivity::class.java))
         }
 
         btnSettings.setOnClickListener {
-            startActivity(Intent(this, Settings::class.java))
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
 
         btnAbout.setOnClickListener {
-            startActivity( Intent(this, About::class.java))
+            startActivity( Intent(this, AboutActivity::class.java))
         }
 
         btnLogOut.setOnClickListener {

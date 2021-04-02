@@ -1,18 +1,19 @@
-package com.rever.moodtrack
+package com.rever.moodtrack.Activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.rever.moodtrack.R
 import kotlinx.android.synthetic.main.activity_settings.*
 
-class Settings : AppCompatActivity() {
+class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         val actionBar = supportActionBar
-        actionBar!!.title = "Settings"
+        actionBar!!.title = "SettingsActivity"
         actionBar.setDisplayHomeAsUpEnabled(true)
 
         val userID = FirebaseAuth.getInstance().currentUser.uid
@@ -22,7 +23,7 @@ class Settings : AppCompatActivity() {
             database.child("data").removeValue()
         }
         btnEditNeed.setOnClickListener {
-            startActivity(Intent(this, SettingsNeedEdit::class.java))
+            startActivity(Intent(this, SettingsNeedEditActivity::class.java))
         }
 
         btnLoadPreData.setOnClickListener {

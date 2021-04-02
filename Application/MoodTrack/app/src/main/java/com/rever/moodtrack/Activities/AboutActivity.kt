@@ -1,15 +1,16 @@
-package com.rever.moodtrack
+package com.rever.moodtrack.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.rever.moodtrack.R
 
-class About : AppCompatActivity() {
+class AboutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
 
         val actionBar = supportActionBar
-        actionBar!!.title = "About"
+        actionBar!!.title = "AboutActivity"
         actionBar.setDisplayHomeAsUpEnabled(true)
     }
 }

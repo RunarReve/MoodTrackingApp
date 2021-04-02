@@ -1,4 +1,4 @@
-package com.rever.moodtrack
+package com.rever.moodtrack.Activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.rever.moodtrack.R
 import com.rever.moodtrack.data.User
 import kotlinx.android.synthetic.main.activity_user_info_edit.*
 

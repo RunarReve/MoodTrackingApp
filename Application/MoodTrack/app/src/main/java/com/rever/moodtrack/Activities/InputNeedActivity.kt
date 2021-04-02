@@ -1,4 +1,4 @@
-package com.rever.moodtrack
+package com.rever.moodtrack.Activities
 
 import android.content.Context
 import android.content.Intent
@@ -13,12 +13,13 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.rever.moodtrack.Adapters.QuestionAdapter
 import com.rever.moodtrack.Adapters.StepCounterAdapter
+import com.rever.moodtrack.R
 import com.rever.moodtrack.data.Question
 import kotlinx.android.synthetic.main.activity_day_need.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class InputNeed : AppCompatActivity() {
+class InputNeedActivity : AppCompatActivity() {
     private lateinit var questionAdapter: QuestionAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,7 +90,7 @@ class InputNeed : AppCompatActivity() {
             questionList.forEach {question ->
                 uploadLocation.child(question.title).setValue(question)
             }
-            val intent = Intent(this, Statistics::class.java)
+            val intent = Intent(this, StatisticsActivity::class.java)
             startActivity(intent)
         }
 
