@@ -12,9 +12,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.rever.moodtrack.Adapters.FireQuestionAdapter
-import com.rever.moodtrack.Adapters.QuestionAdapter
-import com.rever.moodtrack.data.CustomNeed
-import com.rever.moodtrack.data.NeedStore.NeedViewModel
 import kotlinx.android.synthetic.main.activity_day_want.*
 
 class InputWant : AppCompatActivity() {

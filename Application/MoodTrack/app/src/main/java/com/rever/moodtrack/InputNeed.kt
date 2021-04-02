@@ -16,11 +16,6 @@ import com.google.firebase.database.ValueEventListener
 import com.rever.moodtrack.Adapters.QuestionAdapter
 import com.rever.moodtrack.Adapters.StepCounterAdapter
 import com.rever.moodtrack.data.FireQuestion
-import com.rever.moodtrack.data.LastStep.LastStep
-import com.rever.moodtrack.data.LastStep.StepViewModel
-import com.rever.moodtrack.data.NeedStore.NeedViewModel
-import com.rever.moodtrack.data.QuestionStore.Question
-import com.rever.moodtrack.data.QuestionStore.QuestionViewModel
 import kotlinx.android.synthetic.main.activity_day_need.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

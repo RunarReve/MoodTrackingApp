@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.FirebaseDatabase
 import com.rever.moodtrack.R
 import com.rever.moodtrack.data.CustomNeed
-import com.rever.moodtrack.data.NeedStore.Need
-import com.rever.moodtrack.data.NeedStore.NeedViewModel
 import kotlinx.android.synthetic.main.need_item.view.*
 
 class FireNeedAdapter(

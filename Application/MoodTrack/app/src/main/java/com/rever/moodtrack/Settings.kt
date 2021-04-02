@@ -3,11 +3,8 @@ package com.rever.moodtrack
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.rever.moodtrack.data.QuestionStore.QuestionViewModel
-import com.rever.moodtrack.data.Fabricated.FabData
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_settings.*
 
 class Settings : AppCompatActivity() {
@@ -21,9 +18,8 @@ class Settings : AppCompatActivity() {
         val userID = FirebaseAuth.getInstance().currentUser.uid
 
         btnDeleteTable.setOnClickListener {
-            val mUserViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
-            mUserViewModel.deleteLocalData()
-            Toast.makeText(this, "Deleted Local Data", Toast.LENGTH_SHORT).show()
+            val database = FirebaseDatabase.getInstance().reference.child("user").child(userID)
+            database.child("data").removeValue()
         }
         btnEditNeed.setOnClickListener {
             startActivity(Intent(this, SettingsNeedEdit::class.java))

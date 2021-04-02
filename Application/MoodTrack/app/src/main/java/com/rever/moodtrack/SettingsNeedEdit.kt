@@ -11,11 +11,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.rever.moodtrack.Adapters.FireNeedAdapter
-import com.rever.moodtrack.Adapters.NeedAdapter
 import com.rever.moodtrack.data.CustomNeed
-import com.rever.moodtrack.data.NeedStore.NeedViewModel
 import kotlinx.android.synthetic.main.activity_settings_need_edit.*
-import kotlinx.android.synthetic.main.activity_user_info_edit.*
 
 class SettingsNeedEdit() : AppCompatActivity() {
     private lateinit var needAdapter: FireNeedAdapter
