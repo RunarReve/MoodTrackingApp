@@ -9,10 +9,10 @@ import com.rever.moodtrack.R
 import com.rever.moodtrack.data.CustomNeed
 import kotlinx.android.synthetic.main.need_item.view.*
 
-class FireNeedAdapter(
+class NeedAdapter(
         private val userID: String,
         private var needList: MutableList<CustomNeed>
-):RecyclerView.Adapter<FireNeedAdapter.NeedViewHolder>() {
+):RecyclerView.Adapter<NeedAdapter.NeedViewHolder>() {
     inner class NeedViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NeedViewHolder {

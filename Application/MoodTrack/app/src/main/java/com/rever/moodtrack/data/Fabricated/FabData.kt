@@ -1,6 +1,6 @@
 package com.rever.moodtrack.data.Fabricated
 
-import com.rever.moodtrack.data.QuestionStore.Question
+import com.rever.moodtrack.data.Question
 import com.rever.moodtrack.data.questionCollection
 import com.rever.moodtrack.data.Fabricated.Data4Fab.listO
 

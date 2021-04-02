@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rever.moodtrack.data.questionCollection
 import com.rever.moodtrack.R
-import com.rever.moodtrack.data.QuestionStore.Question
 import kotlinx.android.synthetic.main.statistics_item.view.*
 
 class StatisticsAdapter(

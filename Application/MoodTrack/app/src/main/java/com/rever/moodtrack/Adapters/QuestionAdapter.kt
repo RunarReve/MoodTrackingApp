@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.recyclerview.widget.RecyclerView
 import com.rever.moodtrack.R
-import com.rever.moodtrack.data.NeedStore.Need
-import com.rever.moodtrack.data.QuestionStore.Question
+import com.rever.moodtrack.data.CustomNeed
 import kotlinx.android.synthetic.main.need_question_item.view.*
+import com.rever.moodtrack.data.Question
 
 class QuestionAdapter (
     private val questions: MutableList<Question>
@@ -25,38 +25,38 @@ class QuestionAdapter (
         )
     }
 
-    fun addNeed(need: Need){
-        val q = Question(need.isPrimary,"NULL", need.userID, need.needTitle,4,0)
+    fun addNeed(need: CustomNeed){
+        val q = com.rever.moodtrack.data.Question(need.NeedTitle, need.type, -1)
         questions.add(q)
         notifyItemInserted(questions.size - 1)
     }
 
-    fun addQuestion(question: Question){
+    fun addQuestion(question: com.rever.moodtrack.data.Question){
         questions.add(question)
         notifyItemInserted(questions.size - 1)
     }
 
-    fun addQuestionPrimary(tile: String){
-        val q = Question(1,"NULL", "DEL", tile,4,0)
+    fun addQuestionPrimary(title: String){
+        val q = com.rever.moodtrack.data.Question(title, 1,4)
         questions.add(q)
         notifyItemInserted(questions.size - 1)
     }
-    fun addQuestion(tile: String){
-        val q = Question(0,"NULL", "DEL", tile,4, 0)
+    fun addQuestion(title: String){
+        val q = com.rever.moodtrack.data.Question(title, 0,4)
         questions.add(q)
         notifyItemInserted(questions.size - 1)
     }
 
     //Returns a comma seperated string with
     fun getItemCount2(i: Int): String {
-        return questions[i].questionTitle + ',' + questions[i].rate
+        return questions[i].title + ',' + questions[i].rate
     }
 
     fun getSize(): Int {
         return questions.size
     }
     fun getTitle(i: Int): String{
-        return questions[i].questionTitle
+        return questions[i].title
     }
     fun getrate(i: Int): Int{
         return questions[i].rate
@@ -65,7 +65,7 @@ class QuestionAdapter (
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
         val curQuestion = questions[position]
         holder.itemView.apply {
-            tvHeader.text = curQuestion.questionTitle
+            tvHeader.text = curQuestion.title
             sbRankBar.progress = curQuestion.rate
         }
         holder.itemView.sbRankBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{

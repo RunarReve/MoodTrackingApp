@@ -8,12 +8,12 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.rever.moodtrack.Adapters.FireNeedAdapter
+import com.rever.moodtrack.Adapters.NeedAdapter
 import com.rever.moodtrack.data.CustomNeed
 import kotlinx.android.synthetic.main.activity_settings_need_edit.*
 
 class SettingsNeedEdit() : AppCompatActivity() {
-    private lateinit var needAdapter: FireNeedAdapter
+    private lateinit var needAdapter: NeedAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +25,7 @@ class SettingsNeedEdit() : AppCompatActivity() {
 
         val userID = FirebaseAuth.getInstance().currentUser.uid
 
-        needAdapter = FireNeedAdapter(userID,mutableListOf<CustomNeed>())
+        needAdapter = NeedAdapter(userID,mutableListOf<CustomNeed>())
         rvNeedList.layoutManager = LinearLayoutManager(this)
         rvNeedList.adapter = needAdapter
 

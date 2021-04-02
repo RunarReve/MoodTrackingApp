@@ -3,19 +3,17 @@ package com.rever.moodtrack
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.rever.moodtrack.Adapters.FireQuestionAdapter
+import com.rever.moodtrack.Adapters.QuestionAdapter
 import kotlinx.android.synthetic.main.activity_day_want.*
 
 class InputWant : AppCompatActivity() {
-    private lateinit var questionAdapter: FireQuestionAdapter
+    private lateinit var questionAdapter: QuestionAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +25,7 @@ class InputWant : AppCompatActivity() {
 
         val userID = FirebaseAuth.getInstance().currentUser.uid
 
-        questionAdapter = FireQuestionAdapter(mutableListOf())
+        questionAdapter = QuestionAdapter(mutableListOf())
         rvWantRateList.adapter = questionAdapter
         rvWantRateList.layoutManager = LinearLayoutManager(this)
 
