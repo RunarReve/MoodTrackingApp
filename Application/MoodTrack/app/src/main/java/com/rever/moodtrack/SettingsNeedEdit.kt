@@ -2,8 +2,6 @@ package com.rever.moodtrack
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -51,7 +49,7 @@ class SettingsNeedEdit() : AppCompatActivity() {
         })
 
         fabAdd.setOnClickListener {
-            FireAddNeedItemDialog(this, userID).show()
+            AddNeedItemDialog(this, userID).show()
         }
     }
 }

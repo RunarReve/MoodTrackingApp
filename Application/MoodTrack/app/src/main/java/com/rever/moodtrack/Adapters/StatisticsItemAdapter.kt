@@ -4,12 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rever.moodtrack.R
-import com.rever.moodtrack.data.FireQuestion
-import com.rever.moodtrack.data.QuestionStore.Question
+import com.rever.moodtrack.data.Question
 import kotlinx.android.synthetic.main.need_score_item.view.*
 
 class StatisticsItemAdapter(
-        private val stats: MutableList<FireQuestion>
+        private val stats: MutableList<com.rever.moodtrack.data.Question>
 ): RecyclerView.Adapter<StatisticsAdapter.StatisticViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatisticsAdapter.StatisticViewHolder {
@@ -22,7 +21,7 @@ class StatisticsItemAdapter(
         )
     }
 
-    fun addObj(question: FireQuestion){
+    fun addObj(question: com.rever.moodtrack.data.Question){
         stats.add(question)
         stats.sortBy { it.title} //Sorting method to get alphabetical ...
         stats.sortByDescending { it.type}// ...but also moods first

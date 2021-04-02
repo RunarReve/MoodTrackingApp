@@ -2,7 +2,7 @@ package com.rever.moodtrack.relationMethods
 
 import com.google.common.truth.Truth.assertThat
 import com.rever.moodtrack.data.questionCollection
-import com.rever.moodtrack.data.QuestionStore.Question
+import com.rever.moodtrack.data.Question
 import org.junit.Test
 
 class RegressionTest{
@@ -178,8 +178,8 @@ class RegressionTest{
         val list = mutableListOf<questionCollection>()
         for (i in 1..3) {
             val newDay = questionCollection("Day${i}")
-            newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
-            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
+            newDay.qList.add(Question("Want1",1, i))
+            newDay.qList.add(Question("Need1",0, i))
             list.add(newDay)
         }
         val result = Regression.collection2ListList(list)
@@ -192,8 +192,8 @@ class RegressionTest{
         val list = mutableListOf<questionCollection>()
         for (i in 1..20) {
             val newDay = questionCollection("Day${i}")
-            newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
-            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
+            newDay.qList.add(Question("Want1",1, i))
+            newDay.qList.add(Question("Need1",0, i))
             list.add(newDay)
         }
         val result = Regression.collection2ListList(list)
@@ -207,9 +207,9 @@ class RegressionTest{
         val list = mutableListOf<questionCollection>()
         for (i in 1..3) {
             val newDay = questionCollection("Day${i}")
-            newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
+            newDay.qList.add(Question("Want1",1, i))
             if(i != 2)
-                newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
+                newDay.qList.add(Question("Need1",0, i))
             list.add(newDay)
         }
         val result = Regression.collection2ListList(list)
@@ -225,8 +225,8 @@ class RegressionTest{
         val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
             val newDay = questionCollection("Day${i}")
-            newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
-            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
+            newDay.qList.add(Question("Want1",1, i))
+            newDay.qList.add(Question("Need1",0, i))
 
             list.add(newDay)
         }
@@ -250,8 +250,8 @@ class RegressionTest{
         val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
             val newDay = questionCollection("Day${i}")
-            newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
-            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", 5-i, 0))
+            newDay.qList.add(Question("Want1",1, i))
+            newDay.qList.add(Question("Need1",0, 5-i))
             list.add(newDay)
         }
         val result = Regression.doRegression(list)
@@ -273,8 +273,8 @@ class RegressionTest{
         val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
             val newDay = questionCollection("Day${i}")
-            newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
-            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", 3, 0))
+            newDay.qList.add(Question("Want1",1, i))
+            newDay.qList.add(Question("Need1",0, 3))
             list.add(newDay)
         }
         val result = Regression.doRegression(list)
@@ -297,8 +297,8 @@ class RegressionTest{
         val list = mutableListOf<questionCollection>()
         for (i in 0..20) {
             val newDay = questionCollection("Day${i}")
-            newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
-            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
+            newDay.qList.add(Question("Want1",1, i))
+            newDay.qList.add(Question("Need1",0, i))
             list.add(newDay)
         }
         val result = Regression.doRegression(list)
@@ -323,9 +323,9 @@ class RegressionTest{
         val list = mutableListOf<questionCollection>()
         for (i in 0..20) {
             val newDay = questionCollection("Day${i}")
-            newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
+            newDay.qList.add(Question("Want1",1, i))
             if(i % 2 == 0)
-                newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
+                newDay.qList.add(Question("Need1",0, i))
             list.add(newDay)
         }
         val result = Regression.doRegression(list)
@@ -348,10 +348,10 @@ class RegressionTest{
         val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
             val newDay = questionCollection("Day${i}")
-            newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", i, 0))
-            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", i, 0))
-            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need2", 5-i, 0))
-            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need3", 2, 0))
+            newDay.qList.add(Question("Want1",1, i))
+            newDay.qList.add(Question("Need1",0, i))
+            newDay.qList.add(Question("Need2",0, 5-i))
+            newDay.qList.add(Question("Need3",0, 2))
             list.add(newDay)
         }
         val result = Regression.doRegression(list)
@@ -380,10 +380,10 @@ class RegressionTest{
         val list = mutableListOf<questionCollection>()
         for (i in 0..3) {
             val newDay = questionCollection("Day${i}")
-            newDay.qList.add(Question(1, "NULL", "Day${i}", "Want1", 4 + i, 0))
-            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need1", 4 + 0, 0))
-            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need2", 4 - i, 0))
-            newDay.qList.add(Question(0, "NULL", "Day${i}", "Need3", 4 + i, 0))
+            newDay.qList.add(Question("Want1",1, 4 + i))
+            newDay.qList.add(Question("Need1",0, 4 + 0))
+            newDay.qList.add(Question("Need2",0, 4 - i))
+            newDay.qList.add(Question("Need3",0, 4 + i))
             list.add(newDay)
         }
         val result = Regression.doRegression(list)

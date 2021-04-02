@@ -5,8 +5,6 @@ import android.content.Intent
 import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -15,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.rever.moodtrack.Adapters.QuestionAdapter
 import com.rever.moodtrack.Adapters.StepCounterAdapter
-import com.rever.moodtrack.data.FireQuestion
+import com.rever.moodtrack.data.Question
 import kotlinx.android.synthetic.main.activity_day_need.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -66,24 +64,24 @@ class InputNeed : AppCompatActivity() {
         }
 
         btnToStat.setOnClickListener {
-            val questionList = mutableListOf<FireQuestion>()
+            val questionList = mutableListOf<Question>()
             val time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("y_MM_dd-H:mm:ss")).toString()
 
             //Get previous activities questions
             intent.getStringArrayExtra("moodQ")?.forEach {
                 val split = it.split(',')
-                val q = FireQuestion(split[0], 1, split[1].toInt())
+                val q = Question(split[0], 1, split[1].toInt())
                 questionList.add(q)
             }
             //Current activities questions
             for(i in 0 until questionAdapter.getSize()) {
-                val q = FireQuestion(questionAdapter.getTitle(i), 0, questionAdapter.getrate(i))
+                val q = Question(questionAdapter.getTitle(i), 0, questionAdapter.getrate(i))
                 questionList.add(q)
             }
             //Get steps
             val steps = etStepBox.text.toString().toIntOrNull()
             if(steps != null)
-                questionList.add(FireQuestion("Steps", -1, steps))
+                questionList.add(Question("Steps", -1, steps))
 
             //Upload gathered data
             val uploadLocation = database.child("user").child(userID).child("data").child(time)

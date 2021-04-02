@@ -1,6 +1,6 @@
 package com.rever.moodtrack.data
 
-data class FireQuestion(
+data class Question(
         val title: String,
         val type: Int,
         var rate: Int

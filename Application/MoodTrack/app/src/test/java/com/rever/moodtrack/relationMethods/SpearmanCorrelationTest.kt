@@ -1,7 +1,7 @@
 package com.rever.moodtrack.relationMethods
 
 import com.google.common.truth.Truth
-import com.rever.moodtrack.data.QuestionStore.Question
+import com.rever.moodtrack.data.Question
 import com.rever.moodtrack.data.questionCollection
 import org.junit.Test
 
@@ -88,9 +88,9 @@ class SpearmanCorrelationTest {
         val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
             val qcoll = questionCollection("Day${i}")
-            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait2", 8 - i, 0))
+            qcoll.qList.add(Question("Mood1", 1, 6 + i))
+            qcoll.qList.add(Question("Trait1",0, i))
+            qcoll.qList.add(Question("Trait2",0, 8 - i))
             list.add(qcoll)
         }
         var result = Correlation.doSpearman(list)
@@ -103,9 +103,9 @@ class SpearmanCorrelationTest {
         val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
             val qcoll = questionCollection("Day${i}")
-            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i*i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait2", 8 - i*i, 0))
+            qcoll.qList.add(Question("Mood1", 1, 6 + i))
+            qcoll.qList.add(Question("Trait1",0, i*i))
+            qcoll.qList.add(Question("Trait2",0, 8 - i*i))
             list.add(qcoll)
         }
         val result = Correlation.doSpearman(list)
@@ -118,10 +118,10 @@ class SpearmanCorrelationTest {
         val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
             val qcoll = questionCollection("Day${i}")
-            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
-            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood2",  8-i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait2", 8 - i, 0))
+            qcoll.qList.add(Question("Mood1", 1, 6 + i))
+            qcoll.qList.add(Question("Mood2", 1, 8 - i))
+            qcoll.qList.add(Question("Trait1",0, i))
+            qcoll.qList.add(Question("Trait2",0, 8 - i))
             list.add(qcoll)
         }
         val result = Correlation.doSpearman(list)
@@ -141,10 +141,10 @@ class SpearmanCorrelationTest {
         val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
             val qcoll = questionCollection("Day${i}")
-            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1",  i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", 8 - i, 0))
+            qcoll.qList.add(Question("Mood1", 1, i))
+            qcoll.qList.add(Question("Trait1",0, 8 - i))
             if(i > 2)
-                qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait2", i, 0))
+                qcoll.qList.add(Question("Trait2",0, i))
             list.add(qcoll)
         }
         val result = Correlation.doPearson(list)

@@ -8,7 +8,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.rever.moodtrack.data.CustomNeed
 import kotlinx.android.synthetic.main.dialog_add_need_item.*
 
-class FireAddNeedItemDialog (context: Context, userID: String):AppCompatDialog(context){
+class AddNeedItemDialog (context: Context, userID: String):AppCompatDialog(context){
     val userID = userID
 
     override fun onCreate(savedInstanceState: Bundle?){

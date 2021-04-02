@@ -1,10 +1,9 @@
 package com.rever.moodtrack.relationMethods
 
-
 import com.google.common.truth.Truth
 import com.google.common.truth.Truth.assertThat
 import com.rever.moodtrack.data.questionCollection
-import com.rever.moodtrack.data.QuestionStore.Question
+import com.rever.moodtrack.data.Question
 import org.junit.Test
 
 class PearsonCorrelationTest {
@@ -100,9 +99,9 @@ class PearsonCorrelationTest {
         val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
             val qcoll = questionCollection("Day${i}")
-            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait2", 8 - i, 0))
+            qcoll.qList.add(Question("Mood1",1,6+i))
+            qcoll.qList.add(Question("Trait1",0, i))
+            qcoll.qList.add(Question("Trait2",0,8 - i))
             list.add(qcoll)
         }
         val result = Correlation.doPearson(list)
@@ -113,9 +112,9 @@ class PearsonCorrelationTest {
         val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
             val qcoll = questionCollection("Day${i}")
-            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i*i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait2", 8 - i*i, 0))
+            qcoll.qList.add(Question("Mood1",1,6+i))
+            qcoll.qList.add(Question("Trait1",0, i*i))
+            qcoll.qList.add(Question("Trait2",0,8 - i*i))
             list.add(qcoll)
         }
         val result = Correlation.doPearson(list)
@@ -133,10 +132,10 @@ class PearsonCorrelationTest {
         val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
             val qcoll = questionCollection("Day${i}")
-            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
-            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood2",  i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait2", 8 - i, 0))
+            qcoll.qList.add(Question("Mood1",1,6+i))
+            qcoll.qList.add(Question("Mood2",1, i))
+            qcoll.qList.add(Question("Trait1",0, i))
+            qcoll.qList.add(Question("Trait2",0,8 - i))
             list.add(qcoll)
         }
         val result = Correlation.doPearson(list)
@@ -148,10 +147,10 @@ class PearsonCorrelationTest {
         val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
             val qcoll = questionCollection("Day${i}")
-            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
-            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood2",  i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait2", 8 - i, 0))
+            qcoll.qList.add(Question("Mood1" ,1,6+i))
+            qcoll.qList.add(Question("Mood2" ,1, i))
+            qcoll.qList.add(Question("Trait1",0, i))
+            qcoll.qList.add(Question("Trait2",0,8 - i))
             list.add(qcoll)
         }
         val result = Correlation.doPearson(list)
@@ -163,12 +162,12 @@ class PearsonCorrelationTest {
         val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
             val qcoll = questionCollection("Day${i}")
-            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
-            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood2",  i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait2", 8 - i, 0))
+            qcoll.qList.add(Question("Mood1",1,6+i))
+            qcoll.qList.add(Question("Mood2",1, i))
+            qcoll.qList.add(Question("Trait1",0, i))
+            qcoll.qList.add(Question("Trait2",0,8 - i))
             if(i == 2)
-                qcoll.qList.add(Question(0, "NULL", "Day${i}", "TraitOnce", i, 0))
+                qcoll.qList.add(Question("TraitOnce", 0, i, ))
             list.add(qcoll)
         }
         val result = Correlation.doPearson(list)
@@ -181,8 +180,8 @@ class PearsonCorrelationTest {
         val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
             val qcoll = questionCollection("Day${i}")
-            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
+            qcoll.qList.add(Question("Mood1",1,6+i))
+            qcoll.qList.add(Question("Trait1",0, i))
             list.add(qcoll)
         }
         val result = Correlation.fillCorrelationList(list)
@@ -204,10 +203,10 @@ class PearsonCorrelationTest {
         val list = mutableListOf<questionCollection>()
         for (i in 0..5) {
             val qcoll = questionCollection("Day${i}")
-            qcoll.qList.add(Question(1, "NULL", "Day${i}", "Mood1", 6 + i, 0))
-            qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait1", i, 0))
+            qcoll.qList.add(Question("Mood1",1,6+i))
+            qcoll.qList.add(Question("Trait1",0, i))
             if(i == 2)
-                qcoll.qList.add(Question(0, "NULL", "Day${i}", "Trait2", i, 0))
+                qcoll.qList.add(Question("Trait2", 0, i))
             list.add(qcoll)
         }
         val result = Correlation.fillCorrelationList(list)//Get list of all given values

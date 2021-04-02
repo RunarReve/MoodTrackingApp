@@ -12,7 +12,7 @@ import com.rever.moodtrack.Adapters.LinePlotAdapter
 import com.rever.moodtrack.Adapters.PearsonAdapter
 import com.rever.moodtrack.Adapters.RegressionAdapter
 import com.rever.moodtrack.Adapters.StatisticsAdapter
-import com.rever.moodtrack.data.FireQuestion
+import com.rever.moodtrack.data.Question
 import com.rever.moodtrack.data.questionCollection
 import kotlinx.android.synthetic.main.activity_statistics.*
 
@@ -36,12 +36,12 @@ class Statistics : AppCompatActivity() {
                 val newList = mutableListOf<questionCollection>()
                 val shot = snapshot.child("user").child(userID).child("data")
                 shot.children.forEach { date ->
-                    val questionList = mutableListOf<FireQuestion>()
+                    val questionList = mutableListOf<Question>()
                     date.children.forEach {
                         val title = it.child("title").getValue().toString()
                         val type = it.child("type").getValue().toString().toInt()
                         val rate = it.child("rate").getValue().toString().toInt()
-                        questionList.add(FireQuestion(title, type, rate))
+                        questionList.add(Question(title, type, rate))
                     }
                     questionList.forEach {
                         println("LOL: ${it}")

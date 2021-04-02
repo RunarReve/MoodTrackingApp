@@ -7,13 +7,10 @@ import android.widget.SeekBar
 import androidx.recyclerview.widget.RecyclerView
 import com.rever.moodtrack.R
 import com.rever.moodtrack.data.CustomNeed
-import com.rever.moodtrack.data.FireQuestion
-import com.rever.moodtrack.data.NeedStore.Need
-import com.rever.moodtrack.data.QuestionStore.Question
 import kotlinx.android.synthetic.main.need_question_item.view.*
 
 class FireQuestionAdapter (
-    private val questions: MutableList<FireQuestion>
+    private val questions: MutableList<com.rever.moodtrack.data.Question>
         ): RecyclerView.Adapter<FireQuestionAdapter.QuestionViewHolder>() {
         class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -28,23 +25,23 @@ class FireQuestionAdapter (
     }
 
     fun addNeed(need: CustomNeed){
-        val q = FireQuestion(need.NeedTitle, need.type, -1)
+        val q = com.rever.moodtrack.data.Question(need.NeedTitle, need.type, -1)
         questions.add(q)
         notifyItemInserted(questions.size - 1)
     }
 
-    fun addQuestion(question: FireQuestion){
+    fun addQuestion(question: com.rever.moodtrack.data.Question){
         questions.add(question)
         notifyItemInserted(questions.size - 1)
     }
 
     fun addQuestionPrimary(title: String){
-        val q = FireQuestion(title, 1,4)
+        val q = com.rever.moodtrack.data.Question(title, 1,4)
         questions.add(q)
         notifyItemInserted(questions.size - 1)
     }
     fun addQuestion(title: String){
-        val q = FireQuestion(title, 0,4)
+        val q = com.rever.moodtrack.data.Question(title, 0,4)
         questions.add(q)
         notifyItemInserted(questions.size - 1)
     }
