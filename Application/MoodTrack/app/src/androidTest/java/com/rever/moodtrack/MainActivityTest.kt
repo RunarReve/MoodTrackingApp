@@ -1,6 +1,5 @@
 package com.rever.moodtrack
 
-
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.core.app.ActivityScenario

@@ -40,9 +40,9 @@ class InputNeedActivity : AppCompatActivity() {
         rvNeedRateList.layoutManager = LinearLayoutManager(this)
 
         //Preset constant LastStep
-        questionAdapter.addQuestion("Sleep")
-        questionAdapter.addQuestion("Movement")
-        questionAdapter.addQuestion("Social")
+        questionAdapter.addQuestion(getString(R.string.defaultNeed1))
+        questionAdapter.addQuestion(getString(R.string.defaultNeed2))
+        questionAdapter.addQuestion(getString(R.string.defaultNeed3))
         //Get custom needs goals from DB
         val database = FirebaseDatabase.getInstance().reference
         database.addValueEventListener(object : ValueEventListener {

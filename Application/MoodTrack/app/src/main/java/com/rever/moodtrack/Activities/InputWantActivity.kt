@@ -32,7 +32,7 @@ class InputWantActivity : AppCompatActivity() {
 
         //-------------Setting up the Questions being asked
         //Preset constant LastStep goals
-        questionAdapter.addQuestionPrimary("Happiness")
+        questionAdapter.addQuestionPrimary(getString(R.string.defaultWant1))
         //Get custom needs goals from DB
         val database = FirebaseDatabase.getInstance().reference
         database.addValueEventListener(object : ValueEventListener {

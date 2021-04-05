@@ -6,5 +6,11 @@
     <string name="btnGo2Settings">Settings</string>
     <string name="btnGo2About">About</string>
     <string name="preLoadStreak">Streak</string>
+    <string name="defaultWant1">Happiness</string>
+    <string name="defaultNeed1">Sleep</string>
+    <string name="defaultNeed2">Movement</string>
+    <string name="defaultNeed3">Social</string>
+    <string name="customNeed1">Productivity</string>
+    <string name="customWant1">Coding</string>
 
 </resources>

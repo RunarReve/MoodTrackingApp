@@ -16,7 +16,7 @@ class RegisterActivity : AppCompatActivity() {
 
         //Set up all text
         tvLoginHeader.text = "Register Account"
-        tvGotAccount.text = "Already got an account: "
+        tvGotAccount.text = "Already got an account:"
         tvGoToLogin.text = "Log In"
         btnLogIn.text = "Register"
 
@@ -26,11 +26,14 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         btnLogIn.setOnClickListener {
-            if (etLoginEmail.text.trim().isEmpty()){
+            if (etLoginEmail.text.trim().isEmpty()) {
                 Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
+            }else if (!etLoginEmail.text.trim().contains('@')){
+                Toast.makeText(this, "Check email format", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }else if(etLoginPassword.text.trim().length < 6) {
-                Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter password > 6 characters ", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val email = etLoginEmail.text.toString().trim()
