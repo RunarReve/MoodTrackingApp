@@ -243,6 +243,27 @@ class LoginActivityTest {
         deleteUser(email, password)
     }
 
+    @Test
+    fun checkAddingNewInputsIsSaved(){
+        val email = "TEST@xcrayks9oph4.com"
+        val password = "jhca43gs7qs38"
+
+        registerUser(email,password)
+
+        //Initially starts with no inputs
+        onView(withId(R.id.tvMainScreenText)).check(matches(withText("0")))
+
+        //Input one data and see total input incremented by 1
+        newArbitraryDataInput()
+        onView(withId(R.id.tvMainScreenText)).check(matches(withText("1")))
+
+        //DO IT AGAIN, and see it increment to 0
+        newArbitraryDataInput()
+        onView(withId(R.id.tvMainScreenText)).check(matches(withText("2")))
+
+        deleteUser(email, password)
+    }
+    //======================FUNCTIONS===========================
     private fun logIn(email: String, password: String){
         onView(withText("Do not have an account:")).check(matches(isDisplayed()))
         onView(withId(R.id.activityLoginAndRegister)).check(matches(isDisplayed()))
@@ -308,4 +329,27 @@ class LoginActivityTest {
         onView(withText(string)).check(matches(isDisplayed()))
     }
 
+    private fun newArbitraryDataInput(){
+        onView(withId(R.id.btnNewInput)).perform(click())
+        Thread.sleep(waitDelay) //Non optimal method to give it time to do something
+        onView(withId(R.id.activityAddWant)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.btnToAddNeed)).perform(click())
+        Thread.sleep(waitDelay) //Non optimal method to give it time to do something
+        onView(withId(R.id.activityAddNeed)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.btnToStat)).perform(click())
+        Thread.sleep(waitDelay) //Non optimal method to give it time to do something
+        onView(withId(R.id.activityStatistics)).check(matches(isDisplayed()))
+
+        //Go back to main menu
+        Espresso.pressBack()
+        onView(withId(R.id.activityAddNeed)).check(matches(isDisplayed()))
+        Espresso.pressBack()
+        Thread.sleep(waitDelay) //Non optimal method to give it time to do something
+        onView(withId(R.id.activityAddWant)).check(matches(isDisplayed()))
+        Espresso.pressBack()
+        Thread.sleep(waitDelay) //Non optimal method to give it time to do something
+        onView(withId(R.id.activityMain)).check(matches(isDisplayed()))
+    }
 }

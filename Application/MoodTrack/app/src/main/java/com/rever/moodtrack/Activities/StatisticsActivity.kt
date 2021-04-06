@@ -44,9 +44,7 @@ class StatisticsActivity : AppCompatActivity() {
                         val rate = it.child("rate").getValue().toString().toInt()
                         questionList.add(Question(title, type, rate))
                     }
-                    questionList.forEach {
-                        println("LOL: ${it}")
-                    }
+
                     newList.add(questionCollection(date.key.toString(), questionList))
                 }
                 statisticsAdapter.setList(newList)

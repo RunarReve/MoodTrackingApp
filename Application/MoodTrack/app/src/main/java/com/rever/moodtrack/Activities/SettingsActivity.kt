@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.rever.moodtrack.R
+import com.rever.moodtrack.data.Fabricated.FabData
 import kotlinx.android.synthetic.main.activity_settings.*
 
 class SettingsActivity : AppCompatActivity() {
@@ -40,12 +41,12 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         btnLoadPreData.setOnClickListener {
-      /*     val questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
-            FabData.addData().forEach { questionCollection ->
-                questionCollection.qList.forEach{question ->
-                    questionViewModel.addQuestion(question)
+            val database = FirebaseDatabase.getInstance().reference.child("user").child(userID).child("data")
+            FabData.addData().forEach {  questionCollection ->
+                questionCollection.qList.forEach { question ->
+                    database.child(questionCollection.id).child(question.title).setValue(question)
                 }
-            }*/
+            }
         }
 
         btnEditUserData.setOnClickListener {

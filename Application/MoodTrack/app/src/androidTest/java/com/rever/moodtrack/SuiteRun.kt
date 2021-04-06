@@ -6,6 +6,6 @@ import org.junit.runners.Suite
 
 @RunWith(Suite::class)
 @Suite.SuiteClasses(
-        MainActivityTest::class
+        LoginActivityTest::class
 )
 class SuiteRun
