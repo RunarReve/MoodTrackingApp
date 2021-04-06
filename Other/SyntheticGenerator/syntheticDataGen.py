@@ -116,18 +116,21 @@ for input in range(0, len(listOfInstances)): #For each lists in value
 
 outFile = open ("Data4Fab.kt", 'w')#OutFile
 
+#Header of the generated file
 outFile.write("package com.rever.moodtrack.data.Fabricated\n\nobject Data4Fab{\n\tval listO = listOf(")
 for i in range(0, instances):
 	outString = "\n\t\tlistOf("
 	for j in range(0,len(listOfTitles)):
 		outString += str(listOfInstances[i][j])
-		if(j < len(listOfTitles)-1):
-			outString += ", "
+		if(j < len(listOfTitles)-1): 
+			outString += ", " #Comma seperator
 		else:
-			outString += ")"
+			outString += ")" #Last item get no comma
 	if(i <= instances-2):	#Comma on all except last
 		outString += ","
 	outFile.write(outString)
+
 outFile.write("\n\t)\n}")
 outFile.close()
+
 print("Move generated file to application package: com.rever.moodtrack.data.Fabricated")
