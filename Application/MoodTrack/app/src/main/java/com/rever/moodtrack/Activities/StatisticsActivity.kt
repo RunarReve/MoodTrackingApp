@@ -31,11 +31,11 @@ class StatisticsActivity : AppCompatActivity() {
 
         statisticsAdapter = StatisticsAdapter(mutableListOf())
         //Get data stored in db
-        val database = FirebaseDatabase.getInstance().reference
+        val database = FirebaseDatabase.getInstance().reference.child("user").child(userID)
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val newList = mutableListOf<questionCollection>()
-                val shot = snapshot.child("user").child(userID).child("data")
+                val shot = snapshot.child("data")
                 shot.children.forEach { date ->
                     val questionList = mutableListOf<Question>()
                     date.children.forEach {

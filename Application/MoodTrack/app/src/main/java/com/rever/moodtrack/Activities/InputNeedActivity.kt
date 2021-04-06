@@ -44,10 +44,10 @@ class InputNeedActivity : AppCompatActivity() {
         questionAdapter.addQuestion(getString(R.string.defaultNeed2))
         questionAdapter.addQuestion(getString(R.string.defaultNeed3))
         //Get custom needs goals from DB
-        val database = FirebaseDatabase.getInstance().reference
+        val database = FirebaseDatabase.getInstance().reference.child("user").child(userID)
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val shot = snapshot.child("user").child(userID).child("customNeed")
+                val shot = snapshot.child("customNeed")
                 shot.children.forEach {
                     val type = it.child("type").getValue().toString().toInt()
                     val needName = it.child("needTitle").getValue().toString()
@@ -85,7 +85,7 @@ class InputNeedActivity : AppCompatActivity() {
                 questionList.add(Question("Steps", -1, steps))
 
             //Upload gathered data
-            val uploadLocation = database.child("user").child(userID).child("data").child(time)
+            val uploadLocation = database.child("data").child(time)
 
             questionList.forEach {question ->
                 uploadLocation.child(question.title).setValue(question)

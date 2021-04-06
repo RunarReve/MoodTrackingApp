@@ -24,14 +24,14 @@ class UserInfoEditActivity : AppCompatActivity() {
         val userID = FirebaseAuth.getInstance().currentUser.uid
 
         val user = User(userID)
-        val database = FirebaseDatabase.getInstance().reference
+        val database = FirebaseDatabase.getInstance().reference.child("user").child(userID)
 
         if(intent.getStringExtra("from") != "register"){
             // Read from the database
             btnBackUserInfo.visibility = View.VISIBLE
             database.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val shot = snapshot.child("user").child(userID).child("userInfo")
+                    val shot = snapshot.child("userInfo")
                     user.ethnicity = shot.child("ethnicity").getValue().toString()
                     user.gender = shot.child("gender").getValue().toString()
                     user.nationality = shot.child("nationality").getValue().toString()
@@ -63,7 +63,7 @@ class UserInfoEditActivity : AppCompatActivity() {
             user.nationality = etNationality.text.toString().trim()
             user.postCode = etPostCode.text.toString().trim()
 
-            database.child("user").child(userID).child("userInfo").setValue(user).addOnCompleteListener { task ->
+            database.child("userInfo").setValue(user).addOnCompleteListener { task ->
                 if (task.isComplete) {
                     Toast.makeText(this, "Completed Registration", Toast.LENGTH_SHORT).show()
 

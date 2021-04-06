@@ -22,7 +22,6 @@ class RegisterActivity : AppCompatActivity() {
 
         tvGoToLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
-
         }
 
         btnLogIn.setOnClickListener {

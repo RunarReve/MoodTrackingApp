@@ -34,10 +34,10 @@ class InputWantActivity : AppCompatActivity() {
         //Preset constant LastStep goals
         questionAdapter.addQuestionPrimary(getString(R.string.defaultWant1))
         //Get custom needs goals from DB
-        val database = FirebaseDatabase.getInstance().reference
+        val database = FirebaseDatabase.getInstance().reference.child("user").child(userID)
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val shot = snapshot.child("user").child(userID).child("customNeed")
+                val shot = snapshot.child("customNeed")
                 shot.children.forEach {
                     val type = it.child("type").getValue().toString().toInt()
                     val needName = it.child("needTitle").getValue().toString()

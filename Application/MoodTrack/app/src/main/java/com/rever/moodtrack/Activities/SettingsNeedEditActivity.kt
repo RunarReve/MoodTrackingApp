@@ -32,11 +32,11 @@ class SettingsNeedEditActivity() : AppCompatActivity() {
         rvNeedList.adapter = needAdapter
 
         // Read from the database
-        val database = FirebaseDatabase.getInstance().reference
+        val database = FirebaseDatabase.getInstance().reference.child("user").child(userID)
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val newList = mutableListOf<CustomNeed>() //New list to update with
-                val shot = snapshot.child("user").child(userID).child("customNeed")
+                val shot = snapshot.child("customNeed")
                 shot.children.forEach {
                     val needName = it.child("needTitle").getValue().toString()
                     val type = it.child("type").getValue().toString().toInt()
