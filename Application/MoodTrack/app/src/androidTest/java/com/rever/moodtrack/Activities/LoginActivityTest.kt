@@ -17,7 +17,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4ClassRunner::class)
 class LoginActivityTest {
 
-    val waitDelay = 1000L
+    val waitDelay = 1500L
 
     @Before
     fun setUp() {
