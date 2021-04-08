@@ -10,6 +10,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.rever.moodtrack.Activities.LoginActivity
+import kotlinx.android.synthetic.main.activity_settings.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,7 +18,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4ClassRunner::class)
 class LoginActivityTest {
 
-    val waitDelay = 1500L
+    val waitDelay = 1300L
 
     @Before
     fun setUp() {
@@ -263,6 +264,47 @@ class LoginActivityTest {
 
         deleteUser(email, password)
     }
+
+    @Test
+    fun checkAndChangeUserInfo(){
+        val email = "TEST@xcraykss5c34.com"
+        val password = "czca40gs7pl3s"
+
+        registerUser(email,password)
+
+        //Go to user information
+        onView(withId(R.id.btnSettings)).perform(click())
+        onView(withId(R.id.activitySettings)).check(matches(isDisplayed()))
+        onView(withId(R.id.btnEditUserData)).perform(click())
+        Thread.sleep(waitDelay) //Non optimal method to give it time to do something
+        onView(withId(R.id.activityUserInfoEdit)).check(matches(isDisplayed()))
+
+        //Check old data is stored and change it
+        onView(withText("TestLand")).check(matches(isDisplayed()))
+        onView(withText("TestCode")).check(matches(isDisplayed()))
+        onView(withId(R.id.etNationality)).perform(replaceText("Testistan"), ViewActions.closeSoftKeyboard())
+        onView(withId(R.id.etPostCode)).perform(replaceText("CodeOfTest"), ViewActions.closeSoftKeyboard())
+        onView(withId(R.id.btnDoneUserInfo)).perform(click())
+        Thread.sleep(waitDelay) //Non optimal method to give it time to do something
+        onView(withId(R.id.activityMain)).check(matches(isDisplayed()))
+
+        //Go to user information again
+        onView(withId(R.id.btnSettings)).perform(click())
+        onView(withId(R.id.activitySettings)).check(matches(isDisplayed()))
+        onView(withId(R.id.btnEditUserData)).perform(click())
+        Thread.sleep(waitDelay) //Non optimal method to give it time to do something
+        onView(withId(R.id.activityUserInfoEdit)).check(matches(isDisplayed()))
+
+        //Check that data was updated
+        onView(withText("Testistan")).check(matches(isDisplayed()))
+        onView(withText("CodeOfTest")).check(matches(isDisplayed()))
+        onView(withId(R.id.btnDoneUserInfo)).perform(click())
+        Thread.sleep(waitDelay) //Non optimal method to give it time to do something
+        onView(withId(R.id.activityMain)).check(matches(isDisplayed()))
+
+        deleteUser(email, password)
+    }
+
     //======================FUNCTIONS===========================
     private fun logIn(email: String, password: String){
         onView(withText("Do not have an account:")).check(matches(isDisplayed()))
@@ -297,6 +339,9 @@ class LoginActivityTest {
         onView(withId(R.id.rGenderNA)).perform(click())
         onView(withId(R.id.rEthnicityNA)).perform(click())
         onView(withId(R.id.rAgeNA)).perform(click())
+        onView(withId(R.id.etNationality)).perform(replaceText("TestLand"), ViewActions.closeSoftKeyboard())
+        onView(withId(R.id.etPostCode)).perform(replaceText("TestCode"), ViewActions.closeSoftKeyboard())
+
         onView(withId(R.id.btnDoneUserInfo)).perform(click())
         Thread.sleep(waitDelay) //Non optimal method to give it time to do something
         onView(withId(R.id.activityMain)).check(matches(isDisplayed()))
@@ -306,6 +351,7 @@ class LoginActivityTest {
         //To settings and delete User
         onView(withId(R.id.btnSettings)).perform(click())
         onView(withId(R.id.activitySettings)).check(matches(isDisplayed()))
+        Thread.sleep(waitDelay) //Non optimal method to give it time to do something
         onView(withId(R.id.btnDeleteUser)).perform(click())
         Thread.sleep(waitDelay) //Non optimal method to give it time to do something
         onView(withId(R.id.activityLoginAndRegister)).check(matches(isDisplayed()))

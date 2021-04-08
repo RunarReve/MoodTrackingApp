@@ -5,6 +5,8 @@ data class User(
 ) {
     var ethnicity = ""
     var gender = ""
+    var ageGroup = ""
     var nationality = ""
     var postCode = ""
+    var allow4Study = "No"
 }
