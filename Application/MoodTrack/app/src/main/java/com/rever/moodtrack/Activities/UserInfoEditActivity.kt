@@ -2,12 +2,10 @@ package com.rever.moodtrack.Activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.children
 import androidx.core.view.get
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -43,8 +41,7 @@ class UserInfoEditActivity : AppCompatActivity() {
                     user.ageGroup = shot.child("ageGroup").getValue().toString()
                     user.nationality = shot.child("nationality").getValue().toString()
                     user.postCode = shot.child("postCode").getValue().toString()
-
-                    setRadioBoxes(user)
+                    setUserInfo(user)
                 }
                 override fun onCancelled(error: DatabaseError) {
                     // Failed to read anything, Do nothing
@@ -82,7 +79,7 @@ class UserInfoEditActivity : AppCompatActivity() {
         }
     }
 
-    private fun setRadioBoxes(user: User){
+    private fun setUserInfo(user: User){
         setBox(user.allow4Study, rgAllow4Study)
         setBox(user.gender, rgGender)
         setBox(user.ethnicity, rgEthnicity)
@@ -91,12 +88,12 @@ class UserInfoEditActivity : AppCompatActivity() {
         etNationality.setText(user.nationality)
         etPostCode.setText(user.postCode)
     }
+
     private fun setBox(string: String, radioGroup: RadioGroup){
         for (index in 0..radioGroup.childCount) {
             radioGroup.check(radioGroup[index].id)
-            if(findViewById<RadioButton>(radioGroup.checkedRadioButtonId).text.toString() != string)
+            if(findViewById<RadioButton>(radioGroup.checkedRadioButtonId).text.toString() == string)
                 return //If this is correct just return
         }
-
     }
 }
