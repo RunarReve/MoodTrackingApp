@@ -20,8 +20,10 @@ auth = firebase.auth()
 
 #===========Authorizing access to the Firebase as admin, and only as admin==============
 print("To authorize you are allowed to download data of participants")
-email    = input("Enter an admin email: ")
-password = input("Enter password: ")
+#email    = input("Enter an admin email: ")
+#password = input("Enter password: ")
+email = "admin@admin.com"
+password = "654321"
 
 try:    #Check it is formatted correctly
     if email.split('@')[1].split('.')[0] != 'admin':
@@ -44,7 +46,7 @@ userInfo.write("UserID" +s+ s.join(userInfoList))
 
 defaultNeeds = ['Happiness', 'Movement', 'Sleep', 'Social'] #Wants and needs gathering
 dataInfo = open("dataInfo.csv", 'w') #Store every inputs of the default wants and needs
-dataInfo.write("UserID"+s+"InputNumb"+s+s.join(userInfoList)) #Default
+dataInfo.write("UserID"+s+"InputNumb"+s+s.join(defaultNeeds)) #Default
 
 users = firebase.database().child("user").get(currentUser['idToken'])
 for user in users: #For each available user
@@ -52,19 +54,25 @@ for user in users: #For each available user
     info = user.val()['userInfo']
     currentUserID = info['userId'] #TODO Could hash the user ID to get another layer of security
 
+    if(info["allow4Study"] != "Yes"):
+        continue
+
     string = currentUserID
     for each in userInfoList:
         string += s + info[each]
     userInfo.write('\n' + string)
 
-    #Get datapoints of the user 
-    data = user.val()['data']
-    for inputs in data:
-        string = currentUserID +s+ inputs
-        for each in defaultNeeds:
-            string += s + str(data[inputs][each]['rate'])
-        dataInfo.write('\n' + string)
-
+    #Get datapoints of the user, if there is any
+    try:
+        data = user.val()['data']
+        for inputs in data:
+            string = currentUserID +s+ inputs
+            for each in defaultNeeds:
+                string += s + str(data[inputs][each]['rate'])
+            dataInfo.write('\n' + string)
+    except:
+        continue
+    
 #Close writing
 userInfo.close()
 dataInfo.close()
