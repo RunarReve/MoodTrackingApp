@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MoodTrack">
-        <activity android:name=".Activities.UserInfoEditActivity"></activity>
+        <activity android:name=".AreYouSureDialog"></activity>
+        <activity android:name=".Activities.UserInfoEditActivity" />
         <activity android:name=".Activities.RegisterActivity" />
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>
@@ -20,8 +21,7 @@
         </activity>
         <activity
             android:name=".Activities.SettingsNeedEditActivity"
-            android:parentActivityName=".Activities.SettingsActivity">
-        </activity>
+            android:parentActivityName=".Activities.SettingsActivity"></activity>
         <activity
             android:name=".Activities.AboutActivity"
             android:parentActivityName=".Activities.MainActivity" />
@@ -30,8 +30,7 @@
             android:parentActivityName=".Activities.MainActivity" />
         <activity
             android:name=".Activities.StatisticsActivity"
-            android:parentActivityName=".Activities.MainActivity">
-        </activity>
+            android:parentActivityName=".Activities.MainActivity"></activity>
         <activity
             android:name=".Activities.InputNeedActivity"
             android:parentActivityName=".Activities.InputWantActivity" />
