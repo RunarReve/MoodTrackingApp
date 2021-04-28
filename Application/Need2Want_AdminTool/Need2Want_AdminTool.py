@@ -20,10 +20,8 @@ auth = firebase.auth()
 
 #===========Authorizing access to the Firebase as admin, and only as admin==============
 print("To authorize you are allowed to download data of participants")
-#email    = input("Enter an admin email: ")
-#password = input("Enter password: ")
-email = "admin@admin.com"
-password = "654321"
+email    = input("Enter an admin email: ")
+password = input("Enter password: ")
 
 try:    #Check it is formatted correctly
     if email.split('@')[1].split('.')[0] != 'admin':
