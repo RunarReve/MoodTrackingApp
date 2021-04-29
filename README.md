@@ -5,7 +5,8 @@ This is repository for my Major Project for my university degree. It is through 
 # Structure
 
 * ./Application/MoodTrack/
-	* Need2Want: Main Android application for this project
+	* Need2Want: Main Android application for this project.
+	* Contains Unit and UI tests, easies method is to use Android Studio, located in default location. 
 * ./Application/Need2Want\_AdminTool/
 	* Admin Tool: Tool to access and download cohort data
 * ./Application/SyntheticGenerator/
