@@ -12,6 +12,11 @@ Application/Need2Want\_AdminTool/
 	Synthetic Generator: Program to generate data for Need2Want
 
 
+/Documents
+	Containing all documents created in regards to this project
+
+
+
 # Diary 
 Link to my diary throughout this project:
 https://www.overleaf.com/read/zhzbjscrfzzq
