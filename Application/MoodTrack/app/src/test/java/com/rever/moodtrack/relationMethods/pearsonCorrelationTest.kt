@@ -9,7 +9,7 @@ import org.junit.Test
 class PearsonCorrelationTest {
 
     //-------UNIT-TESTS-----
-    
+
     @Test
     fun emptyArrayGiven() {
         val list1 = listOf<Double>()

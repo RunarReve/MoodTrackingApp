@@ -354,6 +354,7 @@ class LoginActivityTest {
         Thread.sleep(waitDelay) //Non optimal method to give it time to do something
         onView(withId(R.id.btnDeleteUser)).perform(click())
         Thread.sleep(waitDelay) //Non optimal method to give it time to do something
+        dialogYes()
         Thread.sleep(waitDelay) //Non optimal method to give it time to do something
         onView(withId(R.id.activityLoginAndRegister)).check(matches(isDisplayed()))
         onView(withText("Do not have an account:")).check(matches(isDisplayed()))
@@ -398,5 +399,12 @@ class LoginActivityTest {
         Espresso.pressBack()
         Thread.sleep(waitDelay) //Non optimal method to give it time to do something
         onView(withId(R.id.activityMain)).check(matches(isDisplayed()))
+    }
+
+    private fun dialogYes(){
+        onView(withId(android.R.id.button1)).perform(click())
+    }
+    private fun dialogNo(){
+        onView(withId(android.R.id.button2)).perform(click())
     }
 }
