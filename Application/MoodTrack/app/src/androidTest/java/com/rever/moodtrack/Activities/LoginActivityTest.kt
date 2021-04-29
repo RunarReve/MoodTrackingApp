@@ -354,6 +354,7 @@ class LoginActivityTest {
         Thread.sleep(waitDelay) //Non optimal method to give it time to do something
         onView(withId(R.id.btnDeleteUser)).perform(click())
         Thread.sleep(waitDelay) //Non optimal method to give it time to do something
+        Thread.sleep(waitDelay) //Non optimal method to give it time to do something
         onView(withId(R.id.activityLoginAndRegister)).check(matches(isDisplayed()))
         onView(withText("Do not have an account:")).check(matches(isDisplayed()))
 

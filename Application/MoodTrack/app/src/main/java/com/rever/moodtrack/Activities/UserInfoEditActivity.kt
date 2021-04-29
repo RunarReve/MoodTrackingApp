@@ -90,7 +90,7 @@ class UserInfoEditActivity : AppCompatActivity() {
     }
 
     private fun setBox(string: String, radioGroup: RadioGroup){
-        for (index in 0..radioGroup.childCount) {
+        for (index in 0..radioGroup.childCount-1) {
             radioGroup.check(radioGroup[index].id)
             if(findViewById<RadioButton>(radioGroup.checkedRadioButtonId).text.toString() == string)
                 return //If this is correct just return

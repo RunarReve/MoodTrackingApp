@@ -43,10 +43,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
 
-        btnAbout.setOnClickListener {
-            startActivity( Intent(this, AboutActivity::class.java))
-        }
-
         btnLogOut.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))
