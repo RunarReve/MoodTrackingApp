@@ -8,8 +8,8 @@ import org.junit.Test
 class RegressionTest{
     private val allowedDif = 0.2 // allowed difference from expected
 
+    //-------UNIT-TESTS-----
 
-    //-------------TEST-REGRESSION-----------------
     @Test
     fun simplePositiveRegression(){
         val yList = listOf(1.0,2.0,3.0)
@@ -172,6 +172,8 @@ class RegressionTest{
         assertThat(result[0]).isEqualTo(listOf(1.0,2.0,3.0))
         assertThat(result[1]).isEqualTo(listOf(3.0,2.0,1.0))
     }
+
+    //-------INTEGRATION-TESTS-------
 
     @Test
     fun questionList2ListList(){

@@ -7,7 +7,7 @@ import org.junit.Test
 
 class SpearmanCorrelationTest {
 
-    //-------BASIC-PEARSON-FUNCTIONALITY-----
+    //-------UNIT-TESTS-----
 
     @Test
     fun rankedTestEmpty(){
@@ -81,7 +81,7 @@ class SpearmanCorrelationTest {
         Truth.assertThat(result).isEqualTo(1.0)
     }
 
-    //-------APP-EXAMPLE-INPUTS-------
+    //-------INTEGRATION-TESTS-------
 
     @Test
     fun oneSubjectiveGivingLinear(){

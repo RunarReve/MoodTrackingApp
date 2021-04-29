@@ -8,7 +8,8 @@ import org.junit.Test
 
 class PearsonCorrelationTest {
 
-    //-------BASIC-PEARSON-FUNCTIONALITY-----
+    //-------UNIT-TESTS-----
+    
     @Test
     fun emptyArrayGiven() {
         val list1 = listOf<Double>()
@@ -92,7 +93,7 @@ class PearsonCorrelationTest {
         assertThat(result).isAtLeast(0.973)
     }
 
-    //-------APP-EXAMPLE-INPUTS-------
+    //-------INTEGRATION-TESTS-------
 
     @Test
     fun oneSubjectiveGiving(){
@@ -223,5 +224,5 @@ class PearsonCorrelationTest {
             for(x in 0..3-1)
                 assertThat(result[i].rateList.size).isEqualTo(result[x].rateList.size)
     }
-
+    //-------INTEGRATION-TESTS-------
 }
